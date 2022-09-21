@@ -70,5 +70,29 @@
     "status": "PENDING",
     "id": "wiVXhN73Mt",
     "created": "Sat Sep 17 2022 19:31:42 GMT+0200"
+  },
+  {
+    "applicantType": "OSVC",
+    "name": "Lacinia",
+    "surname": "Fusce",
+    "birthNum": "006004/2400",
+    "nationality": "CZ",
+    "email": "delectus@volutpat.in",
+    "phone": "+420111222555",
+    "IC": "1566545987",
+    "position": "reditel",
+    "companyName": "Loko",
+    "amount": 70000,
+    "numOfMonths": 18,
+    "address": {
+      "street": "Ante",
+      "descNumber": 13,
+      "indicativeNumber": 7,
+      "city": "Totam",
+      "postalCode": 777777
+    },
+    "created": "2022-09-21T17:01:27.635Z",
+    "status": "PENDING",
+    "id": "e83db03f346ad3d5"
   }
 ]
