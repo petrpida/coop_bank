@@ -1,0 +1,23 @@
+[
+  {
+    "login": "dulik",
+    "password": "dulik1",
+    "name": "Dulík Kačer",
+    "roles": ["ADMIN"],
+    "token": "qdsMkMpb16"
+  },
+  {
+    "login": "bubik",
+    "password": "bubik1",
+    "name": "Bubík Kačer",
+    "roles": ["SUPERVIZOR"],
+    "token": "mazwdbGkD5"
+  },
+  {
+    "login": "kulik",
+    "password": "kulik1",
+    "name": "Kulík Kačer",
+    "roles": [],
+    "token": "04J7V3AOV4"
+  }
+]

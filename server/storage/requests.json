@@ -1,0 +1,74 @@
+[
+  {
+    "applicantType": "INDIVIDUAL",
+    "name": "Lorem",
+    "surname": "Ipsum",
+    "birthNum": "801007/5953",
+    "nationality": "CZ",
+    "email": "dolor.sit@amet.co",
+    "phone": "+420555444333",
+    "IC": null,
+    "companyName": null,
+    "amount": 150000,
+    "numOfMonths": 12,
+    "position": null,
+    "address": {
+      "street": "Accumsan",
+      "descNumber": 12,
+      "indicativeNumber": 2,
+      "city": "Duis",
+      "postalCode": 11111
+    },
+    "status": "PENDING",
+    "id": "Pm8MtixTFX",
+    "created": "Wed Mar 25 2015 01:00:00 GMT+0100"
+  },
+  {
+    "applicantType": "OSVC",
+    "name": "Lacinia",
+    "surname": "Fusce",
+    "birthNum": "006004/2400",
+    "nationality": "CZ",
+    "email": "delectus@volutpat.in",
+    "phone": "+420111222555",
+    "IC": "1566545987",
+    "companyName": null,
+    "amount": 70000,
+    "numOfMonths": 18,
+    "position": null,
+    "address": {
+      "street": "Ante",
+      "descNumber": 13,
+      "indicativeNumber": 7,
+      "city": "Totam",
+      "postalCode": 777777
+    },
+    "status": "PENDING",
+    "id": "wiVXhN73Mt",
+    "created": "Sat Sep 17 2022 19:31:42 GMT+0200"
+  },
+  {
+    "applicantType": "LEGAL_ENTITY",
+    "name": "Herbert",
+    "surname": "Berber",
+    "birthNum": "006003/2400",
+    "nationality": "CZ",
+    "email": "herbert.brebrebre@berber.ber",
+    "phone": "+420111222345",
+    "IC": "123466434",
+    "companyName": "Trees and Such",
+    "amount": 1000000,
+    "numOfMonths": 12,
+    "position": "generální ředitel",
+    "address": {
+      "street": "Ante",
+      "descNumber": 13,
+      "indicativeNumber": 7,
+      "city": "Totam",
+      "postalCode": 777777
+    },
+    "status": "PENDING",
+    "id": "wiVXhN73Mt",
+    "created": "Sat Sep 17 2022 19:31:42 GMT+0200"
+  }
+]
