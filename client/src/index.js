@@ -9,6 +9,7 @@ import AdminApp from "./routes/AdminApp";
 import Calculator from "./routes/Calculator";
 import Form from "./routes/Form";
 import Summary from "./routes/Summary";
+import Home from "./routes/Home";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,6 +17,7 @@ root.render(
       <BrowserRouter>
           <Routes>
               <Route path="/" element={<App/>}>
+                  <Route path="" element={<Home/>} />
                   <Route path="adminLogin" element={<AdminLogin/>} />
                   <Route path="adminApp" element={<AdminApp/>} />
                   <Route path="calculator" element={<Calculator/>} />
