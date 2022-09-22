@@ -4,7 +4,7 @@ const FetchDataContext = createContext();
 
 export function FetchDataProvider(props) {
   // fetch data calculator
-  const [inputCalc, setInputCalc] = useState({});
+  const [inputCalc, setInputCalc] = useState();
   const [calculatedData, setCalculatedData] = useState({});
   // fetch data create applicant
   const [enteredApplicantData, setEnteredApplicantData] = useState({});
@@ -28,34 +28,34 @@ export function FetchDataProvider(props) {
   }, [inputCalc]);
 
   // fetch data create applicant
-  useEffect(() => {
-    fetch(`http://localhost:3000/request/create`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(enteredApplicantData),
-    }).then(async (response) => {
-      const data = await response.json();
-      if (response.status >= 400) {
-        setEnteredApplicantData({ state: "error", error: data });
-      } else {
-        setEnteredApplicantData({ state: "success", data: data });
-      }
-    });
-  }, [enteredApplicantData]);
+  // useEffect(() => {
+  //   fetch(`http://localhost:3000/request/create`, {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify(enteredApplicantData),
+  //   }).then(async (response) => {
+  //     const data = await response.json();
+  //     if (response.status >= 400) {
+  //       setEnteredApplicantData({ state: "error", error: data });
+  //     } else {
+  //       setEnteredApplicantData({ state: "success", data: data });
+  //     }
+  //   });
+  // }, [enteredApplicantData]);
 
   // // fetch data applicant by id
-  useEffect(() => {
-    fetch(`http://localhost:3000/request/${""}`, { method: "GET" }).then(
-      async (response) => {
-        const data = await response.json();
-        if (response.status >= 400) {
-          setApplicantData({ state: "error", error: data });
-        } else {
-          setApplicantData({ state: "success", data: data });
-        }
-      }
-    );
-  }, []);
+  // useEffect(() => {
+  //   fetch(`http://localhost:3000/request/${""}`, { method: "GET" }).then(
+  //     async (response) => {
+  //       const data = await response.json();
+  //       if (response.status >= 400) {
+  //         setApplicantData({ state: "error", error: data });
+  //       } else {
+  //         setApplicantData({ state: "success", data: data });
+  //       }
+  //     }
+  //   );
+  // }, []);
 
   const value = {
     inputCalc,
