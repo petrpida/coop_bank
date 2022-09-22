@@ -7,6 +7,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.bg-green {
+  background-color: #00843D;
+}
+
+.text-green {
+  color: #00843D;
+}
+
+.border-green {
+  border-color: #00843D
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
