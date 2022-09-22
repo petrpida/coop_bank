@@ -5,12 +5,12 @@ import React from "react";
 // import { Nav, Navbar, NavDropdown } from "react-bootstrap"
 import {Nav, Navbar, NavDropdown} from "react-bootstrap"
 import Main from "./bricks/Main"
+import {Outlet} from "react-router-dom";
 
 function App() {
  
   return (
     <div className="App">
-      
       <Navbar bg="white" expand="sm" className={styles.navbar + "d-flex justify-content-between" }>
        <div> 
         <Navbar.Brand href="#home">
@@ -43,8 +43,8 @@ function App() {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-     
-     <Main />
+      <Main />
+      <Outlet/>
     </div>
   );
 }
