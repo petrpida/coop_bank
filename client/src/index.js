@@ -11,7 +11,7 @@ import Form from "./routes/Form";
 import Summary from "./routes/Summary";
 import Home from "./routes/Home";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
       <BrowserRouter>
