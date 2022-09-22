@@ -4,7 +4,7 @@ const FetchDataContext = createContext();
 
 export function FetchDataProvider(props) {
   // fetch data calculator
-  const [inputCalc, setInputCalc] = useState({});
+  const [inputCalc, setInputCalc] = useState({amount: 200000, numOfMonths: 12});
   const [calculatedData, setCalculatedData] = useState({});
   // fetch data create applicant
   const [enteredApplicantData, setEnteredApplicantData] = useState({});
@@ -27,9 +27,10 @@ export function FetchDataProvider(props) {
     });
   }, [inputCalc]);
 
+
   // fetch data create applicant
-  useEffect(() => {
-    fetch(`http://localhost:3000/request/create`, {
+ useEffect(() => {
+    fetch("http://localhost:3000/request/create", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(enteredApplicantData),
@@ -43,8 +44,8 @@ export function FetchDataProvider(props) {
     });
   }, [enteredApplicantData]);
 
-  // // fetch data applicant by id
-  useEffect(() => {
+ // fetch data applicant by id
+ useEffect(() => {
     fetch(`http://localhost:3000/request/${""}`, { method: "GET" }).then(
       async (response) => {
         const data = await response.json();

@@ -1,4 +1,7 @@
+import Main from "../bricks/Main";
 
 export default function Home() {
-    return <div>HomePage</div>
+    return <div>
+        <Main/>
+    </div>
 }
