@@ -1,6 +1,6 @@
 
 .inputContainer {
- max-width: 800px;
+ max-width: 900px;
     margin: 80px auto;
     display: flex;
     flex-direction: column;
@@ -11,15 +11,35 @@
     font-size: 0.8rem;
 }
 
-.outputs {
-    text-align: right;
-    margin-top: 10px;
-}
-
 .outputsValue {
     border: 1px solid #00843D;
     padding: 8px;
     font-weight: bold;
 }
 
+.card {
+    border: 2px solid #00843D;
+}
+
+.title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.text {
+    font-size: 1.2rem;
+}
+
+.header {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #00843D;
+}
+
+.values {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
 
