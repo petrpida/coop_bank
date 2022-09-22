@@ -1,0 +1,13 @@
+.navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 4.5rem;
+
+}
+.logo_img { 
+    margin-top: .5rem;
+height: 4rem;
+}
+
+
