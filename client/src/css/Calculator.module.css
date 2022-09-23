@@ -1,0 +1,48 @@
+
+.inputContainer {
+ max-width: 900px;
+    margin: 80px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.fee {
+    font-size: 0.8rem;
+}
+
+.outputsValue {
+    border: 1px solid #00843D;
+    padding: 8px;
+    font-weight: bold;
+}
+
+.card {
+    border: 2px solid #00843D;
+}
+
+.title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.text {
+    font-size: 1.2rem;
+}
+
+.header {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #00843D;
+}
+
+.values {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.spinner {
+    height: 304px;
+}
