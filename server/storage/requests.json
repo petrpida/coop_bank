@@ -310,5 +310,29 @@
     "created": "2022-09-23T10:40:55.220Z",
     "status": "PENDING",
     "id": "f5ef1543975d4353"
+  },
+  {
+    "name": "aa",
+    "surname": "aa",
+    "birthNum": "",
+    "nationality": "",
+    "email": "aa@dd.f",
+    "phone": "",
+    "IC": "",
+    "position": "",
+    "companyName": "",
+    "address": {
+      "street": "",
+      "descNumber": 3,
+      "indicativeNumber": 0,
+      "city": "",
+      "postalCode": 0
+    },
+    "applicantType": "INDIVIDUAL",
+    "amount": 350000,
+    "numOfMonths": 24,
+    "created": "2022-09-23T15:07:30.833Z",
+    "status": "PENDING",
+    "id": "f661c19574bc3d71"
   }
 ]

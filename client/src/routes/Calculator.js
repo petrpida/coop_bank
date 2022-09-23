@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import { Card, FormGroup, Spinner } from "react-bootstrap";
 import FetchDataContext from "../store/FetchDataProvider";
 import { useNavigate } from "react-router-dom";
+import { Buffer } from "buffer";
 
 const Calculator = React.memo(() => {
   const [amount, setAmount] = useState(350000);
@@ -12,6 +13,11 @@ const Calculator = React.memo(() => {
   const [isCalculated, setIsCalculated] = useState(false);
 
   const navigate = useNavigate();
+
+  const user = Buffer.from("dulik").toString("base64");
+  const pass = Buffer.from("dulik1").toString("base64");
+
+  console.log(`${user}:${pass}`);
 
   // send and get data to/from server
   const { inputCalc, setInputCalc, calculatedData } =
