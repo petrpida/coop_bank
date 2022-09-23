@@ -4,7 +4,10 @@ const FetchDataContext = createContext();
 
 export function FetchDataProvider(props) {
   // fetch data calculator
-  const [inputCalc, setInputCalc] = useState();
+  const [inputCalc, setInputCalc] = useState({
+    amount: 350000,
+    numOfMonths: 24,
+  });
   const [calculatedData, setCalculatedData] = useState({});
   // fetch data create applicant
   const [enteredApplicantData, setEnteredApplicantData] = useState({});
@@ -26,7 +29,6 @@ export function FetchDataProvider(props) {
       }
     });
   }, [inputCalc]);
-
 
   // fetch data create applicant
   // useEffect(() => {
