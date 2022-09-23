@@ -13,24 +13,11 @@ export default function AdminLogin() {
   };
 
   const [loginData, setLoginData] = useState(defaultData);
-  const [userData, setUserData] = useState();
+  const [userData, setUserData] = useState({});
 
-  let user = Buffer.from(`${loginData.login}`).toString("base64");
-  let pass = Buffer.from(`${loginData.password}`).toString("base64");
-
-  // useEffect(() => {
-  //   fetch(`http://localhost:3000/login`, {
-  //     method: "GET",
-  //     headers: { Authorization: `Basic ${user}:${pass}` },
-  //   }).then(async (response) => {
-  //     const data = await response.json();
-  //     if (response.status >= 400) {
-  //       setUserData({ state: "error", error: data });
-  //     } else {
-  //       setUserData({ state: "success", data: data });
-  //     }
-  //   });
-  // }, []);
+  let user = Buffer.from(`${loginData.login}:${loginData.password}`).toString(
+    "base64"
+  );
 
   const setField = (key, value) => {
     return setLoginData((loginData) => {
@@ -43,10 +30,10 @@ export default function AdminLogin() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    async function check(user, pass) {
+    async function checkUser(user) {
       const res = await fetch(`http://localhost:3000/login`, {
         method: "GET",
-        headers: { Authorization: `Basic ${user}:${pass}` },
+        headers: { Authorization: `Basic ${user}` },
       });
 
       const data = await res.json();
@@ -54,14 +41,13 @@ export default function AdminLogin() {
         setUserData({ state: "error", error: data });
       } else {
         setUserData({ state: "success", data: data });
-        navigate("/AdminApp");
+        console.log(data);
       }
     }
-
-    check(user, pass);
-
-    console.log(userData);
+    checkUser(user);
   };
+
+  console.log(userData);
 
   return (
     <Form
@@ -75,7 +61,7 @@ export default function AdminLogin() {
         </Form.Label>
         <Form.Control
           className={"border-success rounded-0 "}
-          value={loginData.login}
+          defaultValue={loginData.login}
           onInput={(e) => setField("login", e.target.value)}
         />
       </Form.Group>
@@ -85,7 +71,7 @@ export default function AdminLogin() {
         <Form.Control
           type="password"
           className={"border-success rounded-0"}
-          value={loginData.password}
+          defaultValue={loginData.password}
           onInput={(e) => setField("password", e.target.value)}
         />
       </Form.Group>
