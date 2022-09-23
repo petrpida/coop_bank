@@ -10,6 +10,7 @@ import BootstrapTable from "react-bootstrap-table-next";
 import filterFactory, { selectFilter } from "react-bootstrap-table2-filter";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import { Modal, Button } from "react-bootstrap";
+import styles from "../css/AdminApp.module.css"
 
 const mockup = [
   {
@@ -45,7 +46,7 @@ const mockup = [
     email: "delectus@volutpat.in",
     phone: "+420111222555",
     IC: "1566545987",
-    companyName: "Company name",
+    companyName: "Company nameeeeeeeeeeeeee",
     amount: 70000,
     numOfMonths: 18,
     position: null,
@@ -112,22 +113,26 @@ export default function AdminApp() {
     // 2: "Third Option" // ------------------------------opravit
   };
 
- 
+//  const random = data.map((singleUser) => { 
+//   return singleUser.amount * 100000
+//  })
+//  console.log(random)
 
   const columns = [
     {
       dataField: "surname",
-      text: "Surename",
+      text: "Surename" ,
       sort: true,
     },
     {
-      dataField: new Intl.NumberFormat('cs-CZ').format({}),
+      dataField:"amount",
       text: "Amount",
       sort: true,
+      // formatter: (column)
     },
     {
       dataField: "applicantType",
-      text: "Typ osoby",
+      // text: "Typ osoby",
       formatter: (cell) => selectOptions[cell],
       filter: selectFilter({
         options: selectOptions,
@@ -144,6 +149,7 @@ export default function AdminApp() {
       text: "Status",
     },
   ];
+  console.log(columns)
 
   const rowEvents = { 
     onClick: (e, row) => {
@@ -159,7 +165,7 @@ export default function AdminApp() {
 
   const ModalContent = () => { 
     return ( 
-        <Modal show={show} onHide={handleClose}>
+        <Modal show={show} onHide={handleClose} className={styles.modal}>
             <Modal.Header closeButton>
                 <Modal.Title>
                 {modalInfo.name}
@@ -167,6 +173,9 @@ export default function AdminApp() {
             </Modal.Header>
             <Modal.Body>
                 <ul>
+                    <li>Name: {modalInfo.name} {modalInfo.surname}</li>
+                    <li>Company Name: {modalInfo.companyName}</li>
+                    <li>Surname: {modalInfo.surname}</li>
                     <li>Surname: {modalInfo.surname}</li>
                     <li>Email: {modalInfo.email}</li>
                     <li>Phone: {modalInfo.phone}</li>
@@ -174,14 +183,12 @@ export default function AdminApp() {
                     <li>Surname: {modalInfo.surname}</li>
                    
                 </ul>
+                <div className={styles.buttons}>
+                <Button>Potvrdit</Button>
+                <Button>Zamitnout</Button>
+                <Button>Vymazat</Button>
+                </div>
             </Modal.Body>
-            <Modal.Footer>
-                <Button 
-                variant="secondary"
-                onClick={handleClose}>
-                    Close
-                </Button>
-            </Modal.Footer>
         </Modal>
     )
   }
@@ -189,7 +196,8 @@ export default function AdminApp() {
   return (
     <>
       <BootstrapTable
-        keyField="id"
+        className={styles.table}
+        keyField="id" 
         data={data}
         columns={columns}
         striped
@@ -202,6 +210,9 @@ export default function AdminApp() {
     </>
   );
 }
+
+// new Intl.NumberFormat('cs-CZ').format({})
+
 
 // <div>
 //   <Table striped bordered hover size="sm">

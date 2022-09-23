@@ -1,0 +1,20 @@
+.modal { 
+    border-radius: 0;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 2rem;
+  
+}
+.buttons button { 
+    background-color: #00843D;
+    border: #00843D;
+    border-radius: 0;
+
+}
+.buttons button:hover { 
+    background-color: #00843ed0;
+}
+
