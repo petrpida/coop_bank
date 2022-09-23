@@ -1,9 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import {BrowserRouter, Routes, Route} from "react-router-dom";
-import './index.css';
-import reportWebVitals from './reportWebVitals';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
+import App from "./App";
 import AdminLogin from "./routes/AdminLogin";
 import AdminApp from "./routes/AdminApp";
 import Calculator from "./routes/Calculator";
@@ -30,7 +30,7 @@ root.render(
             </BrowserRouter>
         </FetchDataProvider>
     </React.StrictMode>
-);
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

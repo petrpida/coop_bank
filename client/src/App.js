@@ -2,8 +2,10 @@ import "./App.css";
 import styles from "./css/app.module.css";
 import "bootstrap/dist/css/bootstrap.css";
 import React from "react";
-import {Nav, Navbar, NavDropdown} from "react-bootstrap"
-import {Outlet} from "react-router-dom";
+// import { Nav, Navbar, NavDropdown } from "react-bootstrap"
+import { Nav, Navbar, NavDropdown } from "react-bootstrap";
+import Main from "./bricks/Main";
+import { Outlet } from "react-router-dom";
 
 function App() {
  

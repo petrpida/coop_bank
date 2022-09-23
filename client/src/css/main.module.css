@@ -11,8 +11,31 @@
 }
 
  .main_text {
+  margin-top: 100px;
+  margin-left: 100px;
 display: flex;
 flex-direction: column;
-
-
+color: white;
 } 
+
+.main_text p { 
+font-size: small;
+}
+.percents { 
+  font-size: 3rem;
+}
+.rpsn { 
+  margin-top: -1.5rem;
+  margin-left: 6rem;
+}
+
+.main_text button { 
+  padding: 8px 0;
+border: white 1px solid;
+color: white;
+background-color: #00843D;
+}
+
+.main_text button:hover { 
+  background-color: #00843ec4;
+}
