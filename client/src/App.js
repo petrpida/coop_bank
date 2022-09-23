@@ -43,7 +43,7 @@ function App() {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <Outlet />
+      <Outlet/>
     </div>
   );
 }
