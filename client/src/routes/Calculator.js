@@ -2,12 +2,13 @@ import React, { useContext, useState } from "react";
 import Form from "react-bootstrap/Form";
 import styles from "../css/Calculator.module.css";
 import Button from "react-bootstrap/Button";
-import { Card, FormGroup } from "react-bootstrap";
+import { Card, FormGroup, Spinner } from "react-bootstrap";
 import FetchDataContext from "../store/FetchDataProvider";
 
 const Calculator = React.memo(() => {
   const [amount, setAmount] = useState(350000);
   const [months, setMonths] = useState(24);
+  const [isSpinner, setIsSpinenr] = useState(false);
 
   // send and get data to/from server
   const { setInputCalc, calculatedData } = useContext(FetchDataContext);
@@ -19,7 +20,14 @@ const Calculator = React.memo(() => {
     });
   }
 
-  console.log(calculatedData);
+  function spinner() {
+    return (
+      <div className={styles.spinner}>
+        <Spinner animation="grow" variant="success" class="text-center" />
+        <p>Počítám</p>
+      </div>
+    );
+  }
 
   // format months
   function getYearsAndMonths(mths) {
@@ -72,8 +80,12 @@ const Calculator = React.memo(() => {
             step={amount < 100000 ? "1000" : "5000"}
             id="customRange3"
             onChange={(event) => {
+              setIsSpinenr(true);
               setAmount(event.target.value);
-              set(amount, months);
+              setTimeout(() => {
+                set(amount, months);
+                setIsSpinenr(!isSpinner);
+              }, 2000);
             }}
           />
           <div className={styles.values}>
@@ -99,8 +111,12 @@ const Calculator = React.memo(() => {
             step="1"
             id="customRange3"
             onChange={(event) => {
+              setIsSpinenr(true);
               setMonths(event.target.value);
-              set(amount, months);
+              setTimeout(() => {
+                setIsSpinenr(false);
+                set(amount, months);
+              }, 2000);
             }}
           />
           <div className={styles.values}>
@@ -117,7 +133,7 @@ const Calculator = React.memo(() => {
           <Card.Header className={styles.header}>
             Vaše výhodná půjčka
           </Card.Header>
-          {calculatedData.state === "success" && (
+          {calculatedData.state === "success" && !isSpinner ? (
             <Card.Body>
               <Card.Title
                 className={styles.title}
@@ -153,6 +169,8 @@ const Calculator = React.memo(() => {
                 Sjednat online
               </Button>
             </Card.Body>
+          ) : (
+            spinner()
           )}
           <Card.Footer className="text-muted"></Card.Footer>
         </Card>
