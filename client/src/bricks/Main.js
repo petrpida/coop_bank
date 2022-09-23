@@ -1,27 +1,20 @@
 import React from "react";
 import styles from "../css/main.module.css";
+import { useNavigate } from "react-router-dom";
 
 function Main() {
+  const navigate = useNavigate()
+  
   return (
     <div className={styles.main}>
       <div className="w-50"></div>
       <div className={styles.main_text}>
-        <div className="h-25 w-100 d-flex">
-          {" "}
-          <h3>Pujčka na cokoli</h3>
-        </div>
-
-        <div className="h-50 w-100">
-          {" "}
-          <p>
-            od <span>6,5 %</span>
-          </p>
-          <p>RPSN</p>
-        </div>
-        <div className="h-25 w-100">
-          {" "}
-          <button>chci pujčku</button>{" "}
-        </div>
+        <h3>Pujčka na cokoli</h3>
+        <p>
+          od <span className={styles.percents}>6,5 %</span>
+        </p>
+        <p className={styles.rpsn}>RPSN</p>
+        <button onClick={() => navigate("/calculator")}>Chci pujčku</button>{" "}
       </div>
     </div>
   );
