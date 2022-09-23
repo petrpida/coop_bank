@@ -7,6 +7,7 @@ import FetchDataContext from "../store/FetchDataProvider";
 import { useNavigate } from "react-router-dom";
 
 const Calculator = React.memo(() => {
+  const navigate = useNavigate()
   const [amount, setAmount] = useState(350000);
   const [months, setMonths] = useState(24);
   const [isCalculated, setIsCalculated] = useState(false);

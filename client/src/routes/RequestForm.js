@@ -1,10 +1,13 @@
 import {Button, Form, InputGroup} from "react-bootstrap";
-import {useState, useContext} from "react";
+import {useState, useContext, useEffect} from "react";
 import FetchDataContext from "../store/FetchDataProvider";
 import Summary from "../bricks/Summary";
 
 export default function RequestForm() {
     const {inputCalc, setEnteredApplicantData} = useContext(FetchDataContext)
+    const [dataToSend, setDataToSend] = useState({})
+    const [newRequestRecived, setNewRequestRecived] = useState({})
+    const [showErrorMessage, setShowErrorMessage] = useState("")
     const [validated, setValidated] = useState(false)
     const [typeOfApplicant, setTypeOfApplicant] = useState("default")
     const [typeSelected, setTypeSelected] = useState("default")
@@ -45,6 +48,24 @@ export default function RequestForm() {
         })
     }
 
+    // sent created request data to server
+    useEffect(() => {
+          fetch(`http://localhost:3000/request/create`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(dataToSend),
+          }).then(async (response) => {
+            const data = await response.json();
+            if (response.status >= 400) {
+                setNewRequestRecived({ state: "error", error: data });
+            } else {
+                setNewRequestRecived({ state: "success", data: data });
+            }
+          });
+        }, [dataToSend]);
+
+    console.log(newRequestRecived)
+
     const handleSubmit = (e) => {
         const form = e.currentTarget;
 
@@ -56,15 +77,20 @@ export default function RequestForm() {
             amount: inputCalc.amount,
             numOfMonths: inputCalc.numOfMonths
         }
+        console.log(newData)
 
         if (!form.checkValidity()) {
             setValidated(true);
             return;
         }
 
-        console.log(newData)
-        setEnteredApplicantData(newData)
-        setDataSent(true)
+        if (newRequestRecived.errorMessage) {
+            setShowErrorMessage(newRequestRecived.errorMessage)
+        } else {
+            setDataToSend(newData)
+        }
+
+            setDataSent(true)
     }
 
     const createFormGroup = (label, name, type = "text") => {
@@ -120,6 +146,10 @@ export default function RequestForm() {
             {dataSent ?
                 <div>
                     <Summary/>
+                    {showErrorMessage ? <div>{showErrorMessage}</div> :
+                        <div>{`id request ${newRequestRecived.state}`}</div>
+                    }
+
                 </div>
                 :
                 <Form noValidate validated={validated}
