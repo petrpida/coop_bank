@@ -4,8 +4,10 @@ import styles from "../css/Calculator.module.css";
 import Button from "react-bootstrap/Button";
 import { Card, FormGroup, Spinner } from "react-bootstrap";
 import FetchDataContext from "../store/FetchDataProvider";
+import {useNavigate} from "react-router-dom";
 
 const Calculator = React.memo(() => {
+  const navigate = useNavigate()
   const [amount, setAmount] = useState(350000);
   const [months, setMonths] = useState(24);
   const [isSpinner, setIsSpinenr] = useState(false);
@@ -159,6 +161,7 @@ const Calculator = React.memo(() => {
                 </p>
               )}
               <Button
+                  onClick={() => navigate("/requestForm")}
                 style={{
                   backgroundColor: "#00843D",
                   border: "none",

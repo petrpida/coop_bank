@@ -1,8 +1,11 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 export default function AdminLogin () {
+    const navigate = useNavigate()
+
     const defaultData = {
         login: "",
         password: ""
@@ -22,6 +25,7 @@ export default function AdminLogin () {
         e.preventDefault()
         console.log(loginData)
         setLoginData(defaultData)
+        navigate("/adminApp")
     }
 
         return (

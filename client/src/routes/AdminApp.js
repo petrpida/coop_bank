@@ -86,7 +86,7 @@ const mockup = [
   },
 ];
 
-console.log(mockup);
+//console.log(mockup);
 
 export default function AdminApp() {
 
@@ -105,7 +105,7 @@ export default function AdminApp() {
     setData(mockup);
   }, [data]);
 
-  console.log(data);
+  //console.log(data);
   const selectOptions = {
     OSVC: "OSVC",
     INDIVIDUAL: "INDIVIDUAL",
