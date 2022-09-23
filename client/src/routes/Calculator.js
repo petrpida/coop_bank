@@ -2,12 +2,11 @@ import React, { useContext, useState } from "react";
 import Form from "react-bootstrap/Form";
 import styles from "../css/Calculator.module.css";
 import Button from "react-bootstrap/Button";
-import { Card, FormGroup } from "react-bootstrap";
+import { Card, FormGroup, Spinner } from "react-bootstrap";
 import FetchDataContext from "../store/FetchDataProvider";
 import { useNavigate } from "react-router-dom";
 
 const Calculator = React.memo(() => {
-  const navigate = useNavigate()
   const [amount, setAmount] = useState(350000);
   const [months, setMonths] = useState(24);
   const [isCalculated, setIsCalculated] = useState(false);
@@ -87,8 +86,12 @@ const Calculator = React.memo(() => {
             max="1200000"
             step={amount < 100000 ? "1000" : "5000"}
             id="customRange3"
-            onChange={(event) => {
+            onChange={(e) => {
+              setAmount(e.target.value);
+            }}
+            onMouseUp={(event) => {
               setAmount(event.target.value);
+              set(amount, months);
             }}
           />
           <div className={styles.values}>
@@ -113,8 +116,12 @@ const Calculator = React.memo(() => {
             max="60"
             step="1"
             id="customRange3"
-            onChange={(event) => {
+            onChange={(e) => {
+              setMonths(e.target.value);
+            }}
+            onMouseUp={(event) => {
               setMonths(event.target.value);
+              set(amount, months);
             }}
           />
           <div className={styles.values}>
@@ -122,22 +129,6 @@ const Calculator = React.memo(() => {
             <p>5 let</p>
           </div>
         </FormGroup>
-      </div>
-      <div class="text-center">
-        <Button
-          onClick={() => {
-            set(amount, months);
-            setIsCalculated(true);
-          }}
-          style={{
-            backgroundColor: "#00843D",
-            border: "none",
-            borderRadius: "0",
-          }}
-          variant="primary"
-        >
-          {isCalculated ? "Přepočítat" : "Spočítat půjčku"}
-        </Button>
       </div>
       <div className={styles.outputCard}>
         <Card
@@ -156,10 +147,10 @@ const Calculator = React.memo(() => {
               )} Kč`}</Card.Title>
               <Card.Text
                 className={styles.text}
-              >{`Roční úroková sazba ${calculatedData.data.yearlyInterest}%`}</Card.Text>
+              >{`Roční úroková sazba ${calculatedData.data.yearlyInterest} %`}</Card.Text>
               <Card.Text
                 className={styles.text}
-              >{`RPSN ${calculatedData.data.RPSN}%`}</Card.Text>
+              >{`RPSN ${calculatedData.data.RPSN} %`}</Card.Text>
               <Card.Text
                 className={styles.text}
               >{`Celkově zaplatíte ${new Intl.NumberFormat("cs-CZ").format(
@@ -174,10 +165,9 @@ const Calculator = React.memo(() => {
               )}
               <Button
                 onClick={() => {
-                  set(amount, months);
                   setTimeout(() => {
                     navigate("/requestForm");
-                  }, 2000);
+                  }, 1000);
                 }}
                 style={{
                   backgroundColor: "#00843D",
