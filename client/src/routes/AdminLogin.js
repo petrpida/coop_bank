@@ -1,8 +1,9 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Buffer } from "buffer";
+import AdminContext from "../store/AdminDataProvider";
 
 export default function AdminLogin() {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ export default function AdminLogin() {
   };
 
   const [loginData, setLoginData] = useState(defaultData);
-  const [userData, setUserData] = useState({});
+  const { userData, setUserData } = useContext(AdminContext);
   const [validated, setValidated] = useState(false);
 
   let user = Buffer.from(`${loginData.login}:${loginData.password}`).toString(
@@ -48,6 +49,7 @@ export default function AdminLogin() {
         setUserData({ state: "error", error: data });
       } else {
         setUserData({ state: "success", data: data });
+        navigate("/AdminApp");
         console.log(data);
       }
     }

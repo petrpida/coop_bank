@@ -14,11 +14,6 @@ const Calculator = React.memo(() => {
 
   const navigate = useNavigate();
 
-  const user = Buffer.from("dulik").toString("base64");
-  const pass = Buffer.from("dulik1").toString("base64");
-
-  console.log(`${user}:${pass}`);
-
   // send and get data to/from server
   const { inputCalc, setInputCalc, calculatedData } =
     useContext(FetchDataContext);

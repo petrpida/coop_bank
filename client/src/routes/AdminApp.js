@@ -10,7 +10,8 @@ import BootstrapTable from "react-bootstrap-table-next";
 import filterFactory, { selectFilter } from "react-bootstrap-table2-filter";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import { Modal, Button } from "react-bootstrap";
-import styles from "../css/AdminApp.module.css"
+import styles from "../css/AdminApp.module.css";
+import AdminContext from "../store/AdminDataProvider";
 
 const mockup = [
   {
@@ -90,17 +91,16 @@ const mockup = [
 //console.log(mockup);
 
 export default function AdminApp() {
-
-
-
-
   const [data, setData] = useState([]);
   const [modalInfo, setModalInfo] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const { userData } = useContext(AdminContext);
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  console.log(userData);
 
   useEffect(() => {
     setData(mockup);
@@ -113,19 +113,19 @@ export default function AdminApp() {
     // 2: "Third Option" // ------------------------------opravit
   };
 
-//  const random = data.map((singleUser) => { 
-//   return singleUser.amount * 100000
-//  })
-//  console.log(random)
+  //  const random = data.map((singleUser) => {
+  //   return singleUser.amount * 100000
+  //  })
+  //  console.log(random)
 
   const columns = [
     {
       dataField: "surname",
-      text: "Surename" ,
+      text: "Surename",
       sort: true,
     },
     {
-      dataField:"amount",
+      dataField: "amount",
       text: "Amount",
       sort: true,
       // formatter: (column)
@@ -149,55 +149,54 @@ export default function AdminApp() {
       text: "Status",
     },
   ];
-  console.log(columns)
+  console.log(columns);
 
-  const rowEvents = { 
+  const rowEvents = {
     onClick: (e, row) => {
-        console.log(row)
-        setModalInfo(row)
-        toggleTrueFalse()
-    }
-  }
+      console.log(row);
+      setModalInfo(row);
+      toggleTrueFalse();
+    },
+  };
 
   const toggleTrueFalse = () => {
-    setShowModal(handleShow)
-  }
+    setShowModal(handleShow);
+  };
 
-  const ModalContent = () => { 
-    return ( 
-        <Modal show={show} onHide={handleClose} className={styles.modal}>
-            <Modal.Header closeButton>
-                <Modal.Title>
-                {modalInfo.name}
-                </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <ul>
-                    <li>Name: {modalInfo.name} {modalInfo.surname}</li>
-                    <li>Company Name: {modalInfo.companyName}</li>
-                    <li>Surname: {modalInfo.surname}</li>
-                    <li>Surname: {modalInfo.surname}</li>
-                    <li>Email: {modalInfo.email}</li>
-                    <li>Phone: {modalInfo.phone}</li>
-                    <li>Surname: {modalInfo.surname}</li>
-                    <li>Surname: {modalInfo.surname}</li>
-                   
-                </ul>
-                <div className={styles.buttons}>
-                <Button>Potvrdit</Button>
-                <Button>Zamitnout</Button>
-                <Button>Vymazat</Button>
-                </div>
-            </Modal.Body>
-        </Modal>
-    )
-  }
+  const ModalContent = () => {
+    return (
+      <Modal show={show} onHide={handleClose} className={styles.modal}>
+        <Modal.Header closeButton>
+          <Modal.Title>{modalInfo.name}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <ul>
+            <li>
+              Name: {modalInfo.name} {modalInfo.surname}
+            </li>
+            <li>Company Name: {modalInfo.companyName}</li>
+            <li>Surname: {modalInfo.surname}</li>
+            <li>Surname: {modalInfo.surname}</li>
+            <li>Email: {modalInfo.email}</li>
+            <li>Phone: {modalInfo.phone}</li>
+            <li>Surname: {modalInfo.surname}</li>
+            <li>Surname: {modalInfo.surname}</li>
+          </ul>
+          <div className={styles.buttons}>
+            <Button>Potvrdit</Button>
+            <Button>Zamitnout</Button>
+            <Button>Vymazat</Button>
+          </div>
+        </Modal.Body>
+      </Modal>
+    );
+  };
 
   return (
     <>
       <BootstrapTable
         className={styles.table}
-        keyField="id" 
+        keyField="id"
         data={data}
         columns={columns}
         striped
@@ -212,7 +211,6 @@ export default function AdminApp() {
 }
 
 // new Intl.NumberFormat('cs-CZ').format({})
-
 
 // <div>
 //   <Table striped bordered hover size="sm">
