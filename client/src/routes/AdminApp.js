@@ -10,7 +10,12 @@ import BootstrapTable from "react-bootstrap-table-next";
 import filterFactory, { selectFilter } from "react-bootstrap-table2-filter";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import { Modal, Button } from "react-bootstrap";
-import styles from "../css/AdminApp.module.css"
+import styles from "../css/AdminApp.module.css";
+import Icon from "@mdi/react";
+import { mdiSwapVerticalBold } from "@mdi/js";
+
+
+
 
 const mockup = [
   {
@@ -38,7 +43,7 @@ const mockup = [
     created: "Wed Mar 25 2015 01:00:00 GMT+0100",
   },
   {
-    applicantType: "OSVC",
+    applicantType: "LEGAL_ENTITY",
     name: "Lacinia",
     surname: "Fusce",
     birthNum: "006004/2400",
@@ -90,10 +95,6 @@ const mockup = [
 //console.log(mockup);
 
 export default function AdminApp() {
-
-
-
-
   const [data, setData] = useState([]);
   const [modalInfo, setModalInfo] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -102,9 +103,41 @@ export default function AdminApp() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  useEffect(() => {
-    setData(mockup);
-  }, [data]);
+
+
+
+
+
+  // useEffect(() => {
+  //   fetch(`http://localhost:3000/request/list`, {
+  //     method: "GET",
+  //     headers: { "Authorization: Bearer <token>" },
+  //   }).then(async (response) => {
+  //     const data = await response.json();
+  //     if (response.status >= 400) {
+  //       setData({ state: "error", error: data });
+  //     } else {
+  //       setData({ state: "success", data: data });
+  //     }
+  //   });
+  // }, []);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   //console.log(data);
   const selectOptions = {
@@ -113,26 +146,43 @@ export default function AdminApp() {
     // 2: "Third Option" // ------------------------------opravit
   };
 
-//  const random = data.map((singleUser) => { 
-//   return singleUser.amount * 100000
-//  })
-//  console.log(random)
+  const sortBtn = (
+    <span>
+      Řadit dle výškz ůveru
+      <Button className="rounded-0">
+        <Icon size={1} path={mdiSwapVerticalBold} />
+      </Button>
+    </span>
+  );
 
+  // editFunction = () => {
+  //   console.log(cell);
+  //   setModalInfo(cell);
+  //   toggleTrueFalse();
+  // }
+
+  // const editButton = <Button></Button>
+  //   onClick: (e, cell) => {
+     
+    
+  // };
   const columns = [
     {
-      dataField: "surname",
-      text: "Surename" ,
+      dataField: "applicantType" === "LEGAL_ENTITY" ? "companyName" : "surname",
+      text: "Surename",
       sort: true,
+      headerFormatter: (cell) => sortBtn,
     },
     {
-      dataField:"amount",
+      // dataField: new Intl.NumberFormat('cs-CZ').format("amount") ,
+      dataField: "amount",
       text: "Amount",
       sort: true,
-      // formatter: (column)
+      headerFormatter: (cell) => sortBtn,
     },
     {
       dataField: "applicantType",
-      // text: "Typ osoby",
+      text: "Typ osoby",
       formatter: (cell) => selectOptions[cell],
       filter: selectFilter({
         options: selectOptions,
@@ -148,63 +198,68 @@ export default function AdminApp() {
       dataField: "status",
       text: "Status",
     },
-  ];
-  console.log(columns)
+    {
+      // dataField: "status",
+      text: "Edit",
+      formatter:(column) => sortBtn
 
-  const rowEvents = { 
-    onClick: (e, row) => {
-        console.log(row)
-        setModalInfo(row)
-        toggleTrueFalse()
-    }
-  }
+    },
+  ];
+  // console.log(columns);
+
+ 
+  // const rowEvents = {
+  //   onClick: (e, row) => {
+  //     console.log(row);
+  //     setModalInfo(row);
+  //     toggleTrueFalse();
+  //   },
+  // };
 
   const toggleTrueFalse = () => {
-    setShowModal(handleShow)
-  }
+    setShowModal(handleShow);
+  };
 
-  const ModalContent = () => { 
-    return ( 
-        <Modal show={show} onHide={handleClose} className={styles.modal}>
-            <Modal.Header closeButton>
-                <Modal.Title>
-                {modalInfo.name}
-                </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <ul>
-                    <li>Name: {modalInfo.name} {modalInfo.surname}</li>
-                    <li>Company Name: {modalInfo.companyName}</li>
-                    <li>Surname: {modalInfo.surname}</li>
-                    <li>Surname: {modalInfo.surname}</li>
-                    <li>Email: {modalInfo.email}</li>
-                    <li>Phone: {modalInfo.phone}</li>
-                    <li>Surname: {modalInfo.surname}</li>
-                    <li>Surname: {modalInfo.surname}</li>
-                   
-                </ul>
-                <div className={styles.buttons}>
-                <Button>Potvrdit</Button>
-                <Button>Zamitnout</Button>
-                <Button>Vymazat</Button>
-                </div>
-            </Modal.Body>
-        </Modal>
-    )
-  }
+  const ModalContent = () => {
+    return (
+      <Modal show={show} onHide={handleClose} className={styles.modal}>
+        <Modal.Header closeButton>
+          <Modal.Title>{modalInfo.name}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <ul>
+            <li>
+              Name: {modalInfo.name} {modalInfo.surname}
+            </li>
+            <li>Company Name: {modalInfo.companyName}</li>
+            <li>Surname: {modalInfo.surname}</li>
+            <li>Surname: {modalInfo.surname}</li>
+            <li>Email: {modalInfo.email}</li>
+            <li>Phone: {modalInfo.phone}</li>
+            <li>Surname: {modalInfo.surname}</li>
+            <li>Surname: {modalInfo.surname}</li>
+          </ul>
+          <div className={styles.buttons}>
+            <Button>Potvrdit</Button>
+            <Button>Zamitnout</Button>
+            <Button>Vymazat</Button>
+          </div>
+        </Modal.Body>
+      </Modal>
+    );
+  };
 
   return (
     <>
       <BootstrapTable
-        className={styles.table}
-        keyField="id" 
+        keyField="id"
         data={data}
         columns={columns}
         striped
         condensed
         filter={filterFactory()}
         pagination={paginationFactory()}
-        rowEvents={rowEvents}
+        // rowEvents={rowEvents}
       />
       {show ? <ModalContent /> : null}
     </>
@@ -212,7 +267,6 @@ export default function AdminApp() {
 }
 
 // new Intl.NumberFormat('cs-CZ').format({})
-
 
 // <div>
 //   <Table striped bordered hover size="sm">
