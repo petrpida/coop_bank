@@ -14,6 +14,7 @@ export default function AdminLogin() {
 
   const [loginData, setLoginData] = useState(defaultData);
   const [userData, setUserData] = useState({});
+  const [validated, setValidated] = useState(false);
 
   let user = Buffer.from(`${loginData.login}:${loginData.password}`).toString(
     "base64"
@@ -29,6 +30,12 @@ export default function AdminLogin() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const form = e.currentTarget;
+
+    if (!form.checkValidity()) {
+      setValidated(true);
+      return;
+    }
 
     async function checkUser(user) {
       const res = await fetch(`http://localhost:3000/login`, {
@@ -51,6 +58,9 @@ export default function AdminLogin() {
 
   return (
     <Form
+      noValidate
+      validated={validated}
+      onSubmit={handleSubmit}
       className={
         "w-50 h-50 d-flex flex-column justify-content-center align-items-center m-5 mx-auto"
       }
@@ -60,27 +70,31 @@ export default function AdminLogin() {
           Přihlašovací jméno
         </Form.Label>
         <Form.Control
+          required
           className={"border-success rounded-0 "}
-          defaultValue={loginData.login}
+          value={loginData.login}
           onInput={(e) => setField("login", e.target.value)}
         />
+        <Form.Control.Feedback type="invalid">
+          Uživatelské jméno nebo heslo není správné
+        </Form.Control.Feedback>
       </Form.Group>
-
       <Form.Group className="mt-3 w-100" controlId="formBasicPassword">
         <Form.Label className={"d-block text-start fs-5"}>Heslo</Form.Label>
         <Form.Control
+          required
           type="password"
           className={"border-success rounded-0"}
-          defaultValue={loginData.password}
+          value={loginData.password}
           onInput={(e) => setField("password", e.target.value)}
         />
+        <Form.Control.Feedback type="invalid"></Form.Control.Feedback>
       </Form.Group>
 
       <Button
-        size="lg"
         type="submit"
+        size="lg"
         className={"mt-5 w-100 rounded-0 bg-success border-0"}
-        onClick={handleSubmit}
       >
         Přihlásit se
       </Button>
