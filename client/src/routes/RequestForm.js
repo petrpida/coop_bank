@@ -4,7 +4,7 @@ import FetchDataContext from "../store/FetchDataProvider";
 import Summary from "../bricks/Summary";
 
 export default function RequestForm() {
-    const {inputCalc, setEnteredApplicantData} = useContext(FetchDataContext)
+    const {inputCalc} = useContext(FetchDataContext)
     const [dataToSend, setDataToSend] = useState({})
     const [newRequestRecived, setNewRequestRecived] = useState({})
     const [showErrorMessage, setShowErrorMessage] = useState("")
@@ -31,6 +31,13 @@ export default function RequestForm() {
     }
     const [formData, setFormData] = useState(defaultFormData)
     const [dataSent, setDataSent] = useState(false)
+    const companyPositions = [
+        "člen/ka představenstva", "člen/ka správní rady", "člen/ka výboru", "ekonom/ka",
+        "generální ředitel/ka", "jednatel/ka", "místopředseda", "místopředsedkyně", "místostarosta", "místostarostka",
+        "primátor/ka", "prokurista", "prokuristka", "předseda", "přdseda představenstva", "předseda správní rady",
+        "předsedkyně", "předsedkyně představenstva", "předsedkyně správní rady", "ředitel/ka", "společník", "starosta",
+        "starostka", "statutární ředitel/ka", "účetní", "zástupce", "zástupkyně", "zplnomocněný", "zplnomocněná"
+    ]
 
     const storeInputData = (key, value) => {
         return setFormData((formData) => {
@@ -50,21 +57,21 @@ export default function RequestForm() {
 
     // sent created request data to server
     useEffect(() => {
-          fetch(`http://localhost:3000/request/create`, {
+        fetch(`http://localhost:3000/request/create`, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify(dataToSend),
-          }).then(async (response) => {
+        }).then(async (response) => {
             const data = await response.json();
             if (response.status >= 400) {
-                setNewRequestRecived({ state: "error", error: data });
+                setNewRequestRecived({state: "error", error: data});
             } else {
-                setNewRequestRecived({ state: "success", data: data });
+                setNewRequestRecived({state: "success", data: data});
             }
-          });
-        }, [dataToSend]);
+        });
+    }, [dataToSend]);
 
-    console.log(newRequestRecived)
+    //console.log(formData)
 
     const handleSubmit = (e) => {
         const form = e.currentTarget;
@@ -77,20 +84,21 @@ export default function RequestForm() {
             amount: inputCalc.amount,
             numOfMonths: inputCalc.numOfMonths
         }
-        console.log(newData)
+
+        //console.log(newData)
 
         if (!form.checkValidity()) {
             setValidated(true);
             return;
         }
 
-        if (newRequestRecived.errorMessage) {
-            setShowErrorMessage(newRequestRecived.errorMessage)
-        } else {
-            setDataToSend(newData)
-        }
+        setDataToSend(newData)
 
-            setDataSent(true)
+        if (newRequestRecived.state === "error") {
+            setShowErrorMessage(newRequestRecived.error.errorMessage)
+            setFormData(newData)
+        }
+        setDataSent(true)
     }
 
     const createFormGroup = (label, name, type = "text") => {
@@ -101,6 +109,7 @@ export default function RequestForm() {
                     onChange={(e) => storeInputData(name, e.target.value)}
                     className={"rounded-0"}
                     type={type}
+                    required
                 />
             </Form.Group>
         )
@@ -145,16 +154,19 @@ export default function RequestForm() {
         <>
             {dataSent ?
                 <div>
-                    <Summary/>
-                    {showErrorMessage ? <div>{showErrorMessage}</div> :
-                        <div>{`id request ${newRequestRecived.state}`}</div>
+
+                    {newRequestRecived.state === "success" ?
+                        <Summary data={newRequestRecived.data}/>
+                        :
+                        newRequestRecived.error.errorMessage && <div>{showErrorMessage}</div>
                     }
 
                 </div>
                 :
                 <Form noValidate validated={validated}
                       onSubmit={(e) => handleSubmit(e)}
-                      className={" w-100 d-flex flex-column justify-content-between align-items-center mt-2 mb-5 mx-auto bg-green text-light p-5"}>
+                      className={" w-100 d-flex flex-column justify-content-between align-items-center" +
+                          " mt-2 mb-5 mx-auto bg-green text-light p-5"}>
                     {typeOfApplicant === "default" &&
                         <div className={" d-flex flex-column justify-content-center align-items-center"}>
                             <h3 className={"w-100"}>
@@ -162,7 +174,7 @@ export default function RequestForm() {
                             </h3>
                             <Form.Select className={"rounded-0"} defaultValue=""
                                          onChange={(e) => setTypeSelected(e.target.value)}>
-                                <option value="" disabled hidden>vyberte jednu z možností</option>
+                                <option value="" disabled hidden>vyberte</option>
                                 <option value="INDIVIDUAL">fyzická osoba</option>
                                 <option value="OSVC">fyzická osoba - podnikatel</option>
                                 <option value="LEGAL_ENTITY">právnická osoba</option>
@@ -191,7 +203,7 @@ export default function RequestForm() {
                                             />
                                             <Form.Control.Feedback className={"ps-1 text-light bg-danger"}
                                                                    type="invalid">
-                                                Povinné pole
+                                                Zadejte své jméno
                                             </Form.Control.Feedback>
                                         </Form.Group>
                                         <Form.Group className="mb-2 w-100" controlId={`FormGroupSurname`}>
@@ -203,7 +215,7 @@ export default function RequestForm() {
                                             />
                                             <Form.Control.Feedback className={"ps-1 text-light bg-danger"}
                                                                    type="invalid">
-                                                Povinné pole
+                                                Zadejte své příjmení
                                             </Form.Control.Feedback>
                                         </Form.Group>
                                         <Form.Group className="mb-2 w-100" controlId="formGroupBirthNum">
@@ -212,27 +224,29 @@ export default function RequestForm() {
                                             {typeOfApplicant === "INDIVIDUAL" ?
                                                 <>
                                                     <Form.Control
-                                                        onChange={(e) => storeInputData("birthNum", e.target.value)}
+                                                        onChange={(e) => storeInputData("birthNum", e.target.value.replaceAll(/\D/g, ""))}
                                                         className={"rounded-0"}
-                                                        placeholder="ve tvaru 751231/0123"
-                                                        pattern="[0-9]{2}[0156][0-9][0-3][0-9][ \/][0-9]{3,4}"
-                                                    />
-                                                    <Form.Control.Feedback className={"ps-1 text-light bg-danger"}
-                                                                           type="invalid">
-                                                        Uveďte platné RČ
-                                                    </Form.Control.Feedback>
-                                                </>
-                                                :
-                                                <>
-                                                    <Form.Control
-                                                        onChange={(e) => storeInputData("IC", e.target.value)}
-                                                        className={"rounded-0"}
-                                                        pattern="[0-9]{8}"
+                                                        pattern="[0-9]{2}[0156][0-9][0-3][0-9][ \/-]?[0-9]{3,4}"
                                                         required
                                                     />
                                                     <Form.Control.Feedback className={"ps-1 text-light bg-danger"}
                                                                            type="invalid">
-                                                        Povinné pole, IČO musí být osmimístné číslo
+                                                        {formData.birthNum ? "Toto rodné číslo není platné" : "Zadejte své rodné číslo"}
+                                                    </Form.Control.Feedback>
+
+
+                                                </>
+                                                :
+                                                <>
+                                                    <Form.Control
+                                                        onChange={(e) => storeInputData("IC", e.target.value.replaceAll(/\D/g, ""))}
+                                                        className={"rounded-0"}
+                                                        pattern="^\D*[0-9]\D*[0-9]\D*[0-9]\D*[0-9]\D*[0-9]\D*[0-9]\D*[0-9]\D*[0-9]\D*$"
+                                                        required
+                                                    />
+                                                    <Form.Control.Feedback className={"ps-1 text-light bg-danger"}
+                                                                           type="invalid">
+                                                        Zadejte osmimístné IČO
                                                     </Form.Control.Feedback>
                                                 </>
                                             }
@@ -250,67 +264,130 @@ export default function RequestForm() {
                                             />
                                             <Form.Control.Feedback className={"ps-1 text-light bg-danger"}
                                                                    type="invalid">
-                                                Uveďte email ve správném tvaru
+                                                {formData.email ? "Uveďte email ve správném tvaru" : "Zadejte svůj email"}
+
                                             </Form.Control.Feedback>
                                         </Form.Group>
                                         <Form.Group className="mb-2 w-100" controlId={`FormGroupPhone`}>
                                             <Form.Label className={"mb-0"}>Telefonní číslo</Form.Label>
-                                            <InputGroup hasValidation className={"mb-3"}>
+                                            <InputGroup hasValidation>
                                                 <InputGroup.Text className={"rounded-0"}>+420</InputGroup.Text>
                                                 <Form.Control
-                                                    placeholder="např. 602123456"
-                                                    onChange={(e) => storeInputData("phone", e.target.value)}
+                                                    onChange={(e) => storeInputData("phone", e.target.value.replaceAll(/\D/g, ""))}
                                                     className={"rounded-0"}
-                                                    type="tel"
-                                                    pattern="[0-9]{9}"
+                                                    required
+                                                    pattern="^\D*[0-9]\D*[0-9]\D*[0-9]\D*[0-9]\D*[0-9]\D*[0-9]\D*[0-9]\D*[0-9]\D*[0-9]\D*$"
                                                 />
-                                            <Form.Control.Feedback className={"ps-1 text-light bg-danger"}
-                                                                   type="invalid">
-                                                Zadejte devítimísné číslo bez mezer
-                                            </Form.Control.Feedback>
+                                                <Form.Control.Feedback className={"ps-1 text-light bg-danger"}
+                                                                       type="invalid">
+                                                    {formData.phone ? "Telefonní číslo musí být devítimístné" : "Zadejte své telefonní číslo"}
+                                                </Form.Control.Feedback>
                                             </InputGroup>
                                         </Form.Group>
-                                        {createFormGroup("Národnost", "nationality")}
+                                        <Form.Group className="mb-2 w-100" controlId={`FormGroupNationality`}>
+                                            <Form.Label className={"mb-0"}>Národnost</Form.Label>
+                                            <Form.Control
+                                                onChange={(e) => storeInputData("nationality", e.target.value)}
+                                                className={"rounded-0"}
+                                                required
+                                            />
+                                            <Form.Control.Feedback className={"ps-1 text-light bg-danger"}
+                                                                   type="invalid">
+                                                Zadejte svou národnost
+                                            </Form.Control.Feedback>
+                                        </Form.Group>
                                     </div>
                                 </div>
                                 <div className={"m-5 w-100"}>
                                     <h3>Adresa</h3>
                                     <div className={"d-flex flex-column flex-lg-row gap-1"}>
-                                        {createAddressFormGroup("Ulice", "street")}
-                                        <Form.Group className="mb-2 w-100" controlId={`FormGroupDescNumber`}>
-                                            <Form.Label className={"mb-0"}>Číslo popisné</Form.Label>
+                                        <Form.Group className="mb-2 w-100" controlId={`FormGroupDescStreet`}>
+                                            <Form.Label className={"mb-0"}>Ulice</Form.Label>
                                             <Form.Control
-                                                onChange={(e) => storeAddressData("descNumber", parseInt(e.target.value))}
+                                                onChange={(e) => storeAddressData("street", e.target.value)}
                                                 className={"rounded-0"}
-                                                type="number"
-                                                min="1"
-                                                step="2"
+                                                required
                                             />
                                             <Form.Control.Feedback className={"ps-1 text-light bg-danger"}
                                                                    type="invalid">
-                                                Číslo popisné musí být liché
+                                                Zadejte ulici
                                             </Form.Control.Feedback>
+                                        </Form.Group>
+                                        <Form.Group className="mb-2 w-100" controlId={`FormGroupDescNumber`}>
+                                            <Form.Label className={"mb-0"}>Číslo popisné</Form.Label>
+                                            {formData.address.indicativeNumber ?
+                                                <Form.Control
+                                                    onChange={(e) => storeAddressData("descNumber", parseInt(e.target.value))}
+                                                    className={"rounded-0"}
+                                                    type="number"
+                                                    min="1"
+                                                />
+                                                :
+                                                <><Form.Control
+                                                    onChange={(e) => storeAddressData("descNumber", parseInt(e.target.value))}
+                                                    className={"rounded-0"}
+                                                    type="number"
+                                                    min="1"
+                                                    required
+                                                />
+                                                    <Form.Control.Feedback className={"ps-1 text-light bg-danger"}
+                                                                           type="invalid">
+                                                        Číslo popisné nebo orientační je povinné
+                                                    </Form.Control.Feedback></>
+                                            }
+
                                         </Form.Group>
                                         <Form.Group className="mb-2 w-100" controlId={`FormGroupIndicativeNumber`}>
                                             <Form.Label className={"mb-0"}>Číslo orientační</Form.Label>
-                                            <Form.Control
-                                                onChange={(e) => storeAddressData("indicativeNumber", parseInt(e.target.value))}
-                                                className={"rounded-0"}
-                                                type="number"
-                                                min="1"
-                                            />
+                                            {formData.address.descNumber ?
+                                                <Form.Control
+                                                    onChange={(e) => storeAddressData("indicativeNumber", parseInt(e.target.value))}
+                                                    className={"rounded-0"}
+                                                    type="number"
+                                                    min="1"
+                                                />
+                                                :
+                                                <>
+                                                    <Form.Control
+                                                        onChange={(e) => storeAddressData("indicativeNumber", parseInt(e.target.value))}
+                                                        className={"rounded-0"}
+                                                        type="number"
+                                                        min="1"
+                                                        required
+                                                    />
+                                                    <Form.Control.Feedback className={"ps-1 text-light bg-danger"}
+                                                                           type="invalid">
+                                                        Číslo popisné nebo orientační je povinné
+                                                    </Form.Control.Feedback>
+                                                </>
+                                            }
                                         </Form.Group>
                                     </div>
                                     <div className={"d-flex flex-column flex-lg-row gap-1"}>
-                                        {createAddressFormGroup("Město", "city")}
+                                        <Form.Group className="mb-2 w-100" controlId={`FormGroupCity`}>
+                                            <Form.Label className={"mb-0"}>Město</Form.Label>
+                                            <Form.Control
+                                                onChange={(e) => storeAddressData("city", e.target.value)}
+                                                className={"rounded-0"}
+                                                required
+                                            />
+                                            <Form.Control.Feedback className={"ps-1 text-light bg-danger"}
+                                                                   type="invalid">
+                                                Zadejte město
+                                            </Form.Control.Feedback>
+                                        </Form.Group>
                                         <Form.Group className="mb-2 w-100" controlId={`FormGroupPostalCode`}>
                                             <Form.Label className={"mb-0"}>PSČ</Form.Label>
                                             <Form.Control
-                                                onChange={(e) => storeAddressData("postalCode", parseInt(e.target.value))}
+                                                onChange={(e) => storeAddressData("postalCode", parseInt(e.target.value.replaceAll(/\D/g, "")))}
                                                 className={"rounded-0"}
-                                                type="number"
-                                                min="1"
+                                                pattern="^\D*[0-9]\D*[0-9]\D*[0-9]\D*[0-9]\D*[0-9]$"
+                                                required
                                             />
+                                            <Form.Control.Feedback className={"ps-1 text-light bg-danger"}
+                                                                   type="invalid">
+                                                {formData.address.postalCode ? "PSČ musí být pětimístné" : "Zadejte PSČ"}
+                                            </Form.Control.Feedback>
                                         </Form.Group>
                                     </div>
                                 </div>
@@ -389,11 +466,14 @@ export default function RequestForm() {
                                                 className={"rounded-0"} defaultValue=""
                                                 onChange={(e) => storeInputData("position", e.target.value)}
                                                 required>
-
                                                 <option value="" disabled hidden>vyberte</option>
-                                                <option value="majitel">majitel</option>
-                                                <option value="jednatel">jednatel</option>
-                                                <option value="pověřená osoba">pověřená osoba</option>
+
+                                                {
+                                                    companyPositions.map(position => {
+                                                        return <option value={position}>{position}</option>
+                                                    })
+
+                                                }
                                             </Form.Select>
                                             <Form.Control.Feedback className={"ps-1 text-light bg-danger"}
                                                                    type="invalid">
