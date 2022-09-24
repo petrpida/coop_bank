@@ -13,9 +13,7 @@ import { Modal, Button } from "react-bootstrap";
 import styles from "../css/AdminApp.module.css";
 import Icon from "@mdi/react";
 import { mdiSwapVerticalBold } from "@mdi/js";
-
-
-
+import AdminContext from "../store/AdminDataProvider";
 
 const mockup = [
   {
@@ -98,15 +96,11 @@ export default function AdminApp() {
   const [data, setData] = useState([]);
   const [modalInfo, setModalInfo] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const { userData } = useContext(AdminContext);
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-
-
-
-
 
   // useEffect(() => {
   //   fetch(`http://localhost:3000/request/list`, {
@@ -122,22 +116,11 @@ export default function AdminApp() {
   //   });
   // }, []);
 
+  console.log(userData);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  useEffect(() => {
+    setData(mockup);
+  }, [data]);
 
   //console.log(data);
   const selectOptions = {
@@ -160,6 +143,10 @@ export default function AdminApp() {
   //   setModalInfo(cell);
   //   toggleTrueFalse();
   // }
+  //  const random = data.map((singleUser) => {
+  //   return singleUser.amount * 100000
+  //  })
+  //  console.log(random)
 
   // const editButton = <Button></Button>
   //   onClick: (e, cell) => {
@@ -169,6 +156,7 @@ export default function AdminApp() {
   const columns = [
     {
       dataField: "applicantType" === "LEGAL_ENTITY" ? "companyName" : "surname",
+      dataField: "surname",
       text: "Surename",
       sort: true,
       headerFormatter: (cell) => sortBtn,
@@ -207,7 +195,6 @@ export default function AdminApp() {
   ];
   // console.log(columns);
 
- 
   // const rowEvents = {
   //   onClick: (e, row) => {
   //     console.log(row);
@@ -215,6 +202,15 @@ export default function AdminApp() {
   //     toggleTrueFalse();
   //   },
   // };
+  console.log(columns);
+
+  const rowEvents = {
+    onClick: (e, row) => {
+      console.log(row);
+      setModalInfo(row);
+      toggleTrueFalse();
+    },
+  };
 
   const toggleTrueFalse = () => {
     setShowModal(handleShow);
@@ -252,6 +248,7 @@ export default function AdminApp() {
   return (
     <>
       <BootstrapTable
+        className={styles.table}
         keyField="id"
         data={data}
         columns={columns}
