@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import { Card, FormGroup, Spinner } from "react-bootstrap";
 import FetchDataContext from "../store/FetchDataProvider";
 import { useNavigate } from "react-router-dom";
+import { Buffer } from "buffer";
 
 const Calculator = React.memo(() => {
   const [amount, setAmount] = useState(350000);

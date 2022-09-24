@@ -312,30 +312,6 @@
     "id": "f5ef1543975d4353"
   },
   {
-    "name": "Petr",
-    "surname": "Studený",
-    "birthNum": "8508070835",
-    "nationality": "ČR",
-    "email": "petstu@email.cz",
-    "phone": "123654789",
-    "IC": " 02354780",
-    "position": "",
-    "companyName": "",
-    "address": {
-      "street": "",
-      "descNumber": 1,
-      "indicativeNumber": 0,
-      "city": "",
-      "postalCode": 0
-    },
-    "applicantType": "INDIVIDUAL",
-    "amount": 350000,
-    "numOfMonths": 24,
-    "created": "2022-09-23T19:09:18.792Z",
-    "status": "PENDING",
-    "id": "994c48e62b087c89"
-  },
-  {
     "name": "petr",
     "surname": "studeny",
     "birthNum": "7506120659",
