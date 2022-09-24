@@ -1,5 +1,4 @@
 import React, { useState, useMemo, useContext, useEffect } from "react";
-import "bootstrap/dist/css/bootstrap.css";
 // import Table from "react-bootstrap/Table";
 // import Form from "react-bootstrap/Form";
 // import Button from "react-bootstrap/Button";
@@ -156,7 +155,6 @@ export default function AdminApp() {
   const columns = [
     {
       dataField: "applicantType" === "LEGAL_ENTITY" ? "companyName" : "surname",
-      dataField: "surname",
       text: "Surename",
       sort: true,
       headerFormatter: (cell) => sortBtn,

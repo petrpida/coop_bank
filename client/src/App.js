@@ -1,6 +1,7 @@
+import './theme.sass'
 import "./App.css";
 import styles from "./css/app.module.css";
-import "bootstrap/dist/css/bootstrap.css";
+//import "bootstrap/dist/css/bootstrap.css";
 import React from "react";
 import {Nav, Navbar, NavDropdown} from "react-bootstrap";
 import {Outlet, useNavigate} from "react-router-dom";
