@@ -1,6 +1,6 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Buffer } from "buffer";
 import AdminContext from "../store/AdminDataProvider";
@@ -50,13 +50,10 @@ export default function AdminLogin() {
       } else {
         setUserData({ state: "success", data: data });
         navigate("/AdminApp");
-        console.log(data);
       }
     }
     checkUser(user);
   };
-
-  console.log(userData);
 
   return (
     <Form
