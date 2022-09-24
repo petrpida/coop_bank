@@ -12,7 +12,7 @@ const Calculator = React.memo(() => {
   const [months, setMonths] = useState(24);
   const [isCalculated, setIsCalculated] = useState(false);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // send and get data to/from server
   const { inputCalc, setInputCalc, calculatedData } =

@@ -11,6 +11,8 @@ import filterFactory, { selectFilter } from "react-bootstrap-table2-filter";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import { Modal, Button } from "react-bootstrap";
 import styles from "../css/AdminApp.module.css";
+import Icon from "@mdi/react";
+import { mdiSwapVerticalBold } from "@mdi/js";
 import AdminContext from "../store/AdminDataProvider";
 
 const mockup = [
@@ -39,7 +41,7 @@ const mockup = [
     created: "Wed Mar 25 2015 01:00:00 GMT+0100",
   },
   {
-    applicantType: "OSVC",
+    applicantType: "LEGAL_ENTITY",
     name: "Lacinia",
     surname: "Fusce",
     birthNum: "006004/2400",
@@ -100,6 +102,20 @@ export default function AdminApp() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  // useEffect(() => {
+  //   fetch(`http://localhost:3000/request/list`, {
+  //     method: "GET",
+  //     headers: { "Authorization: Bearer <token>" },
+  //   }).then(async (response) => {
+  //     const data = await response.json();
+  //     if (response.status >= 400) {
+  //       setData({ state: "error", error: data });
+  //     } else {
+  //       setData({ state: "success", data: data });
+  //     }
+  //   });
+  // }, []);
+
   console.log(userData);
 
   useEffect(() => {
@@ -113,26 +129,48 @@ export default function AdminApp() {
     // 2: "Third Option" // ------------------------------opravit
   };
 
+  const sortBtn = (
+    <span>
+      Řadit dle výškz ůveru
+      <Button className="rounded-0">
+        <Icon size={1} path={mdiSwapVerticalBold} />
+      </Button>
+    </span>
+  );
+
+  // editFunction = () => {
+  //   console.log(cell);
+  //   setModalInfo(cell);
+  //   toggleTrueFalse();
+  // }
   //  const random = data.map((singleUser) => {
   //   return singleUser.amount * 100000
   //  })
   //  console.log(random)
 
+  // const editButton = <Button></Button>
+  //   onClick: (e, cell) => {
+     
+    
+  // };
   const columns = [
     {
+      dataField: "applicantType" === "LEGAL_ENTITY" ? "companyName" : "surname",
       dataField: "surname",
       text: "Surename",
       sort: true,
+      headerFormatter: (cell) => sortBtn,
     },
     {
+      // dataField: new Intl.NumberFormat('cs-CZ').format("amount") ,
       dataField: "amount",
       text: "Amount",
       sort: true,
-      // formatter: (column)
+      headerFormatter: (cell) => sortBtn,
     },
     {
       dataField: "applicantType",
-      // text: "Typ osoby",
+      text: "Typ osoby",
       formatter: (cell) => selectOptions[cell],
       filter: selectFilter({
         options: selectOptions,
@@ -148,7 +186,22 @@ export default function AdminApp() {
       dataField: "status",
       text: "Status",
     },
+    {
+      // dataField: "status",
+      text: "Edit",
+      formatter:(column) => sortBtn
+
+    },
   ];
+  // console.log(columns);
+
+  // const rowEvents = {
+  //   onClick: (e, row) => {
+  //     console.log(row);
+  //     setModalInfo(row);
+  //     toggleTrueFalse();
+  //   },
+  // };
   console.log(columns);
 
   const rowEvents = {
@@ -203,7 +256,7 @@ export default function AdminApp() {
         condensed
         filter={filterFactory()}
         pagination={paginationFactory()}
-        rowEvents={rowEvents}
+        // rowEvents={rowEvents}
       />
       {show ? <ModalContent /> : null}
     </>
