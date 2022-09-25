@@ -26,7 +26,7 @@ root.render(
               <Route path="adminApp" element={<AdminApp />} />
               <Route path="calculator" element={<Calculator />} />
               <Route path="requestForm" element={<RequestForm />} />
-              <Route path="summary" element={<Summary />} />
+              <Route path="/:id" element={<Summary />} />
             </Route>
           </Routes>
         </BrowserRouter>
