@@ -37,3 +37,37 @@
     border-radius: 0;
     width: 100%;
 }
+.address_ul { 
+    list-style: none;
+   
+}
+li { 
+    margin-bottom: 5px;
+
+}
+
+.modal_title { 
+    display: flex;
+    flex-direction: column;
+    margin-left:1rem ;
+
+}
+
+.modal_status_pen { 
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    color: #afcb15;
+}
+.modal_status_app {
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    color: #00843D;
+}
+.modal_status_can {
+     margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    color: red;
+}

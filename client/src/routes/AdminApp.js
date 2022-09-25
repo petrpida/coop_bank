@@ -1,10 +1,4 @@
 import React, { useState, useMemo, useContext, useEffect } from "react";
-// import Table from "react-bootstrap/Table";
-// import Form from "react-bootstrap/Form";
-// import Button from "react-bootstrap/Button";
-// import Icon from "@mdi/react";
-// import { mdiMagnify } from "@mdi/js";
-// import FetchDataContext from "../store/FetchDataProvider";
 import BootstrapTable from "react-bootstrap-table-next";
 import filterFactory, { selectFilter } from "react-bootstrap-table2-filter";
 import paginationFactory from "react-bootstrap-table2-paginator";
@@ -15,19 +9,19 @@ import { mdiLoading, mdiSwapVerticalBold } from "@mdi/js";
 import AdminContext from "../store/AdminDataProvider";
 import { useNavigate } from "react-router-dom";
 
-//console.log(mockup);
-
 export default function AdminApp() {
   const { userData } = useContext(AdminContext);
   const navigate = useNavigate();
   const [adminData, setAdminData] = useState({});
-  const [data, setData] = useState([]);
-  const [modalInfo, setModalInfo] = useState([]);
+  const [isApproved, setIsApproved] = useState({});
+  const [isCanceled, setIsCanceled] = useState({});
+  const [isDeleted, setIsDeleted] = useState({})
   const [showModal, setShowModal] = useState(false);
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [dataUpdate, setDataUpdate] = useState(false)
 
   useEffect(() => {
     fetch(`http://localhost:3000/request/list`, {
@@ -38,27 +32,12 @@ export default function AdminApp() {
       if (response.status >= 400) {
         setAdminData({ state: "error", error: data });
       } else {
-        console.log(data);
         setAdminData({ state: "success", data: data });
       }
     });
-  }, []);
+  }, [dataUpdate]);
 
-  // console.log(userData);
-  // console.log(adminData);
-
-  const selectOptionsType = {
-    OSVC: "Podnikatel fyzická osoba",
-    INDIVIDUAL: "Fyzická osoba",
-    LEGAL_ENTITY: "Právnická osoba",
-  };
-
-  const selectOptionsStatus = {
-    PENDING: "Čeká na schválení",
-    APPROVED: "Potvrzeno",
-    DECLINED: "Zamítnuto",
-  };
-
+  //  Sorting buttons in table header
   const sortNames = (
     <span>
       Řadit dle jména
@@ -67,7 +46,6 @@ export default function AdminApp() {
       </Button>
     </span>
   );
-
   const sortNumbers = (
     <span>
       Řadit dle výšky ůveru
@@ -76,10 +54,23 @@ export default function AdminApp() {
       </Button>
     </span>
   );
- // Display company name if it exist, otherwise display name of the person 
+
+  // Select inputs in table header
+  const selectOptionsType = {
+    OSVC: "Podnikatel fyzická osoba",
+    INDIVIDUAL: "Fyzická osoba",
+    LEGAL_ENTITY: "Právnická osoba",
+  };
+  const selectOptionsStatus = {
+    PENDING: "Čeká na schválení",
+    APPROVED: "Schváleno",
+    CANCELLED: "Zamítnuto",
+  };
+
+  // Display company name if it exist, otherwise display persons name
   const nameFormatter = (company, row) => {
     for (let i = 0; i < adminData.data.length; i++) {
-      return company ? row.companyName : `${row.name} ${row.surname}`;
+      return company ? row.companyName : `${row.surname} ${row.name}`;
     }
   };
 
@@ -89,7 +80,6 @@ export default function AdminApp() {
   };
 
   const [singleRequest, setSingleRequest] = useState({});
-
   const editBtnFetch = (id) => {
     fetch(`http://localhost:3000/request/${id}`, {
       method: "GET",
@@ -99,21 +89,56 @@ export default function AdminApp() {
       if (response.status >= 400) {
         setSingleRequest({ state: "error", error: data });
       } else {
-        console.log(data);
         setSingleRequest({ state: "success", data: data });
       }
     });
   };
 
-  const rowStyle = (row) => {
-    if (row === row.companyName) {
-      return { color: "#FD0303" };
-    }
+  const approveBtn = () => {
+    fetch(`http://localhost:3000/request/${singleRequest.data.id}/approve`, {
+      method: "PUT",
+      headers: { Authorization: `Bearer ${userData.data.token}` },
+    }).then(async (response) => {
+      const data = await response.json();
+      if (response.status >= 400) {
+        setIsApproved({ state: "error", error: data });
+      } else {
+        setIsApproved({ state: "success", data: data });
+      }
+    });
   };
 
-  console.log(singleRequest);
+  const cancelBtn = () => {
+    fetch(`http://localhost:3000/request/${singleRequest.data.id}/cancel`, {
+      method: "PUT",
+      headers: { Authorization: `Bearer ${userData.data.token}` },
+    }).then(async (response) => {
+      const data = await response.json();
+      if (response.status >= 400) {
+        setIsCanceled({ state: "error", error: data });
+      } else {
+        console.log(isCanceled);
+        setIsCanceled({ state: "success", data: data });
+      }
+    });
+  };
 
-  //buttons for editing
+  const deleteBtn = () => {
+    fetch(`http://localhost:3000/request/${singleRequest.data.id}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${userData.data.token}` },
+    }).then(async (response) => {
+      const data = await response.json();
+      if (response.status >= 400) {
+        setIsDeleted({ state: "error", error: data });
+      } else {
+        console.log(isCanceled);
+        setIsDeleted({ state: "success", data: data });
+      }
+    });;
+  };
+
+  // Edit buttons for single row in table
   const editBtn = (e, row) => {
     return (
       <Button
@@ -165,12 +190,10 @@ export default function AdminApp() {
     },
   ];
 
-  console.log(columns);
-
   const toggleTrueFalse = () => {
     setShowModal(handleShow);
   };
-  // console.log(singleRequest.state)
+
   const ModalContent = () => {
     return (
       <>
@@ -178,9 +201,22 @@ export default function AdminApp() {
           <Modal show={show} onHide={handleClose} className="rounded-0">
             <Modal.Header closeButton>
               <Modal.Title>
-                {singleRequest.data.companyName
-                  ? singleRequest.data.companyName
-                  : `${singleRequest.data.name} ${singleRequest.data.surname}`}
+                <div className={styles.modal_title}>
+                  <p className={styles.modal_status_pen}>
+                    {singleRequest.data.status === "PENDING" &&
+                      `Čeká na schválení`}
+                  </p>
+                  <p className={styles.modal_status_app}>
+                    {singleRequest.data.status === "APPROVED" && `Schváleno`}
+                  </p>
+                  <p className={styles.modal_status_can}>
+                    {singleRequest.data.status === "CANCELLED" && `Zamítnuto`}
+                  </p>
+
+                  {singleRequest.data.companyName
+                    ? singleRequest.data.companyName
+                    : `${singleRequest.data.name} ${singleRequest.data.surname}`}
+                </div>
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -222,7 +258,7 @@ export default function AdminApp() {
                 <li>{`Telefonní číslo: ${singleRequest.data.phone}`}</li>
                 <li>{`E-mailová adresa: ${singleRequest.data.email}`}</li>
                 <li>Adresa:</li>
-                <ul>
+                <ul className={styles.address_ul}>
                   <li>{`Ulice: ${singleRequest.data.address.street}`}</li>
                   <li>
                     {`Číslo popisné: ${singleRequest.data.address.descNumber}`}
@@ -233,17 +269,20 @@ export default function AdminApp() {
                   <li>{`Město: ${singleRequest.data.address.city}`}</li>
                   <li>{`PSČ: ${singleRequest.data.address.postalCode}`}</li>
                 </ul>
-                {/* <li>{singleRequest.data}</li>
-                <li>{singleRequest.data}</li> */}
               </ul>
               <div className={styles.modal_buttons}>
                 {singleRequest.data.status === "PENDING" && (
                   <div className={styles.approval_btn}>
-                    <Button>Potvrdit</Button>
-                    <Button>Zamitnout</Button>
+                    <Button onClick={() => {approveBtn(); setDataUpdate(!dataUpdate)}}>Potvrdit</Button>
+                    <Button onClick={() => cancelBtn()}>Zamitnout</Button>
                   </div>
                 )}
-                <Button className={styles.delete_btn}>Vymazat</Button>
+                <Button
+                  onClick={() => deleteBtn()}
+                  className={styles.delete_btn}
+                >
+                  Vymazat
+                </Button>
               </div>
             </Modal.Body>
           </Modal>
@@ -270,119 +309,9 @@ export default function AdminApp() {
           condensed
           filter={filterFactory()}
           pagination={paginationFactory()}
-          // rowEvents={rowEvents}
-          rowStyle={rowStyle}
         />
       )}
       {show ? <ModalContent /> : null}
     </>
   );
 }
-
-// new Intl.NumberFormat('cs-CZ').format({})
-
-// <div>
-//   <Table striped bordered hover size="sm">
-//     <thead>
-//       <tr>
-//         <th>meno</th>
-//         <th>Vyse uveru</th>
-//         <th>Typ osoby</th>
-//         <th>Stav schvaleni</th>
-//       </tr>
-//       <tr>
-//         <th>Jmeno Prijmeni</th>
-//         <th>Vyse uveru</th>
-//         <th>Typ osoby</th>
-//         <th>Stav schvaleni</th>
-//         <th>Kontakt</th>
-//       </tr>
-//     </thead>
-//     <tbody>
-//       {mockup.map((user) => {
-//         return (
-//           <>
-//             <tr>
-//               <td>{user.companyName ?? user.surname}</td>
-//               <td>{user.amount}kč</td>
-//               <td>{user.applicantType}</td>
-//               <td>{user.status}</td>
-//             </tr>
-//           </>
-//         );
-//       })}
-//     </tbody>
-//   </Table>
-// </div>
-//   );
-// }
-
-//     const {enteredApplicantData} = useContext(FetchDataContext)
-//   // =========================== Filter by surname or companyName
-//   const [searchBy, setSearchBy] = useState("");
-// console.log(enteredApplicantData)
-//   const filteredUsers = useMemo(() => {
-//     return mockup.filter((item) => {
-//       if (item.companyName) {
-//         return item.companyName
-//           .toLocaleLowerCase()
-//           .includes(searchBy.toLocaleLowerCase);
-//       } else {
-//         return (
-//           item.name
-//             .toLocaleLowerCase()
-//             .includes(searchBy.toLocaleLowerCase()) ||
-//           item.surname
-//             .toLocaleLowerCase()
-//             .includes(searchBy.toLocaleLowerCase())
-//         );
-//       }
-//     });
-//   }, [searchBy]);
-
-//   function handleSearch(event) {
-//     event.preventDefault();
-//     setSearchBy(event.target["searchInput"].value);
-//   }
-//   function handleSearchDelete(event) {
-//     if (!event.target.value) setSearchBy("");
-//   }
-
-//   //============================== Sorting by amount
-//   const [sortedAscending, setSortedAScending] = useState(true);
-
-//   const sortedByAmount = filteredUsers.sort((a, b) => {
-//     if (a.amount > b.amount) {
-//       return -1;
-//     }
-//     if (a.amount < b.amount) {
-//       return 1;
-//     }
-//     return 0;
-//   });
-//   // console.log(sortedByAmount)
-//   sortedByAmount.map((amount) => {
-//     return console.log(amount);
-//   });
-
-//   const searchFieldForm = () => {
-//     return (
-//       <Form className="d-flex" >
-//         <Form.Control
-//           id={"searchInput"}
-//           style={{ maxWidth: "150px" }}
-//           type="search"
-//           placeholder="Search"
-//           aria-label="Search"
-
-//         />
-//         <Button
-//           style={{ marginRight: "8px" }}
-//           variant="outline-success"
-//           type="submit"
-//         >
-//           <Icon size={1} path={mdiMagnify} />
-//         </Button>
-//       </Form>
-//     );
-//   };

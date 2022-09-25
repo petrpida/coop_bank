@@ -19,33 +19,9 @@
       "city": "Duis",
       "postalCode": 11111
     },
-    "status": "PENDING",
+    "status": "CANCELLED",
     "id": "Pm8MtixTFX",
     "created": "Wed Mar 25 2015 01:00:00 GMT+0100"
-  },
-  {
-    "applicantType": "OSVC",
-    "name": "Lacinia",
-    "surname": "Fusce",
-    "birthNum": "006004/2400",
-    "nationality": "CZ",
-    "email": "delectus@volutpat.in",
-    "phone": "+420111222555",
-    "IC": "1566545987",
-    "companyName": null,
-    "amount": 70000,
-    "numOfMonths": 18,
-    "position": null,
-    "address": {
-      "street": "Ante",
-      "descNumber": 13,
-      "indicativeNumber": 7,
-      "city": "Totam",
-      "postalCode": 777777
-    },
-    "status": "PENDING",
-    "id": "wiVXhN73Mt",
-    "created": "Sat Sep 17 2022 19:31:42 GMT+0200"
   },
   {
     "applicantType": "LEGAL_ENTITY",
@@ -67,33 +43,9 @@
       "city": "Totam",
       "postalCode": 777777
     },
-    "status": "PENDING",
+    "status": "APPROVED",
     "id": "wiVXhN73fR",
     "created": "Sat Sep 17 2022 19:31:42 GMT+0200"
-  },
-  {
-    "name": "petr",
-    "surname": "studeny",
-    "birthNum": "",
-    "nationality": "",
-    "email": "petstu@email.cz",
-    "phone": "",
-    "IC": "",
-    "position": "",
-    "companyName": "",
-    "address": {
-      "street": "",
-      "descNumber": 3,
-      "indicativeNumber": 0,
-      "city": "",
-      "postalCode": 0
-    },
-    "applicantType": "INDIVIDUAL",
-    "amount": 440000,
-    "numOfMonths": 28,
-    "created": "2022-09-23T10:12:14.907Z",
-    "status": "PENDING",
-    "id": "69e4f54878e99a12"
   },
   {
     "name": "petr",
@@ -116,32 +68,8 @@
     "amount": 450000,
     "numOfMonths": 13,
     "created": "2022-09-23T10:21:57.079Z",
-    "status": "PENDING",
+    "status": "CANCELLED",
     "id": "946ccb57c68cc5b8"
-  },
-  {
-    "name": "petr",
-    "surname": "studeny",
-    "birthNum": "",
-    "nationality": "",
-    "email": "petstu@email.cz",
-    "phone": "",
-    "IC": "",
-    "position": "",
-    "companyName": "",
-    "address": {
-      "street": "",
-      "descNumber": 13,
-      "indicativeNumber": 0,
-      "city": "",
-      "postalCode": 0
-    },
-    "applicantType": "INDIVIDUAL",
-    "amount": 430000,
-    "numOfMonths": 25,
-    "created": "2022-09-23T10:23:24.965Z",
-    "status": "PENDING",
-    "id": "be2306f7791137f0"
   },
   {
     "name": "petr",
@@ -164,7 +92,7 @@
     "amount": 540000,
     "numOfMonths": 24,
     "created": "2022-09-23T10:25:46.541Z",
-    "status": "PENDING",
+    "status": "APPROVED",
     "id": "2efb87eb3df047fa"
   },
   {
@@ -188,7 +116,7 @@
     "amount": 470000,
     "numOfMonths": 28,
     "created": "2022-09-23T10:30:00.521Z",
-    "status": "PENDING",
+    "status": "APPROVED",
     "id": "3839025a3815810a"
   },
   {
@@ -236,7 +164,7 @@
     "amount": 365000,
     "numOfMonths": 25,
     "created": "2022-09-23T10:32:15.780Z",
-    "status": "PENDING",
+    "status": "APPROVED",
     "id": "8517b1a2a6e5b264"
   },
   {
@@ -260,7 +188,7 @@
     "amount": 405000,
     "numOfMonths": 26,
     "created": "2022-09-23T10:37:14.416Z",
-    "status": "PENDING",
+    "status": "APPROVED",
     "id": "cb115c75d9ca8e71"
   },
   {
@@ -284,7 +212,7 @@
     "amount": 420000,
     "numOfMonths": 25,
     "created": "2022-09-23T10:39:14.154Z",
-    "status": "PENDING",
+    "status": "APPROVED",
     "id": "a72394cb560f6f8a"
   },
   {
@@ -526,54 +454,6 @@
     "created": "2022-09-23T20:41:05.124Z",
     "status": "PENDING",
     "id": "c0edb50f25bc61d0"
-  },
-  {
-    "name": "petr",
-    "surname": "studeny",
-    "birthNum": "7506120659",
-    "nationality": "cr",
-    "email": "petstu@email.cz",
-    "phone": "123456781",
-    "IC": "",
-    "position": "",
-    "companyName": "",
-    "address": {
-      "street": "nova",
-      "descNumber": 1,
-      "indicativeNumber": 0,
-      "city": "Brno",
-      "postalCode": 65120
-    },
-    "applicantType": "INDIVIDUAL",
-    "amount": 1050000,
-    "numOfMonths": 36,
-    "created": "2022-09-23T20:45:02.784Z",
-    "status": "PENDING",
-    "id": "5b808161b09e47cb"
-  },
-  {
-    "name": "petr",
-    "surname": "studeny",
-    "birthNum": "7506120659",
-    "nationality": "cr",
-    "email": "petstu@email.cz",
-    "phone": "123456783",
-    "IC": "",
-    "position": "",
-    "companyName": "",
-    "address": {
-      "street": "nova",
-      "descNumber": 3,
-      "indicativeNumber": 0,
-      "city": "Brno",
-      "postalCode": 65120
-    },
-    "applicantType": "INDIVIDUAL",
-    "amount": 505000,
-    "numOfMonths": 29,
-    "created": "2022-09-23T20:50:09.680Z",
-    "status": "PENDING",
-    "id": "de3af8b93a4a39cc"
   },
   {
     "name": "petr",
@@ -1222,53 +1102,5 @@
     "created": "2022-09-24T09:32:51.501Z",
     "status": "PENDING",
     "id": "99ddace352b3b6e2"
-  },
-  {
-    "name": "petr",
-    "surname": "studeny",
-    "birthNum": "7506120659",
-    "nationality": "cr",
-    "email": "petstu@email.cz",
-    "phone": "123456787",
-    "IC": "",
-    "position": "",
-    "companyName": "",
-    "address": {
-      "street": "nova",
-      "descNumber": 7,
-      "indicativeNumber": 0,
-      "city": "Brno",
-      "postalCode": 65120
-    },
-    "applicantType": "INDIVIDUAL",
-    "amount": 615000,
-    "numOfMonths": 24,
-    "created": "2022-09-25T14:55:33.227Z",
-    "status": "PENDING",
-    "id": "f33eb7ef45e8197d"
-  },
-  {
-    "name": "petr",
-    "surname": "studeny",
-    "birthNum": "7506120659",
-    "nationality": "cr",
-    "email": "petstu@email.cz",
-    "phone": "123456787",
-    "IC": "",
-    "position": "",
-    "companyName": "",
-    "address": {
-      "street": "nova",
-      "descNumber": 7,
-      "indicativeNumber": 0,
-      "city": "Brno",
-      "postalCode": 65120
-    },
-    "applicantType": "INDIVIDUAL",
-    "amount": 480000,
-    "numOfMonths": 24,
-    "created": "2022-09-25T14:57:36.614Z",
-    "status": "PENDING",
-    "id": "5fc9642e4dffd5ab"
   }
 ]
