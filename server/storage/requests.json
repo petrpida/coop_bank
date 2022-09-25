@@ -1270,5 +1270,53 @@
     "created": "2022-09-25T14:57:36.614Z",
     "status": "PENDING",
     "id": "5fc9642e4dffd5ab"
+  },
+  {
+    "name": "petr",
+    "surname": "studeny",
+    "birthNum": "7506120659",
+    "nationality": "cr",
+    "email": "petstu@email.cz",
+    "phone": "123456781",
+    "IC": "",
+    "position": "",
+    "companyName": "",
+    "address": {
+      "street": "nova",
+      "descNumber": 1,
+      "indicativeNumber": 0,
+      "city": "Brno",
+      "postalCode": 65120
+    },
+    "applicantType": "INDIVIDUAL",
+    "amount": 350000,
+    "numOfMonths": 24,
+    "created": "2022-09-25T15:10:01.029Z",
+    "status": "PENDING",
+    "id": "f6c7b650c432cb2c"
+  },
+  {
+    "name": "petr",
+    "surname": "studeny",
+    "birthNum": "7506120659",
+    "nationality": "cr",
+    "email": "petstu@email.cz",
+    "phone": "123456789",
+    "IC": "12345235",
+    "position": "",
+    "companyName": "",
+    "address": {
+      "street": "nova",
+      "descNumber": 5,
+      "indicativeNumber": 4,
+      "city": "Brno",
+      "postalCode": 65120
+    },
+    "applicantType": "INDIVIDUAL",
+    "amount": 350000,
+    "numOfMonths": 27,
+    "created": "2022-09-25T18:21:08.955Z",
+    "status": "PENDING",
+    "id": "0101d5b8f8511cfe"
   }
 ]

@@ -33,8 +33,8 @@ export default function RequestForm() {
     const [formData, setFormData] = useState(defaultFormData)
 
     const [showConfirmation, setShowConfirmation] = useState(false)
-    const handleConfirmationClose = () => setShow(false);
-    const handleConfirmationShow = () => setShow(true);
+    const handleConfirmationClose = () => setShowConfirmation(false);
+    const handleConfirmationShow = () => setShowConfirmation(true);
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -46,16 +46,12 @@ export default function RequestForm() {
         "starostka", "statutární ředitel/ka", "účetní", "zástupce", "zástupkyně", "zplnomocněný", "zplnomocněná"
     ]
 
-    window.addEventListener('loadstart', (event) => {
-        navigate("/calculator");
-    });
-
     // todo !!! DOESNT WORK !!!
     useEffect(() => {
-        if (inputCalc.state === "default") {
+        if (inputCalc.amount === 350000 && inputCalc.numOfMonths === 24) {
             navigate("/calculator")
         }
-    }, [inputCalc.state])
+    }, [inputCalc])
 
 
     const storeInputData = (key, value) => {
@@ -115,7 +111,7 @@ export default function RequestForm() {
             <div className={"mt-5 px-0 px-md-5  w-100 d-flex flex-column flex-sm-row" +
                 " justify-content-between justify-content-lg-center align-items-center gap-2"}>
                 <Button
-                    onClick={() => setShowConfirmation(true)}
+                    onClick={() => handleConfirmationShow()}
                     size="lg"
                     variant="light"
                     className={"w-100 text-secondary fw-bold rounded-0"}>
@@ -272,7 +268,7 @@ export default function RequestForm() {
                             <div className={"m-5 w-100"}>
                                 <h3>Adresa</h3>
                                 <div className={"d-flex flex-column flex-lg-row gap-1"}>
-                                    <Form.Group className="mb-2 w-100" controlId={`FormGroupDescStreet`}>
+                                    <Form.Group className="mb-2 w-100" controlId={`FormGroupStreet`}>
                                         <Form.Label className={"mb-0"}>Ulice</Form.Label>
                                         <Form.Control
                                             onChange={(e) => storeAddressData("street", e.target.value)}
@@ -598,19 +594,21 @@ export default function RequestForm() {
                     </Button>
                 </Modal.Footer>
             </Modal>}
-            {<Modal centered show={showConfirmation} onHide={() => setShowConfirmation(false)}>
+            {<Modal centered show={showConfirmation} onHide={handleConfirmationShow}>
                 <Modal.Header closeButton>
                     <Modal.Title></Modal.Title>
                 </Modal.Header>
-                <Modal.Body className={"text-center bg-danger text-light"}>
-                    <div>Po návratu o krok zpět budou Vaše dosud vyplněná data ztracena.</div>
-                    <div>Chcete se i přesto vrátit zpět?</div>
+                <Modal.Body className={"text-center bg-secondary text-light"}>
+                    <div>Při návratu budou Vaše dosud vyplněná data ztracena.</div>
                 </Modal.Body>
                 <Modal.Footer className={"justify-content-center"}>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button variant="outline-primary" onClick={handleConfirmationClose}>
                         Zůstat
                     </Button>
-                    <Button variant="secondary" onClick={() => setTypeOfApplicant("default")}>
+                    <Button variant="outline-danger" onClick={() => {
+                        setTypeOfApplicant("default");
+                        handleConfirmationClose()
+                    }}>
                         Vrátit se
                     </Button>
                 </Modal.Footer>
