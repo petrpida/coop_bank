@@ -1230,6 +1230,12 @@
     "nationality": "cr",
     "email": "testovic@mail.com",
     "phone": "454879765",
+    "name": "petr",
+    "surname": "studeny",
+    "birthNum": "7506120659",
+    "nationality": "cr",
+    "email": "petstu@email.cz",
+    "phone": "123456787",
     "IC": "",
     "position": "",
     "companyName": "",
@@ -1246,53 +1252,5 @@
     "created": "2022-09-25T11:04:17.828Z",
     "status": "PENDING",
     "id": "3c717e448541bbf0"
-  },
-  {
-    "name": "test",
-    "surname": "testovic",
-    "birthNum": "4507085554",
-    "nationality": "ČR",
-    "email": "testovic@mail.com",
-    "phone": "789456123",
-    "IC": "",
-    "position": "",
-    "companyName": "",
-    "address": {
-      "street": "Testova",
-      "descNumber": 1111,
-      "indicativeNumber": 15,
-      "city": "Testovo",
-      "postalCode": 17864
-    },
-    "applicantType": "INDIVIDUAL",
-    "amount": 350000,
-    "numOfMonths": 24,
-    "created": "2022-09-25T12:40:09.670Z",
-    "status": "PENDING",
-    "id": "b5cc9f51c6089ac1"
-  },
-  {
-    "name": "test",
-    "surname": "testovic",
-    "birthNum": "4507085554",
-    "nationality": "ČR",
-    "email": "testovic@mail.com",
-    "phone": "789456123",
-    "IC": "",
-    "position": "",
-    "companyName": "",
-    "address": {
-      "street": "Testova",
-      "descNumber": 3,
-      "indicativeNumber": 4,
-      "city": "Testovo",
-      "postalCode": 14578
-    },
-    "applicantType": "INDIVIDUAL",
-    "amount": 420000,
-    "numOfMonths": 20,
-    "created": "2022-09-25T14:25:04.063Z",
-    "status": "PENDING",
-    "id": "ac2fc7fb4c65395f"
   }
 ]
