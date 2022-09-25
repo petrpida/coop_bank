@@ -55,70 +55,110 @@ function Summary() {
   }
 
   return (
-    <div className={styles.container}>
-      {applicantData.data && (
-        <div>
-          <ListGroup variant="flush">
-            <ListGroup.Item className={styles.title}>
-              Osobní údaje:
-            </ListGroup.Item>
-            <ListGroup.Item>
-              {applicantData.data.applicantType === "OSVC"
-                ? "Podnikatel"
-                : applicantData.data.applicantType === "INDIVIDUAL"
-                ? "Fyzická osoba"
-                : applicantData.data.applicantType === "LEGAL_ENTITY"
-                ? "Právnická osoba"
-                : applicantData.data.applicantType}
-            </ListGroup.Item>
-            <ListGroup.Item>Jméno: {applicantData.data.name}</ListGroup.Item>
-            <ListGroup.Item>
-              Příjmení: {applicantData.data.surname}
-            </ListGroup.Item>
-            <ListGroup.Item>
-              Rodné číslo: {applicantData.data.birthNum}
-            </ListGroup.Item>
-            <ListGroup.Item>E-mail: {applicantData.data.email}</ListGroup.Item>
-            <ListGroup.Item>
-              Tel. číslo: +420{applicantData.data.phone}
-            </ListGroup.Item>
-            <ListGroup.Item>
-              Adresa: {applicantData.data.address.street}{" "}
-              {applicantData.data.address.descNumber}/
-              {applicantData.data.address.indicativeNumber},{" "}
-              {applicantData.data.address.postalCode}{" "}
-              {applicantData.data.address.city}{" "}
-            </ListGroup.Item>
-            <ListGroup.Item>
-              Národnost: {applicantData.data.nationality}
-            </ListGroup.Item>
-          </ListGroup>
-        </div>
-      )}
-      {applicantData.data && (
-        <div>
-          <ListGroup className="rounded-0">
-            <ListGroup.Item className={styles.title}>
-              Shrnutí žádosti:
-            </ListGroup.Item>
-            <ListGroup.Item>
-              Požadovaná částka:{" "}
-              {new Intl.NumberFormat("cs-CZ").format(applicantData.data.amount)}{" "}
-              Kč
-            </ListGroup.Item>
-            <ListGroup.Item>
-              Doba splácení: {getYearsAndMonths(applicantData.data.numOfMonths)}
-            </ListGroup.Item>
-            <ListGroup.Item>
-              Stav žádosti: {applicantData.data.status}
-            </ListGroup.Item>
-            <ListGroup.Item>
-              Žádost vytvořena: {applicantData.data.created}
-            </ListGroup.Item>
-            <ListGroup.Item>Vaše ID: {applicantData.data.id}</ListGroup.Item>
-          </ListGroup>
-        </div>
-      )}
+    <div>
+      <h2 className={styles.heading}>Shrnutí žádosti</h2>
+      <div className={styles.container}>
+        {applicantData.data && (
+          <div>
+            <ListGroup variant="flush">
+              <ListGroup.Item className={styles.title}>
+                Vyplněné údaje:
+              </ListGroup.Item>
+              <ListGroup.Item>
+                {applicantData.data.applicantType === "OSVC"
+                  ? "Podnikatel"
+                  : applicantData.data.applicantType === "INDIVIDUAL"
+                  ? "Fyzická osoba"
+                  : applicantData.data.applicantType === "LEGAL_ENTITY"
+                  ? "Právnická osoba"
+                  : applicantData.data.applicantType}
+              </ListGroup.Item>
+              <ListGroup.Item>
+                {applicantData.data.applicantType === "LEGAL_ENTITY"
+                  ? "Firma: " + applicantData.data.companyName
+                  : "Jméno: " +
+                    applicantData.data.name +
+                    " " +
+                    applicantData.data.surname}
+              </ListGroup.Item>
+              {applicantData.data.applicantType === "LEGAL_ENTITY" ? (
+                <ListGroup.Item>
+                  {"Jednatel: " +
+                    applicantData.data.name +
+                    " " +
+                    applicantData.data.surname +
+                    ", " +
+                    applicantData.data.position}
+                </ListGroup.Item>
+              ) : (
+                ""
+              )}
+              <ListGroup.Item>
+                {applicantData.data.applicantType === "INDIVIDUAL"
+                  ? "Rodné číslo: " + applicantData.data.birthNum
+                  : "IČO: " + applicantData.data.IC}
+              </ListGroup.Item>
+              <ListGroup.Item>
+                E-mail: {applicantData.data.email}
+              </ListGroup.Item>
+              <ListGroup.Item>
+                Tel. číslo: {applicantData.data.phone}
+              </ListGroup.Item>
+              <ListGroup.Item>
+                Adresa: {applicantData.data.address.street}{" "}
+                {applicantData.data.address.descNumber}/
+                {applicantData.data.address.indicativeNumber},{" "}
+                {applicantData.data.address.postalCode}{" "}
+                {applicantData.data.address.city}{" "}
+              </ListGroup.Item>
+              <ListGroup.Item>
+                Národnost: {applicantData.data.nationality}
+              </ListGroup.Item>
+            </ListGroup>
+          </div>
+        )}
+        {applicantData.data && (
+          <div>
+            <ListGroup className="rounded-0">
+              <ListGroup.Item className={styles.title}>Žádost:</ListGroup.Item>
+              <ListGroup.Item>
+                Požadovaná částka:{" "}
+                {new Intl.NumberFormat("cs-CZ").format(
+                  applicantData.data.amount
+                )}{" "}
+                Kč
+              </ListGroup.Item>
+              <ListGroup.Item>
+                Doba splácení:{" "}
+                {getYearsAndMonths(applicantData.data.numOfMonths)}
+              </ListGroup.Item>
+              <ListGroup.Item>
+                Stav žádosti:{" "}
+                {applicantData.data.status === "PENDING"
+                  ? "Čeká na schválení"
+                  : applicantData.data.status === "CANCELLED"
+                  ? "Zamítnuta"
+                  : applicantData.data.status === "APPROVED"
+                  ? "Schválena"
+                  : ""}
+              </ListGroup.Item>
+              <ListGroup.Item>
+                Žádost vytvořena: {applicantData.data.created}
+              </ListGroup.Item>
+              <ListGroup.Item>Vaše ID: {applicantData.data.id}</ListGroup.Item>
+            </ListGroup>
+          </div>
+        )}
+      </div>
+      <p className={styles.url}>
+        Uschovejte si prosím pečlivě tento odkaz{" "}
+        <span>
+          <a href={`http://localhost:3000/${params.id}`}>
+            http://localhost:3000/{params.id}
+          </a>
+        </span>
+        , přes který se můžete k výše uvedenému shrnutí kdykoli vrátit.
+      </p>
     </div>
   );
 }
