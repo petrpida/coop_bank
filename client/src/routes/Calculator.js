@@ -131,10 +131,7 @@ const Calculator = React.memo(() => {
           </div>
         </div>
         <div>
-          <Card
-            className="text-center rounded-0"
-            style={{ border: "2px solid #00843D" }}
-          >
+          <Card className={"text-center rounded-0 " + styles.card}>
             <Card.Header className={styles.header}>
               Vaše výhodná půjčka
             </Card.Header>
