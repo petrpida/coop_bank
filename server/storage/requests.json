@@ -1224,6 +1224,28 @@
     "id": "99ddace352b3b6e2"
   },
   {
+    "name": "Viktor",
+    "surname": "Studeny",
+    "birthNum": "",
+    "nationality": "CZ",
+    "email": "vrasev@gmail.com",
+    "phone": "",
+    "IC": "18214852",
+    "position": "společník",
+    "companyName": "blabla",
+    "address": {
+      "street": "nfdgwrfgwr",
+      "descNumber": 9,
+      "indicativeNumber": 5,
+      "city": "",
+      "postalCode": 18750
+    },
+    "applicantType": "LEGAL_ENTITY",
+    "amount": 670000,
+    "numOfMonths": 37,
+    "created": "2022-09-25T07:45:23.401Z",
+    "status": "PENDING",
+    "id": "7d989d863dc07b21"
     "name": "test",
     "surname": "testovic",
     "birthNum": "8507055554",

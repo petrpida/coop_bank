@@ -2,3 +2,11 @@
   width: 90%;
   margin: 0 auto;
 }
+
+.sr-only { 
+  display: none;
+}
+.filter-label { 
+  margin-left: 1rem;
+  border-radius: 0;
+}
