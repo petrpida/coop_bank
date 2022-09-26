@@ -15,13 +15,12 @@ export default function AdminApp() {
   const [adminData, setAdminData] = useState({});
   const [isApproved, setIsApproved] = useState({});
   const [isCanceled, setIsCanceled] = useState({});
-  const [isDeleted, setIsDeleted] = useState({})
+  const [isDeleted, setIsDeleted] = useState({});
   const [showModal, setShowModal] = useState(false);
 
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  const [dataUpdate, setDataUpdate] = useState(false)
+  const [dataUpdate, setDataUpdate] = useState(false);
+
+  const role = userData.data.roles[0];
 
   useEffect(() => {
     fetch(`http://localhost:3000/request/list`, {
@@ -36,6 +35,18 @@ export default function AdminApp() {
       }
     });
   }, [dataUpdate]);
+
+  const newData = { ...adminData };
+  if (newData.state === "success") {
+    newData.data.map((x, index) => {
+      if (x.companyName) {
+        newData.data[index].surname = x.companyName;
+      }
+      return newData;
+    });
+  }
+
+  // console.log(newData)
 
   //  Sorting buttons in table header
   const sortNames = (
@@ -68,11 +79,11 @@ export default function AdminApp() {
   };
 
   // Display company name if it exist, otherwise display persons name
-  const nameFormatter = (company, row) => {
-    for (let i = 0; i < adminData.data.length; i++) {
-      return company ? row.companyName : `${row.surname} ${row.name}`;
-    }
-  };
+  // const nameFormatter = (company, row) => {
+  //   for (let i = 0; i < adminData.data.length; i++) {
+  //     return company ? row.companyName : `${row.surname} ${row.name}`;
+  //   }
+  // };
 
   //Numbers Formatter
   const numberFormatter = (number) => {
@@ -90,6 +101,7 @@ export default function AdminApp() {
         setSingleRequest({ state: "error", error: data });
       } else {
         setSingleRequest({ state: "success", data: data });
+        setShowModal(true);
       }
     });
   };
@@ -135,7 +147,7 @@ export default function AdminApp() {
         console.log(isCanceled);
         setIsDeleted({ state: "success", data: data });
       }
-    });;
+    });
   };
 
   // Edit buttons for single row in table
@@ -145,7 +157,6 @@ export default function AdminApp() {
         className={styles.edit_btn}
         onClick={() => {
           editBtnFetch(row.id);
-          toggleTrueFalse();
         }}
       >
         Upravit
@@ -155,11 +166,10 @@ export default function AdminApp() {
 
   const columns = [
     {
-      dataField: "companyName",
-      // text: "Surename",
+      dataField: "surname",
       sort: true,
       headerFormatter: (cell) => sortNames,
-      formatter: nameFormatter,
+      // formatter: nameFormatter,
     },
     {
       // dataField:  ,
@@ -175,14 +185,16 @@ export default function AdminApp() {
       formatter: (cell) => selectOptionsType[cell],
       filter: selectFilter({
         options: selectOptionsType,
+        placeholder: "Zobrazit vše",
       }),
     },
     {
       dataField: "status",
-      text: "Status",
+      text: "Stav",
       formatter: (cell) => selectOptionsStatus[cell],
       filter: selectFilter({
         options: selectOptionsStatus,
+        placeholder: "Zobrazit vše",
       }),
     },
     {
@@ -190,109 +202,115 @@ export default function AdminApp() {
     },
   ];
 
-  const toggleTrueFalse = () => {
-    setShowModal(handleShow);
-  };
-
   const ModalContent = () => {
     return (
       <>
-        {singleRequest.data ? (
-          <Modal show={show} onHide={handleClose} className="rounded-0">
-            <Modal.Header closeButton>
-              <Modal.Title>
-                <div className={styles.modal_title}>
-                  <p className={styles.modal_status_pen}>
-                    {singleRequest.data.status === "PENDING" &&
-                      `Čeká na schválení`}
-                  </p>
-                  <p className={styles.modal_status_app}>
-                    {singleRequest.data.status === "APPROVED" && `Schváleno`}
-                  </p>
-                  <p className={styles.modal_status_can}>
-                    {singleRequest.data.status === "CANCELLED" && `Zamítnuto`}
-                  </p>
+        <Modal show={showModal} onHide={() => setShowModal(false)}>
+          <Modal.Header closeButton>
+            <Modal.Title>
+              <div className={styles.modal_title}>
+                <p className={styles.modal_status_pen}>
+                  {singleRequest.data.status === "PENDING" &&
+                    `Čeká na schválení`}
+                </p>
+                <p className={styles.modal_status_app}>
+                  {singleRequest.data.status === "APPROVED" && `Schváleno`}
+                </p>
+                <p className={styles.modal_status_can}>
+                  {singleRequest.data.status === "CANCELLED" && `Zamítnuto`}
+                </p>
 
-                  {singleRequest.data.companyName
-                    ? singleRequest.data.companyName
-                    : `${singleRequest.data.name} ${singleRequest.data.surname}`}
-                </div>
-              </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <ul>
-                {singleRequest.data.companyName ? (
-                  <>
-                    <li>Společnost: {singleRequest.data.companyName}</li>
-                    <li>
-                      Jednatel:{" "}
-                      {`${singleRequest.data.name} ${singleRequest.data.surname}`}
-                    </li>
-                  </>
-                ) : (
+                {singleRequest.data.companyName
+                  ? singleRequest.data.companyName
+                  : `${singleRequest.data.name} ${singleRequest.data.surname}`}
+              </div>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <ul>
+              {singleRequest.data.companyName ? (
+                <>
+                  <li>Společnost: {singleRequest.data.companyName}</li>
                   <li>
-                    Jméno: {singleRequest.data.name}{" "}
-                    {singleRequest.data.surname}
+                    Jednatel:{" "}
+                    {`${singleRequest.data.name} ${singleRequest.data.surname}`}
                   </li>
-                )}
-
+                </>
+              ) : (
                 <li>
-                  Typ osoby:
-                  {singleRequest.data.applicantType === "INDIVIDUAL" &&
-                    ` fyzická osoba`}
-                  {singleRequest.data.applicantType === "OSVC" &&
-                    ` podnikatel fyzická osoba`}
-                  {singleRequest.data.applicantType === "LEGAL_ENTITY" &&
-                    ` právnická osoba`}
+                  Jméno: {singleRequest.data.name} {singleRequest.data.surname}
+                </li>
+              )}
+
+              <li>
+                Typ osoby:
+                {singleRequest.data.applicantType === "INDIVIDUAL" &&
+                  ` fyzická osoba`}
+                {singleRequest.data.applicantType === "OSVC" &&
+                  ` podnikatel fyzická osoba`}
+                {singleRequest.data.applicantType === "LEGAL_ENTITY" &&
+                  ` právnická osoba`}
+              </li>
+              <li>
+                Výše ůveru:{" "}
+                {new Intl.NumberFormat("cs-CZ").format(
+                  singleRequest.data.amount
+                ) + ` Kč`}
+              </li>
+              <li>{`Délka splácení: ${singleRequest.data.numOfMonths} měsíců`}</li>
+              <li>{`Rodné číslo: ${singleRequest.data.birthNum}`}</li>
+              <li>{`Státní příslušnost: ${singleRequest.data.nationality}`}</li>
+
+              <li>{`Telefonní číslo: ${singleRequest.data.phone}`}</li>
+              <li>{`E-mailová adresa: ${singleRequest.data.email}`}</li>
+              <li>Adresa:</li>
+              <ul className={styles.address_ul}>
+                <li>{`Ulice: ${singleRequest.data.address.street}`}</li>
+                <li>
+                  {`Číslo popisné: ${singleRequest.data.address.descNumber}`}
                 </li>
                 <li>
-                  Výše ůveru:{" "}
-                  {new Intl.NumberFormat("cs-CZ").format(
-                    singleRequest.data.amount
-                  ) + ` Kč`}
+                  {`Číslo orientační: ${singleRequest.data.address.indicativeNumber}`}
                 </li>
-                <li>{`Délka splácení: ${singleRequest.data.numOfMonths} měsíců`}</li>
-                <li>{`Rodné číslo: ${singleRequest.data.birthNum}`}</li>
-                <li>{`Státní příslušnost: ${singleRequest.data.nationality}`}</li>
-
-                <li>{`Telefonní číslo: ${singleRequest.data.phone}`}</li>
-                <li>{`E-mailová adresa: ${singleRequest.data.email}`}</li>
-                <li>Adresa:</li>
-                <ul className={styles.address_ul}>
-                  <li>{`Ulice: ${singleRequest.data.address.street}`}</li>
-                  <li>
-                    {`Číslo popisné: ${singleRequest.data.address.descNumber}`}
-                  </li>
-                  <li>
-                    {`Číslo orientační: ${singleRequest.data.address.indicativeNumber}`}
-                  </li>
-                  <li>{`Město: ${singleRequest.data.address.city}`}</li>
-                  <li>{`PSČ: ${singleRequest.data.address.postalCode}`}</li>
-                </ul>
+                <li>{`Město: ${singleRequest.data.address.city}`}</li>
+                <li>{`PSČ: ${singleRequest.data.address.postalCode}`}</li>
               </ul>
-              <div className={styles.modal_buttons}>
-                {singleRequest.data.status === "PENDING" && (
+            </ul>
+            <div className={styles.modal_buttons}>
+              {singleRequest.data.status === "PENDING" &&
+                (role === "ADMIN" || role === "SUPERVIZOR") && (
                   <div className={styles.approval_btn}>
-                    <Button onClick={() => {approveBtn(); setDataUpdate(!dataUpdate)}}>Potvrdit</Button>
-                    <Button onClick={() => cancelBtn()}>Zamitnout</Button>
+                    <Button
+                      onClick={() => {
+                        approveBtn();
+                        setDataUpdate(!dataUpdate);
+                      }}
+                      className="rounded-0"
+                    >
+                      Potvrdit
+                    </Button>
+                    <Button
+                      onClick={() => cancelBtn()}
+                      variant="secondary"
+                      className="rounded-0"
+                    >
+                      Zamitnout
+                    </Button>
                   </div>
                 )}
+              {role === "SUPERVIZOR" && (
                 <Button
                   onClick={() => deleteBtn()}
-                  className={styles.delete_btn}
+                  // className={styles.delete_btn}
+                  variant="danger"
+                  className="rounded-0"
                 >
                   Vymazat
                 </Button>
-              </div>
-            </Modal.Body>
-          </Modal>
-        ) : (
-          <Modal>
-            <Modal.Body>
-              <Icon size={2} path={mdiLoading} spin={true} />
-            </Modal.Body>
-          </Modal>
-        )}
+              )}
+            </div>
+          </Modal.Body>
+        </Modal>
       </>
     );
   };
@@ -311,7 +329,7 @@ export default function AdminApp() {
           pagination={paginationFactory()}
         />
       )}
-      {show ? <ModalContent /> : null}
+      {showModal && <ModalContent />}
     </>
   );
 }
