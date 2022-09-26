@@ -20,6 +20,9 @@ export default function AdminApp() {
   const [isCanceled, setIsCanceled] = useState({});
   const [isDeleted, setIsDeleted] = useState({});
   const [showModal, setShowModal] = useState(false);
+  const [showConfirmModalA, setShowConfirmModalA] = useState(false);
+  const [showConfirmModalC, setShowConfirmModalC] = useState(false);
+  const [showConfirmModalD, setShowConfirmModalD] = useState(false);
 
   const [dataUpdate, setDataUpdate] = useState(false);
 
@@ -49,7 +52,7 @@ export default function AdminApp() {
     });
   }
 
-  // console.log(newData)
+  console.log(userData);
 
   //  Sorting buttons in table header
   const sortNames = (
@@ -205,10 +208,13 @@ export default function AdminApp() {
     },
   ];
 
+
+  
+
   const ModalContent = () => {
     return (
       <>
-        <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal animation={false} show={showModal} onHide={() => setShowModal(false)}>
           <Modal.Header closeButton>
             <Modal.Title>
               <div className={styles.modal_title}>
@@ -279,30 +285,58 @@ export default function AdminApp() {
               </ul>
             </ul>
             <div className={styles.modal_buttons}>
-              {singleRequest.data.status === "PENDING" &&
-                (role === "ADMIN" || role === "SUPERVIZOR") && (
-                  <div className={styles.approval_btn}>
-                    <Button
-                      onClick={() => {
-                        approveBtn();
-                        setDataUpdate(!dataUpdate);
-                      }}
-                      className="rounded-0"
-                    >
-                      Potvrdit
-                    </Button>
-                    <Button
-                      onClick={() => cancelBtn()}
-                      variant="secondary"
-                      className="rounded-0"
-                    >
-                      Zamitnout
-                    </Button>
-                  </div>
-                )}
+              {role === "SUPERVIZOR" && (
+                <div className={styles.approval_btn}>
+                  <Button
+                    onClick={() => {
+                      // approveBtn();
+                      setShowConfirmModalA(true)
+                      setDataUpdate(!dataUpdate); 
+                    }}
+                    className="rounded-0"
+                  >
+                    Potvrdit
+                  </Button>
+
+                  <Button
+                    onClick={() => setShowConfirmModalC(true)}
+                    variant="secondary"
+                    className="rounded-0"
+                  >
+                    Zamitnout
+                  </Button>
+                </div>
+              )}
+              {role === "ADMIN" && singleRequest.data.status === "PENDING" && (
+                <div className={styles.approval_btn}>
+                  <Button
+                    onClick={() => {
+                      // approveBtn();
+                      setShowConfirmModalA(true)
+                    setDataUpdate(!dataUpdate);
+                    }}
+                    className="rounded-0"
+                  >
+                    Potvrdit
+                  </Button>
+    
+
+                  <Button
+                    onClick={() => {
+                      setShowConfirmModalC(true)
+                      setDataUpdate(!dataUpdate);
+                    }}
+                    variant="secondary"
+                    className="rounded-0"
+                  >
+                    Zamitnout
+                  </Button>
+                </div>
+              )}
+
               {role === "SUPERVIZOR" && (
                 <Button
-                  onClick={() => deleteBtn()}
+                  onClick={() => setShowConfirmModalD(true)}
                   // className={styles.delete_btn}
                   variant="danger"
                   className="rounded-0"
@@ -316,6 +350,64 @@ export default function AdminApp() {
       </>
     );
   };
+
+  const ConfirmModalA = () => {
+    return (
+      <Modal animation={false} centered size="sm" show={showConfirmModalA} onHide={() => setShowConfirmModalA(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Are you sure ??????</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div>
+            <Button
+            onClick={() => {
+              approveBtn()
+              setShowConfirmModalA(false)
+            
+            }}
+            >Potvrdit</Button>
+            <Button>Zavřít</Button>
+          </div>
+        </Modal.Body>
+      </Modal>
+    );
+  };
+  const ConfirmModalC = () => {
+    return (
+      <Modal animation={false} centered size="sm" show={showConfirmModalC} onHide={() => setShowConfirmModalC(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Are you sure ??????</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div>
+            <Button
+            onClick={() => cancelBtn()}
+            >Potvrdit</Button>
+            <Button>Zavřít</Button>
+          </div>
+        </Modal.Body>
+      </Modal>
+    );
+  };
+  const ConfirmModalD = () => {
+    return (
+      <Modal animation={false} centered size="sm" show={showConfirmModalD} onHide={() => setShowConfirmModalD(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Are you sure ??????</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div>
+            <Button
+            onClick={() => deleteBtn() }
+            >Potvrdit</Button>
+            <Button
+            >Zavřít</Button>
+          </div>
+        </Modal.Body>
+      </Modal>
+    );
+  };
+
 
   return (
     <>
@@ -332,6 +424,14 @@ export default function AdminApp() {
         />
       )}
       {showModal && <ModalContent />}
+      
+      {showConfirmModalA && <ConfirmModalA />}
+      {showConfirmModalC && <ConfirmModalC />}
+      {showConfirmModalD && <ConfirmModalD />}
     </>
   );
 }
+
+// SUPERVIZOR = admin
+// ADMIN = banker
+

@@ -1,29 +1,5 @@
 [
   {
-    "applicantType": "INDIVIDUAL",
-    "name": "Lorem",
-    "surname": "Ipsum",
-    "birthNum": "801007/5953",
-    "nationality": "CZ",
-    "email": "dolor.sit@amet.co",
-    "phone": "+420555444333",
-    "IC": null,
-    "companyName": null,
-    "amount": 150000,
-    "numOfMonths": 12,
-    "position": null,
-    "address": {
-      "street": "Accumsan",
-      "descNumber": 12,
-      "indicativeNumber": 2,
-      "city": "Duis",
-      "postalCode": 11111
-    },
-    "status": "CANCELLED",
-    "id": "Pm8MtixTFX",
-    "created": "Wed Mar 25 2015 01:00:00 GMT+0100"
-  },
-  {
     "name": "petr",
     "surname": "studeny",
     "birthNum": "750612/0659",
@@ -44,7 +20,7 @@
     "amount": 450000,
     "numOfMonths": 13,
     "created": "2022-09-23T10:21:57.079Z",
-    "status": "CANCELLED",
+    "status": "APPROVED",
     "id": "946ccb57c68cc5b8"
   },
   {
@@ -116,7 +92,7 @@
     "amount": 470000,
     "numOfMonths": 28,
     "created": "2022-09-23T10:31:05.420Z",
-    "status": "PENDING",
+    "status": "APPROVED",
     "id": "5b01b950201415a4"
   },
   {
@@ -179,30 +155,6 @@
     "companyName": "",
     "address": {
       "street": "Havanska",
-      "descNumber": 1,
-      "indicativeNumber": 99,
-      "city": "Kladno",
-      "postalCode": 27204
-    },
-    "applicantType": "INDIVIDUAL",
-    "amount": 420000,
-    "numOfMonths": 25,
-    "created": "2022-09-23T10:39:14.154Z",
-    "status": "APPROVED",
-    "id": "a72394cb560f6f8a"
-  },
-  {
-    "name": "petr",
-    "surname": "studeny",
-    "birthNum": "750612/0659",
-    "nationality": "ČR",
-    "email": "petstu@email.cz",
-    "phone": "123456789",
-    "IC": "",
-    "position": "",
-    "companyName": "",
-    "address": {
-      "street": "Havanska",
       "descNumber": 9,
       "indicativeNumber": 99,
       "city": "Kladno",
@@ -212,7 +164,7 @@
     "amount": 500000,
     "numOfMonths": 29,
     "created": "2022-09-23T10:40:55.220Z",
-    "status": "PENDING",
+    "status": "APPROVED",
     "id": "f5ef1543975d4353"
   },
   {
@@ -236,7 +188,7 @@
     "amount": 465000,
     "numOfMonths": 31,
     "created": "2022-09-23T20:02:29.014Z",
-    "status": "PENDING",
+    "status": "APPROVED",
     "id": "40878265100992be"
   },
   {
@@ -260,7 +212,7 @@
     "amount": 465000,
     "numOfMonths": 31,
     "created": "2022-09-23T20:03:53.210Z",
-    "status": "PENDING",
+    "status": "CANCELLED",
     "id": "b66069631be3e2b9"
   },
   {
@@ -1078,5 +1030,101 @@
     "created": "2022-09-26T09:36:26.514Z",
     "status": "PENDING",
     "id": "3ad9a73a33c17da3"
+  },
+  {
+    "name": "Čeňěk",
+    "surname": "ŠTUDENÝ",
+    "birthNum": "",
+    "nationality": "cr",
+    "email": "petstu@email.cz",
+    "phone": "+420 605 561 101",
+    "IC": "13456788",
+    "position": "",
+    "companyName": "",
+    "address": {
+      "street": "nova",
+      "descNumber": 3,
+      "indicativeNumber": 0,
+      "city": "Brno",
+      "postalCode": 65120
+    },
+    "applicantType": "OSVC",
+    "amount": 395000,
+    "numOfMonths": 24,
+    "created": "2022-09-26T09:53:25.833Z",
+    "status": "PENDING",
+    "id": "345e66f44fc1ea29"
+  },
+  {
+    "name": "Čeňěk",
+    "surname": "ŠTUDENÝ",
+    "birthNum": "",
+    "nationality": "cr",
+    "email": "petstu@email.cz",
+    "phone": "+420 605 561 101",
+    "IC": "12345678",
+    "position": "ředitel/ka",
+    "companyName": "ŠUPSEM S.R.O.",
+    "address": {
+      "street": "Havanska",
+      "descNumber": 23,
+      "indicativeNumber": 0,
+      "city": "Brno",
+      "postalCode": 65120
+    },
+    "applicantType": "LEGAL_ENTITY",
+    "amount": 550000,
+    "numOfMonths": 24,
+    "created": "2022-09-26T09:56:31.972Z",
+    "status": "PENDING",
+    "id": "2c87a7c7434c11ce"
+  },
+  {
+    "name": "Čeňěk",
+    "surname": "STUDENY",
+    "birthNum": "",
+    "nationality": "cr",
+    "email": "petstu@email.cz",
+    "phone": "+420 123 456 785",
+    "IC": "12345678",
+    "position": "ředitel/ka",
+    "companyName": "ŠUPSEM S.R.O.",
+    "address": {
+      "street": "nova",
+      "descNumber": 3,
+      "indicativeNumber": 0,
+      "city": "Brno",
+      "postalCode": 65120
+    },
+    "applicantType": "LEGAL_ENTITY",
+    "amount": 400000,
+    "numOfMonths": 28,
+    "created": "2022-09-26T11:07:10.656Z",
+    "status": "PENDING",
+    "id": "967d6ffd72b43b18"
+  },
+  {
+    "name": "Pavel",
+    "surname": "SMOLIK",
+    "birthNum": "",
+    "nationality": "New Zealand",
+    "email": "petstu@email.cz",
+    "phone": "+420 123 456 777",
+    "IC": "12457836",
+    "position": "místostarosta",
+    "companyName": "UNICORN",
+    "address": {
+      "street": "Jankovcova",
+      "descNumber": 1,
+      "indicativeNumber": 0,
+      "city": "Praha",
+      "postalCode": 17000
+    },
+    "applicantType": "LEGAL_ENTITY",
+    "amount": 935000,
+    "numOfMonths": 41,
+    "created": "2022-09-26T12:51:43.234Z",
+    "status": "CANCELLED",
+    "id": "c31419efc376a827"
   }
 ]

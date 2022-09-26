@@ -2,6 +2,7 @@ import { Button, Form, InputGroup, Modal } from "react-bootstrap";
 import { useState, useContext, useEffect } from "react";
 import FetchDataContext from "../store/FetchDataProvider";
 import { useNavigate } from "react-router-dom";
+import styles from "../css/RequestForm.module.css"
 
 export default function RequestForm() {
   const navigate = useNavigate();
@@ -72,7 +73,6 @@ export default function RequestForm() {
     "zplnomocněná",
   ];
 
-  // todo !!! DOESNT WORK !!!
   useEffect(() => {
     if (!inputCalc) {
       navigate("/calculator");
@@ -94,6 +94,10 @@ export default function RequestForm() {
       return newData;
     });
   };
+  
+  const formatPhoneNumber = (phoneNumber) => {
+        return ("+420 " + new Intl.NumberFormat("cs-CZ").format(phoneNumber))
+    }
 
   const handleSubmit = async (e) => {
     const form = e.currentTarget;
