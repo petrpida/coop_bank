@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import styles from "../css/Calculator.module.css";
 import Button from "react-bootstrap/Button";
@@ -13,7 +13,7 @@ const Calculator = React.memo(() => {
   const navigate = useNavigate();
 
   // send and get data to/from server
-  const { inputCalc, setInputCalc, calculatedData } =
+  const { inputCalc, setInputCalc, calculatedData, setCalculatedData } =
     useContext(FetchDataContext);
 
   function set(amount, months) {
@@ -22,6 +22,24 @@ const Calculator = React.memo(() => {
       numOfMonths: parseInt(months),
     });
   }
+
+  // fetch data calculator
+  useEffect(() => {
+    fetch(`http://localhost:3000/request/calculate`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(
+        inputCalc ? inputCalc : { amount: 350000, numOfMonths: 24 }
+      ),
+    }).then(async (response) => {
+      const data = await response.json();
+      if (response.status >= 400) {
+        setCalculatedData({ state: "error", error: data });
+      } else {
+        setCalculatedData({ state: "success", data: data });
+      }
+    });
+  }, [inputCalc]);
 
   // format months
   function getYearsAndMonths(mths) {

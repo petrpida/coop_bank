@@ -10,7 +10,10 @@ import AdminContext from "../store/AdminDataProvider";
 import { useNavigate } from "react-router-dom";
 
 export default function AdminApp() {
-  const { userData } = useContext(AdminContext);
+  // const { userData } = useContext(AdminContext);
+  let userData = sessionStorage.getItem("userData");
+  userData = { data: JSON.parse(userData) };
+
   const navigate = useNavigate();
   const [adminData, setAdminData] = useState({});
   const [isApproved, setIsApproved] = useState({});

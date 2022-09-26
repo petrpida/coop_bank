@@ -4,31 +4,28 @@ const FetchDataContext = createContext();
 
 export function FetchDataProvider(props) {
   // fetch data calculator
-  const [inputCalc, setInputCalc] = useState({
-    amount: 350000,
-    numOfMonths: 24,
-  });
+  const [inputCalc, setInputCalc] = useState();
   const [calculatedData, setCalculatedData] = useState({});
   // fetch data create applicant
   const [enteredApplicantData, setEnteredApplicantData] = useState({});
   // fetch data applicant by id
   const [applicantData, setApplicantData] = useState({});
 
-  // fetch data calculator
-  useEffect(() => {
-    fetch(`http://localhost:3000/request/calculate`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(inputCalc),
-    }).then(async (response) => {
-      const data = await response.json();
-      if (response.status >= 400) {
-        setCalculatedData({ state: "error", error: data });
-      } else {
-        setCalculatedData({ state: "success", data: data });
-      }
-    });
-  }, [inputCalc]);
+  // // fetch data calculator
+  // useEffect(() => {
+  //   fetch(`http://localhost:3000/request/calculate`, {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify(inputCalc),
+  //   }).then(async (response) => {
+  //     const data = await response.json();
+  //     if (response.status >= 400) {
+  //       setCalculatedData({ state: "error", error: data });
+  //     } else {
+  //       setCalculatedData({ state: "success", data: data });
+  //     }
+  //   });
+  // }, [inputCalc]);
 
   // fetch data create applicant
   // useEffect(() => {
