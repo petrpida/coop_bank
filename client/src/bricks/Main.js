@@ -15,6 +15,10 @@ function Main() {
         <p className={styles.rpsn}>RPSN</p>
         <button
           onClick={() => {
+            sessionStorage.setItem(
+              "inputCalc",
+              JSON.stringify({ amount: 350000, numOfMonths: 24 })
+            );
             navigate("/calculator");
           }}
         >

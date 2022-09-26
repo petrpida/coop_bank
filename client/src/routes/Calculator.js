@@ -3,18 +3,33 @@ import Form from "react-bootstrap/Form";
 import styles from "../css/Calculator.module.css";
 import Button from "react-bootstrap/Button";
 import { Card, FormGroup } from "react-bootstrap";
-import FetchDataContext from "../store/FetchDataProvider";
+// import FetchDataContext from "../store/FetchDataProvider";
 import { useNavigate } from "react-router-dom";
 
-const Calculator = React.memo(() => {
-  const [amount, setAmount] = useState(350000);
-  const [months, setMonths] = useState(24);
+const Calculator = () => {
+  const [amount, setAmount] = useState(
+    parseInt(JSON.parse(sessionStorage.getItem("inputCalc")).amount)
+  );
+  const [months, setMonths] = useState(
+    parseInt(JSON.parse(sessionStorage.getItem("inputCalc")).numOfMonths)
+  );
+
+  // set data to storage
+  function setStorage(amount, months) {
+    sessionStorage.setItem(
+      "inputCalc",
+      JSON.stringify({ amount: amount, numOfMonths: months })
+    );
+  }
+
+  // set data to fetch
+  const [inputCalc, setInputCalc] = useState({
+    amount: amount,
+    numOfMonths: months,
+  });
+  const [calculatedData, setCalculatedData] = useState({});
 
   const navigate = useNavigate();
-
-  // send and get data to/from server
-  const { inputCalc, setInputCalc, calculatedData, setCalculatedData } =
-    useContext(FetchDataContext);
 
   function set(amount, months) {
     setInputCalc({
@@ -28,20 +43,19 @@ const Calculator = React.memo(() => {
     fetch(`http://localhost:3000/request/calculate`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(
-        inputCalc ? inputCalc : { amount: 350000, numOfMonths: 24 }
-      ),
+      body: JSON.stringify(inputCalc),
     }).then(async (response) => {
       const data = await response.json();
       if (response.status >= 400) {
         setCalculatedData({ state: "error", error: data });
       } else {
         setCalculatedData({ state: "success", data: data });
+        sessionStorage.setItem("calculatedData", JSON.stringify(data));
       }
     });
   }, [inputCalc]);
 
-  // format months
+  // format months/years
   function getYearsAndMonths(mths) {
     let yearsOut = Math.floor(mths / 12);
     let monthsOut = mths % 12;
@@ -87,7 +101,9 @@ const Calculator = React.memo(() => {
                 </span>
               </div>
               <input
-                defaultValue={350000}
+                defaultValue={parseInt(
+                  JSON.parse(sessionStorage.getItem("inputCalc")).amount
+                )}
                 type="range"
                 className="form-range"
                 min="5000"
@@ -100,10 +116,12 @@ const Calculator = React.memo(() => {
                 onMouseUp={(event) => {
                   setAmount(event.target.value);
                   set(amount, months);
+                  setStorage(amount, months);
                 }}
                 onTouchEnd={(event) => {
                   setAmount(event.target.value);
                   set(amount, months);
+                  setStorage(amount, months);
                 }}
               />
               <div className={styles.values}>
@@ -121,7 +139,9 @@ const Calculator = React.memo(() => {
                 </span>
               </div>
               <input
-                defaultValue={24}
+                defaultValue={parseInt(
+                  JSON.parse(sessionStorage.getItem("inputCalc")).numOfMonths
+                )}
                 type="range"
                 className="form-range"
                 min="6"
@@ -134,10 +154,12 @@ const Calculator = React.memo(() => {
                 onMouseUp={(event) => {
                   setMonths(event.target.value);
                   set(amount, months);
+                  setStorage(amount, months);
                 }}
                 onTouchEnd={(event) => {
                   setMonths(event.target.value);
                   set(amount, months);
+                  setStorage(amount, months);
                 }}
               />
               <div className={styles.values}>
@@ -182,7 +204,7 @@ const Calculator = React.memo(() => {
                   onClick={() => {
                     setTimeout(() => {
                       navigate("/requestForm");
-                    }, 1000);
+                    }, 500);
                   }}
                   className="rounded-0"
                   variant="primary"
@@ -198,6 +220,6 @@ const Calculator = React.memo(() => {
       <p className={styles.footer}></p>
     </div>
   );
-});
+};
 
 export default Calculator;
