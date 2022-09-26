@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import styles from "../css/Calculator.module.css";
 import Button from "react-bootstrap/Button";
 import { Card, FormGroup } from "react-bootstrap";
-// import FetchDataContext from "../store/FetchDataProvider";
 import { useNavigate } from "react-router-dom";
 
 const Calculator = () => {
@@ -14,7 +13,7 @@ const Calculator = () => {
     parseInt(JSON.parse(sessionStorage.getItem("inputCalc")).numOfMonths)
   );
 
-  // set data to storage
+  // set input data to storage
   function setStorage(amount, months) {
     sessionStorage.setItem(
       "inputCalc",
@@ -22,7 +21,7 @@ const Calculator = () => {
     );
   }
 
-  // set data to fetch
+  // set data to fetch / get calculated data
   const [inputCalc, setInputCalc] = useState({
     amount: amount,
     numOfMonths: months,
@@ -55,7 +54,7 @@ const Calculator = () => {
     });
   }, [inputCalc]);
 
-  // format months/years
+  // format months/years 🙈
   function getYearsAndMonths(mths) {
     let yearsOut = Math.floor(mths / 12);
     let monthsOut = mths % 12;
@@ -175,7 +174,7 @@ const Calculator = () => {
             <Card.Header className={styles.header}>
               Vaše výhodná půjčka
             </Card.Header>
-            {calculatedData.state === "success" && (
+            {calculatedData.state === "success" ? (
               <Card.Body>
                 <Card.Title
                   className={styles.title}
@@ -212,6 +211,10 @@ const Calculator = () => {
                   Sjednat online
                 </Button>
               </Card.Body>
+            ) : (
+              `Error.
+              Data nenačtena. 
+              Zkuste to prosím znovu.`
             )}
             <Card.Footer className="text-muted"></Card.Footer>
           </Card>
