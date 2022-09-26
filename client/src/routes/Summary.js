@@ -58,7 +58,7 @@ function Summary() {
       <div className={styles.container}>
         {applicantData.data && (
           <div>
-            <ListGroup variant="flush">
+            <ListGroup variant="flush" className={styles.infoCard}>
               <ListGroup.Item className={styles.title}>
                 Vyplněné údaje:
               </ListGroup.Item>
@@ -81,8 +81,7 @@ function Summary() {
               </ListGroup.Item>
               {applicantData.data.applicantType === "LEGAL_ENTITY" ? (
                 <ListGroup.Item>
-                  {"Jednatel: " +
-                    applicantData.data.name +
+                  {applicantData.data.name +
                     " " +
                     applicantData.data.surname +
                     ", " +
@@ -119,7 +118,7 @@ function Summary() {
         )}
         {applicantData.data && (
           <div>
-            <ListGroup className="rounded-0">
+            <ListGroup className={"rounded-0 " + styles.sumCard}>
               <ListGroup.Item className={styles.title}>Žádost:</ListGroup.Item>
               <ListGroup.Item>
                 Požadovaná částka:{" "}

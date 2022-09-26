@@ -2,7 +2,7 @@
     display: flex;
     margin-top: 30px;
     justify-content: center;
-    gap: 10rem;
+    gap: 8rem;
 }
 
 .title {
@@ -23,6 +23,15 @@
     margin-top: 30px;
     padding: 15px;
     font-weight: 600;
+}
+
+.sumCard {
+    box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
+    width: 140%;
+}
+
+.infoCard {
+    width: 110%;
 }
 
 /* mobil and small screens */
