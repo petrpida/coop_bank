@@ -236,7 +236,7 @@
     "amount": 465000,
     "numOfMonths": 31,
     "created": "2022-09-23T20:06:49.827Z",
-    "status": "PENDING",
+    "status": "APPROVED",
     "id": "6c8fcdca072af500"
   },
   {
@@ -1052,7 +1052,7 @@
     "amount": 395000,
     "numOfMonths": 24,
     "created": "2022-09-26T09:53:25.833Z",
-    "status": "PENDING",
+    "status": "APPROVED",
     "id": "345e66f44fc1ea29"
   },
   {
