@@ -1102,5 +1102,29 @@
     "created": "2022-09-24T09:32:51.501Z",
     "status": "PENDING",
     "id": "99ddace352b3b6e2"
-}
+  },
+  {
+    "name": "Test",
+    "surname": "Testovic",
+    "birthNum": "4507085554",
+    "nationality": "ČR",
+    "email": "testovic@mail.com",
+    "phone": "789456123",
+    "IC": "",
+    "position": "",
+    "companyName": "",
+    "address": {
+      "street": "Testova",
+      "descNumber": 3,
+      "indicativeNumber": 0,
+      "city": "Testovo",
+      "postalCode": 78945
+    },
+    "applicantType": "INDIVIDUAL",
+    "amount": 445000,
+    "numOfMonths": 20,
+    "created": "2022-09-26T07:19:47.166Z",
+    "status": "PENDING",
+    "id": "1c6d6fe801b24c7a"
+  }
 ]
