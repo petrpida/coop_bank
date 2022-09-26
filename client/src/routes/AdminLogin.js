@@ -79,7 +79,7 @@ export default function AdminLogin() {
         <Form.Control.Feedback type="invalid">
           {userData.error
             ? "Uživatelské jméno nebo heslo není správné!"
-            : "Zadejte uživatelské jméno a heslo"}
+            : "Zadání uživatelského jména je povinné!"}
         </Form.Control.Feedback>
       </Form.Group>
       <Form.Group className="mt-3 w-100" controlId="formBasicPassword">
@@ -92,6 +92,9 @@ export default function AdminLogin() {
           value={loginData.password}
           onInput={(e) => setField("password", e.target.value)}
         />
+        <Form.Control.Feedback type="invalid">
+          {userData.error ? "" : "Zadání hesla je povinné!"}
+        </Form.Control.Feedback>
         <Form.Control.Feedback type="invalid"></Form.Control.Feedback>
       </Form.Group>
 
