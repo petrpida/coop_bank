@@ -1,13 +1,10 @@
 import { Button, Form, InputGroup, Modal } from "react-bootstrap";
 import { useState, useContext, useEffect } from "react";
-import FetchDataContext from "../store/FetchDataProvider";
 import { useNavigate } from "react-router-dom";
-import styles from "../css/RequestForm.module.css";
 
 export default function RequestForm() {
   const navigate = useNavigate();
 
-  //const { inputCalc } = useContext(FetchDataContext);
   let inputCalc = sessionStorage.getItem("userData");
   inputCalc = { data: JSON.parse(inputCalc) };
   const [addNewRequestCall, setAddNewRequestCall] = useState({
@@ -77,12 +74,6 @@ export default function RequestForm() {
     "zplnomocněná",
   ];
 
-  // useEffect(() => {
-  //   if (!inputCalc) {
-  //     navigate("/calculator");
-  //   }
-  // }, [inputCalc]);
-
   const storeInputData = (key, value) => {
     return setFormData((formData) => {
       const newData = { ...formData };
@@ -98,6 +89,10 @@ export default function RequestForm() {
       return newData;
     });
   };
+
+  const firstLetterCapital = (string) => {
+    return string.charAt(0).toLocaleUpperCase("cz") + string.slice(1)
+  }
 
   const formatPhoneNumber = (phoneNumber) => {
     return "+420 " + new Intl.NumberFormat("cs-CZ").format(phoneNumber);
@@ -224,8 +219,7 @@ export default function RequestForm() {
                     onChange={(e) =>
                       storeInputData(
                         "name",
-                        e.target.value.charAt(0).toLocaleUpperCase("cz") +
-                          e.target.value.slice(1)
+                        firstLetterCapital(e.target.value)
                       )
                     }
                     className={"rounded-0"}
@@ -343,7 +337,7 @@ export default function RequestForm() {
                       onChange={(e) =>
                         storeInputData(
                           "phone",
-                          e.target.value.replaceAll(/\D/g, "")
+                          formatPhoneNumber(e.target.value.replaceAll(/\D/g, ""))
                         )
                       }
                       className={"rounded-0"}
@@ -390,7 +384,7 @@ export default function RequestForm() {
                 >
                   <Form.Label className={"mb-0"}>Ulice</Form.Label>
                   <Form.Control
-                    onChange={(e) => storeAddressData("street", e.target.value)}
+                    onChange={(e) => storeAddressData("street", firstLetterCapital(e.target.value))}
                     className={"rounded-0"}
                     required
                   />
@@ -444,7 +438,7 @@ export default function RequestForm() {
                 <Form.Group className="mb-2 w-100" controlId={`FormGroupCity`}>
                   <Form.Label className={"mb-0"}>Město</Form.Label>
                   <Form.Control
-                    onChange={(e) => storeAddressData("city", e.target.value)}
+                    onChange={(e) => storeAddressData("city", firstLetterCapital(e.target.value))}
                     className={"rounded-0"}
                     required
                   />
@@ -496,7 +490,7 @@ export default function RequestForm() {
                   <Form.Label className={"mb-0"}>Název firmy</Form.Label>
                   <Form.Control
                     onChange={(e) =>
-                      storeInputData("companyName", e.target.value)
+                      storeInputData("companyName", e.target.value.toLocaleUpperCase("cz"))
                     }
                     className={"rounded-0"}
                     required
@@ -537,7 +531,7 @@ export default function RequestForm() {
                 >
                   <Form.Label className={"mb-0"}>Ulice</Form.Label>
                   <Form.Control
-                    onChange={(e) => storeAddressData("street", e.target.value)}
+                    onChange={(e) => storeAddressData("street", firstLetterCapital(e.target.value))}
                     className={"rounded-0"}
                     required
                   />
@@ -591,7 +585,7 @@ export default function RequestForm() {
                 <Form.Group className="mb-2 w-100" controlId={`FormGroupCity`}>
                   <Form.Label className={"mb-0"}>Město</Form.Label>
                   <Form.Control
-                    onChange={(e) => storeAddressData("city", e.target.value)}
+                    onChange={(e) => storeAddressData("city", firstLetterCapital(e.target.value))}
                     className={"rounded-0"}
                     required
                   />
@@ -637,10 +631,7 @@ export default function RequestForm() {
                   <Form.Control
                     onChange={(e) =>
                       storeInputData(
-                        "name",
-                        e.target.value.charAt(0).toLocaleUpperCase("cz") +
-                          e.target.value.slice(1)
-                      )
+                        "name", firstLetterCapital(e.target.value))
                     }
                     className={"rounded-0"}
                     required
@@ -730,7 +721,7 @@ export default function RequestForm() {
                       onChange={(e) =>
                         storeInputData(
                           "phone",
-                          e.target.value.replaceAll(/\D/g, "")
+                          formatPhoneNumber(e.target.value.replaceAll(/\D/g, ""))
                         )
                       }
                       className={"rounded-0"}
@@ -795,7 +786,6 @@ export default function RequestForm() {
 
       <Modal centered show={showConfirmation} onHide={handleConfirmationClose}>
         <Modal.Header closeButton>
-          <Modal.Title></Modal.Title>
         </Modal.Header>
         <Modal.Body className={"text-center bg-dark text-light"}>
           <div>Při návratu budou Vaše dosud vyplněná data ztracena.</div>
