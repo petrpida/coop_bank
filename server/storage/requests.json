@@ -24,30 +24,6 @@
     "created": "Wed Mar 25 2015 01:00:00 GMT+0100"
   },
   {
-    "applicantType": "LEGAL_ENTITY",
-    "name": "Herbert",
-    "surname": "Berber",
-    "birthNum": "006003/2400",
-    "nationality": "CZ",
-    "email": "herbert.brebrebre@berber.ber",
-    "phone": "+420111222345",
-    "IC": "123466434",
-    "companyName": "Trees and Such",
-    "amount": 1000000,
-    "numOfMonths": 12,
-    "position": "generální ředitel",
-    "address": {
-      "street": "Ante",
-      "descNumber": 13,
-      "indicativeNumber": 7,
-      "city": "Totam",
-      "postalCode": 777777
-    },
-    "status": "APPROVED",
-    "id": "wiVXhN73fR",
-    "created": "Sat Sep 17 2022 19:31:42 GMT+0200"
-  },
-  {
     "name": "petr",
     "surname": "studeny",
     "birthNum": "750612/0659",
@@ -596,7 +572,7 @@
     "amount": 805000,
     "numOfMonths": 36,
     "created": "2022-09-23T20:58:52.186Z",
-    "status": "PENDING",
+    "status": "APPROVED",
     "id": "b46b2ab8fada2444"
   },
   {
@@ -1003,32 +979,8 @@
     "applicantType": "OSVC",
     "amount": 745000,
     "numOfMonths": 24,
-    "created": "2022-09-23T21:49:42.919Z",
-    "status": "PENDING",
-    "id": "cf88e39599921ddb"
-  },
-  {
-    "name": "petr",
-    "surname": "studeny",
-    "birthNum": "",
-    "nationality": "cr",
-    "email": "petstu@email.cz",
-    "phone": "123456784",
-    "IC": "13456788",
-    "position": "",
-    "companyName": "",
-    "address": {
-      "street": "nova",
-      "descNumber": 45,
-      "indicativeNumber": 0,
-      "city": "Brno",
-      "postalCode": 65120
-    },
-    "applicantType": "OSVC",
-    "amount": 745000,
-    "numOfMonths": 24,
     "created": "2022-09-23T21:51:19.912Z",
-    "status": "PENDING",
+    "status": "CANCELLED",
     "id": "10d89fba971a4ed5"
   },
   {
@@ -1102,77 +1054,5 @@
     "created": "2022-09-24T09:32:51.501Z",
     "status": "PENDING",
     "id": "99ddace352b3b6e2"
-  },
-  {
-    "name": "PETR",
-    "surname": "STUDENY",
-    "birthNum": "7506120659",
-    "nationality": "cr",
-    "email": "petstu@email.cz",
-    "phone": "123456787",
-    "IC": "",
-    "position": "",
-    "companyName": "",
-    "address": {
-      "street": "mala",
-      "descNumber": 5,
-      "indicativeNumber": 44,
-      "city": "Brno",
-      "postalCode": 65120
-    },
-    "applicantType": "INDIVIDUAL",
-    "amount": 640000,
-    "numOfMonths": 24,
-    "created": "2022-09-25T21:27:24.348Z",
-    "status": "PENDING",
-    "id": "1960ce674ba9cfb9"
-  },
-  {
-    "name": "petr",
-    "surname": "STUDENY",
-    "birthNum": "",
-    "nationality": "cr",
-    "email": "petstu@email.cz",
-    "phone": "123456789",
-    "IC": "75061278",
-    "position": "",
-    "companyName": "",
-    "address": {
-      "street": "ahoj",
-      "descNumber": 3,
-      "indicativeNumber": 0,
-      "city": "Brno",
-      "postalCode": 65120
-    },
-    "applicantType": "OSVC",
-    "amount": 900000,
-    "numOfMonths": 24,
-    "created": "2022-09-25T21:46:31.112Z",
-    "status": "PENDING",
-    "id": "ab507a7058526f0a"
-  },
-  {
-    "name": "Čeňěk",
-    "surname": "ŠTUDENÝ",
-    "birthNum": "7506120659",
-    "nationality": "cr",
-    "email": "petstu@email.cz",
-    "phone": "123456788",
-    "IC": "",
-    "position": "",
-    "companyName": "",
-    "address": {
-      "street": "nova",
-      "descNumber": 1,
-      "indicativeNumber": 0,
-      "city": "Brno",
-      "postalCode": 65120
-    },
-    "applicantType": "INDIVIDUAL",
-    "amount": 570000,
-    "numOfMonths": 24,
-    "created": "2022-09-25T21:59:37.098Z",
-    "status": "PENDING",
-    "id": "900bfed2ac22fc46"
   }
 ]

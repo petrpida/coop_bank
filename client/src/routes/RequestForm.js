@@ -1,112 +1,116 @@
-import {Button, Form, InputGroup, Modal} from "react-bootstrap";
-import {useState, useContext, useEffect} from "react";
+import { Button, Form, InputGroup, Modal } from "react-bootstrap";
+import { useState, useContext, useEffect } from "react";
 import FetchDataContext from "../store/FetchDataProvider";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function RequestForm() {
-    // const datum = new Date(data.created)
-    // console.log(datum.toLocaleDateString('cz'))
 
-    const navigate = useNavigate()
+  const navigate = useNavigate();
 
-    const {inputCalc} = useContext(FetchDataContext)
-    const [addNewRequestCall, setAddNewRequestCall] = useState({state: "inactive"})
-    const [showErrorMessage, setShowErrorMessage] = useState("")
-    const [validated, setValidated] = useState(false)
-    const [typeOfApplicant, setTypeOfApplicant] = useState("default")
-    const [typeSelected, setTypeSelected] = useState("default")
-    const defaultFormData = {
-        name: "",
-        surname: "",
-        birthNum: "",
-        nationality: "",
-        email: "",
-        phone: "",
-        IC: "",
-        position: "",
-        companyName: "",
-        address: {
-            street: "",
-            descNumber: 0,
-            indicativeNumber: 0,
-            city: "",
-            postalCode: 0
-        }
+  const { inputCalc } = useContext(FetchDataContext);
+  const [addNewRequestCall, setAddNewRequestCall] = useState({
+    state: "inactive",
+  });
+  const [showErrorMessage, setShowErrorMessage] = useState("");
+  const [validated, setValidated] = useState(false);
+  const [typeOfApplicant, setTypeOfApplicant] = useState("default");
+  const [typeSelected, setTypeSelected] = useState("default");
+  const defaultFormData = {
+    name: "",
+    surname: "",
+    birthNum: "",
+    nationality: "",
+    email: "",
+    phone: "",
+    IC: "",
+    position: "",
+    companyName: "",
+    address: {
+      street: "",
+      descNumber: 0,
+      indicativeNumber: 0,
+      city: "",
+      postalCode: 0,
+    },
+  };
+  const [formData, setFormData] = useState(defaultFormData);
+
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const handleConfirmationClose = () => setShowConfirmation(false);
+  const handleConfirmationShow = () => setShowConfirmation(true);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const companyPositions = [
+    "člen/ka představenstva",
+    "člen/ka správní rady",
+    "člen/ka výboru",
+    "ekonom/ka",
+    "generální ředitel/ka",
+    "jednatel/ka",
+    "místopředseda",
+    "místopředsedkyně",
+    "místostarosta",
+    "místostarostka",
+    "primátor/ka",
+    "prokurista",
+    "prokuristka",
+    "předseda",
+    "přdseda představenstva",
+    "předseda správní rady",
+    "předsedkyně",
+    "předsedkyně představenstva",
+    "předsedkyně správní rady",
+    "ředitel/ka",
+    "společník",
+    "starosta",
+    "starostka",
+    "statutární ředitel/ka",
+    "účetní",
+    "zástupce",
+    "zástupkyně",
+    "zplnomocněný",
+    "zplnomocněná",
+  ];
+
+  // todo !!! DOESNT WORK !!!
+  useEffect(() => {
+    if (inputCalc.amount === 350000 && inputCalc.numOfMonths === 24) {
+      navigate("/calculator");
     }
-    const [formData, setFormData] = useState(defaultFormData)
+  }, [inputCalc]);
 
-    const [showConfirmation, setShowConfirmation] = useState(false)
-    const handleConfirmationClose = () => setShowConfirmation(false);
-    const handleConfirmationShow = () => setShowConfirmation(true);
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-    const companyPositions = [
-        "člen/ka představenstva", "člen/ka správní rady", "člen/ka výboru", "ekonom/ka",
-        "generální ředitel/ka", "jednatel/ka", "místopředseda", "místopředsedkyně", "místostarosta", "místostarostka",
-        "primátor/ka", "prokurista", "prokuristka", "předseda", "přdseda představenstva", "předseda správní rady",
-        "předsedkyně", "předsedkyně představenstva", "předsedkyně správní rady", "ředitel/ka", "společník", "starosta",
-        "starostka", "statutární ředitel/ka", "účetní", "zástupce", "zástupkyně", "zplnomocněný", "zplnomocněná"
-    ]
+  const storeInputData = (key, value) => {
+    return setFormData((formData) => {
+      const newData = { ...formData };
+      newData[key] = value;
+      return newData;
+    });
+  };
 
-    // todo !!! DOESNT WORK !!!
-    useEffect(() => {
-        if (inputCalc.amount === 350000 && inputCalc.numOfMonths === 24) {
-            navigate("/calculator")
-        }
-    }, [inputCalc])
+  const storeAddressData = (key, value) => {
+    return setFormData((formData) => {
+      const newData = { ...formData };
+      newData.address[key] = value;
+      return newData;
+    });
+  };
 
+  const handleSubmit = async (e) => {
+    const form = e.currentTarget;
 
-    const storeInputData = (key, value) => {
-        return setFormData((formData) => {
-            const newData = {...formData}
-            newData[key] = value
-            return newData
-        })
-    }
+    e.preventDefault();
 
-    const storeAddressData = (key, value) => {
-        return setFormData((formData) => {
-            const newData = {...formData}
-            newData.address[key] = value
-            return newData
-        })
-    }
+    const newData = {
+      ...formData,
+      applicantType: typeSelected,
+      amount: inputCalc.amount,
+      numOfMonths: inputCalc.numOfMonths,
+    };
 
-    const handleSubmit = async (e) => {
-        const form = e.currentTarget;
-
-        e.preventDefault()
-
-        const newData = {
-            ...formData,
-            applicantType: typeSelected,
-            amount: inputCalc.amount,
-            numOfMonths: inputCalc.numOfMonths
-        }
-
-        if (!form.checkValidity()) {
-            setValidated(true);
-            return;
-        }
-
-        setAddNewRequestCall({state: "pending"})
-
-        const res = await fetch(`http://localhost:3000/request/create`, {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(newData)
-        });
-        const data = await res.json();
-        if (res.status >= 400) {
-            console.log(data)
-            setAddNewRequestCall({state: "error", error: data});
-            setShowErrorMessage(data.errorMessage)
-            handleShow()
-        } else {
-            setAddNewRequestCall({state: "success", data})
-            navigate(`/${data.id}`);
-        }
+    if (!form.checkValidity()) {
+      setValidated(true);
+      return;
     }
 
     const buttons = () => {
@@ -129,8 +133,26 @@ export default function RequestForm() {
                 </Button>
             </div>
         )
-    }
+    setAddNewRequestCall({ state: "pending" });
 
+    const res = await fetch(`http://localhost:3000/request/create`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newData),
+    });
+    const data = await res.json();
+    if (res.status >= 400) {
+      console.log(data);
+      setAddNewRequestCall({ state: "error", error: data });
+      setShowErrorMessage(data.errorMessage);
+      handleShow();
+    } else {
+      setAddNewRequestCall({ state: "success", data });
+      navigate(`/${data.id}`);
+    }
+  };
+
+  const buttons = () => {
     return (
         <>
             <Form noValidate validated={validated}
