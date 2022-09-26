@@ -190,5 +190,53 @@
     "created": "2022-09-26T18:00:03.130Z",
     "status": "PENDING",
     "id": "f998dee7330be7fb"
+  },
+  {
+    "name": "Viktor",
+    "surname": "VIKTOROVIČ",
+    "birthNum": "8512034596",
+    "nationality": "ČR",
+    "email": "vv@email.cz",
+    "phone": "+420 658 968 986",
+    "IC": "",
+    "position": "",
+    "companyName": "",
+    "address": {
+      "street": "Václavské nám.",
+      "descNumber": 23,
+      "indicativeNumber": 1658,
+      "city": "Praha",
+      "postalCode": 11000
+    },
+    "applicantType": "INDIVIDUAL",
+    "amount": 540000,
+    "numOfMonths": 32,
+    "created": "2022-09-26T20:59:03.620Z",
+    "status": "APPROVED",
+    "id": "2a4de98722e5338f"
+  },
+  {
+    "name": "Petr",
+    "surname": "STUDENY",
+    "birthNum": "7506120659",
+    "nationality": "ČR",
+    "email": "petstu@email.cz",
+    "phone": "+420 123 456 787",
+    "IC": "",
+    "position": "",
+    "companyName": "",
+    "address": {
+      "street": "Havanská",
+      "descNumber": 789,
+      "indicativeNumber": 0,
+      "city": "Praha",
+      "postalCode": 25703
+    },
+    "applicantType": "INDIVIDUAL",
+    "amount": 515000,
+    "numOfMonths": 25,
+    "created": "2022-09-26T21:15:56.938Z",
+    "status": "PENDING",
+    "id": "bfcbc9d68060bde6"
   }
 ]

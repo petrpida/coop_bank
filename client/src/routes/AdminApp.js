@@ -287,8 +287,8 @@ export default function AdminApp() {
                         <div className={styles.modal_buttons}>
                             {role === "SUPERVIZOR" && (
                                 <div className={styles.approval_btn}>
-                                    {singleRequest.data.status === "PENDING" ||
-                                        (singleRequest.data.status === "CANCELLED" && (
+                                    {(singleRequest.data.status === "PENDING" ||
+                                        singleRequest.data.status === "CANCELLED") &&
                                             <Button
                                                 onClick={() => {
                                                     setShowConfirmModalA(true);
@@ -297,9 +297,9 @@ export default function AdminApp() {
                                             >
                                                 Potvrdit
                                             </Button>
-                                        ))}
-                                    {singleRequest.data.status === "PENDING" ||
-                                        (singleRequest.data.status === "APPROVED" && (
+                                        }
+                                    {(singleRequest.data.status === "PENDING" ||
+                                        singleRequest.data.status === "APPROVED") &&
                                             <Button
                                                 onClick={() => setShowConfirmModalC(true)}
                                                 variant="secondary"
@@ -307,7 +307,7 @@ export default function AdminApp() {
                                             >
                                                 Zamítnout
                                             </Button>
-                                        ))}
+                                        }
                                 </div>
                             )}
                             {role === "ADMIN" && singleRequest.data.status === "PENDING" && (
@@ -364,8 +364,6 @@ export default function AdminApp() {
                 <Modal.Body>
                     <div className="d-flex justify-content-around">
                         <Button className="rounded-0"
-
-                                variant="danger"
                                 onClick={() => {
                                     approveBtn();
                                     setTimeout(() => {
@@ -377,7 +375,7 @@ export default function AdminApp() {
                         >
                             Potvrdit
                         </Button>
-                        <Button className="rounded-0"
+                        <Button className="rounded-0" variant="secondary"
                                 onClick={() => setShowConfirmModalA(false)}>Zavřít</Button>
                     </div>
                 </Modal.Body>
@@ -409,9 +407,10 @@ export default function AdminApp() {
                                 setShowConfirmModalC(false);
                             }}
                         >
-                            Potvrdit
+                            Zamítnout
                         </Button>
                         <Button
+                            variant="secondary"
                             className="rounded-0"
                             onClick={() => setShowConfirmModalC(false)}>Zavřít</Button>
                     </div>
@@ -444,9 +443,10 @@ export default function AdminApp() {
                                 setShowModal(false);
                             }}
                         >
-                            Potvrdit
+                            Smazat
                         </Button>
                         <Button
+                            variant="secondary"
                             className="rounded-0"
                             onClick={() => setShowConfirmModalD(false)}>Zavřít</Button>
                     </div>
@@ -487,6 +487,3 @@ export default function AdminApp() {
         </>
     );
 }
-
-// SUPERVIZOR = admin
-// ADMIN = banker
