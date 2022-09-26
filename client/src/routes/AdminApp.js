@@ -101,7 +101,7 @@ export default function AdminApp() {
         setSingleRequest({ state: "error", error: data });
       } else {
         setSingleRequest({ state: "success", data: data });
-        setShowModal(true);
+        setShowModal(true)
       }
     });
   };
@@ -219,7 +219,6 @@ export default function AdminApp() {
                 <p className={styles.modal_status_can}>
                   {singleRequest.data.status === "CANCELLED" && `Zamítnuto`}
                 </p>
-
                 {singleRequest.data.companyName
                   ? singleRequest.data.companyName
                   : `${singleRequest.data.name} ${singleRequest.data.surname}`}
