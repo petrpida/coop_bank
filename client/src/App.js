@@ -2,13 +2,12 @@ import "./theme.sass";
 import "./App.css";
 import styles from "./css/app.module.css";
 import React from "react";
-import { Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Nav, Navbar, NavDropdown, Button } from "react-bootstrap";
 import { Outlet, useNavigate } from "react-router-dom";
 
 function App() {
   const navigate = useNavigate();
   const currentPath = window.location.pathname;
-  console.log(currentPath);
 
   return (
     <div className="App">
@@ -32,7 +31,6 @@ function App() {
             {currentPath === "/adminlogin" || currentPath === "/AdminApp" ? (
               <div className={"d-flex flex-column"}>
                 <h2 className={""}>Aplikace pro bankéře</h2>
-                {false && <h6>`Přihlášen: dulik, ADMIN`</h6>}
               </div>
             ) : (
               <NavDropdown title="Pujčky" id="basic-nav-dropdown">

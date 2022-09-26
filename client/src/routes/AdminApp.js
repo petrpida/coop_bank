@@ -265,8 +265,9 @@ export default function AdminApp() {
                 <li>{`Rodné číslo: ${singleRequest.data.birthNum}`}</li>
               )}
               <li>{`Státní příslušnost: ${singleRequest.data.nationality}`}</li>
-                {singleRequest.data.phone && (
-              <li>{`Telefonní číslo: ${singleRequest.data.phone}`}</li>)}
+              {singleRequest.data.phone && (
+                <li>{`Telefonní číslo: ${singleRequest.data.phone}`}</li>
+              )}
               <li>{`E-mailová adresa: ${singleRequest.data.email}`}</li>
               <li>Adresa:</li>
               <ul className={styles.address_ul}>
@@ -286,25 +287,27 @@ export default function AdminApp() {
             <div className={styles.modal_buttons}>
               {role === "SUPERVIZOR" && (
                 <div className={styles.approval_btn}>
-                  {
-                    singleRequest.data.status === "PENDING" || singleRequest.data.status === "CANCELLED"
-                   && <Button
-                    onClick={() => {
-                      setShowConfirmModalA(true);
-                    }}
-                    className="rounded-0"
-                  >
-                    Potvrdit
-                  </Button>}
-                  {
-                      singleRequest.data.status === "PENDING" || singleRequest.data.status === "APPROVED"
-                     && <Button
-                    onClick={() => setShowConfirmModalC(true)}
-                    variant="secondary"
-                    className="rounded-0"
-                  >
-                    Zamitnout
-                  </Button>}
+                  {singleRequest.data.status === "PENDING" ||
+                    (singleRequest.data.status === "CANCELLED" && (
+                      <Button
+                        onClick={() => {
+                          setShowConfirmModalA(true);
+                        }}
+                        className="rounded-0"
+                      >
+                        Potvrdit
+                      </Button>
+                    ))}
+                  {singleRequest.data.status === "PENDING" ||
+                    (singleRequest.data.status === "APPROVED" && (
+                      <Button
+                        onClick={() => setShowConfirmModalC(true)}
+                        variant="secondary"
+                        className="rounded-0"
+                      >
+                        Zamitnout
+                      </Button>
+                    ))}
                 </div>
               )}
               {role === "ADMIN" && singleRequest.data.status === "PENDING" && (
@@ -364,6 +367,9 @@ export default function AdminApp() {
               variant="danger"
               onClick={() => {
                 approveBtn();
+                setTimeout(() => {
+                  editBtnFetch(singleRequest.data.id);
+                }, 500);
                 editBtnFetch(singleRequest.data.id);
                 setShowConfirmModalA(false);
               }}
@@ -393,9 +399,11 @@ export default function AdminApp() {
             <Button
               variant="danger"
               onClick={() => {
-                cancelBtn();
+                cancelBtn()
+                setTimeout(() => {
+                  editBtnFetch(singleRequest.data.id);
+                }, 500);
                 setShowConfirmModalC(false);
-                editBtnFetch(singleRequest.data.id);
               }}
             >
               Potvrdit
@@ -426,6 +434,7 @@ export default function AdminApp() {
               variant="danger"
               onClick={() => {
                 deleteBtn();
+                
                 setShowConfirmModalD(false);
                 setShowModal(false);
               }}

@@ -1,29 +1,5 @@
 [
   {
-    "name": "Jan",
-    "surname": "VESELÝ",
-    "birthNum": "5912061254",
-    "nationality": "ČR",
-    "email": "vesely@seznam.cz",
-    "phone": "+420 603 159 784",
-    "IC": "",
-    "position": "",
-    "companyName": "",
-    "address": {
-      "street": "Nová",
-      "descNumber": 125,
-      "indicativeNumber": 12,
-      "city": "Karlovy Vary",
-      "postalCode": 27501
-    },
-    "applicantType": "INDIVIDUAL",
-    "amount": 450000,
-    "numOfMonths": 31,
-    "created": "2022-09-26T19:20:30.319Z",
-    "status": "PENDING",
-    "id": "5f7b384229c22d64"
-  },
-  {
     "name": "Jana",
     "surname": "ŠŤASTNÁ",
     "birthNum": "8152167859",
@@ -168,6 +144,30 @@
     "id": "002bff5485d85c7e"
   },
   {
+    "name": "Čeňěk",
+    "surname": "ŠTUDENÝ",
+    "birthNum": "",
+    "nationality": "cr",
+    "email": "petstu@email.cz",
+    "phone": "+420 605 561 101",
+    "IC": "13456788",
+    "position": "",
+    "companyName": "",
+    "address": {
+      "street": "nova",
+      "descNumber": 3,
+      "indicativeNumber": 0,
+      "city": "Brno",
+      "postalCode": 65120
+    },
+    "applicantType": "OSVC",
+    "amount": 395000,
+    "numOfMonths": 24,
+    "created": "2022-09-26T09:53:25.833Z",
+    "status": "CANCELLED",
+    "id": "345e66f44fc1ea29"
+  },
+  {
     "name": "Jan",
     "surname": "NOVOTNÝ",
     "birthNum": "",
@@ -188,6 +188,27 @@
     "amount": 540000,
     "numOfMonths": 24,
     "created": "2022-09-26T19:42:54.619Z",
+  {
+    "name": "Adam",
+    "surname": "SMOLIK",
+    "birthNum": "7506120659",
+    "nationality": "cr",
+    "email": "petstu@email.cz",
+    "phone": "123456787",
+    "IC": "",
+    "position": "",
+    "companyName": "",
+    "address": {
+      "street": "nova",
+      "descNumber": 79,
+      "indicativeNumber": 0,
+      "city": "praha",
+      "postalCode": 65120
+    },
+    "applicantType": "INDIVIDUAL",
+    "amount": 465000,
+    "numOfMonths": 34,
+    "created": "2022-09-26T18:00:03.130Z",
     "status": "PENDING",
     "id": "f998dee7330be7fb"
   }
