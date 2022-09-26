@@ -49,6 +49,7 @@ export default function AdminLogin() {
         setUserData({ state: "error", error: data });
       } else {
         setUserData({ state: "success", data: data });
+        sessionStorage.setItem("userData", JSON.stringify(data));
         navigate("/AdminApp");
       }
     }
