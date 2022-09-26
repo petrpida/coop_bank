@@ -68,7 +68,7 @@
     "amount": 405000,
     "numOfMonths": 26,
     "created": "2022-09-23T10:37:14.416Z",
-    "status": "APPROVED",
+    "status": "CANCELLED",
     "id": "cb115c75d9ca8e71"
   },
   {
@@ -92,7 +92,7 @@
     "amount": 500000,
     "numOfMonths": 29,
     "created": "2022-09-23T10:40:55.220Z",
-    "status": "APPROVED",
+    "status": "CANCELLED",
     "id": "f5ef1543975d4353"
   },
   {
@@ -116,7 +116,7 @@
     "amount": 465000,
     "numOfMonths": 31,
     "created": "2022-09-23T20:02:29.014Z",
-    "status": "APPROVED",
+    "status": "CANCELLED",
     "id": "40878265100992be"
   },
   {
@@ -980,7 +980,7 @@
     "amount": 395000,
     "numOfMonths": 24,
     "created": "2022-09-26T09:53:25.833Z",
-    "status": "APPROVED",
+    "status": "CANCELLED",
     "id": "345e66f44fc1ea29"
   },
   {
@@ -1004,32 +1004,8 @@
     "amount": 550000,
     "numOfMonths": 24,
     "created": "2022-09-26T09:56:31.972Z",
-    "status": "APPROVED",
+    "status": "CANCELLED",
     "id": "2c87a7c7434c11ce"
-  },
-  {
-    "name": "Čeňěk",
-    "surname": "STUDENY",
-    "birthNum": "",
-    "nationality": "cr",
-    "email": "petstu@email.cz",
-    "phone": "+420 123 456 785",
-    "IC": "12345678",
-    "position": "ředitel/ka",
-    "companyName": "ŠUPSEM S.R.O.",
-    "address": {
-      "street": "nova",
-      "descNumber": 3,
-      "indicativeNumber": 0,
-      "city": "Brno",
-      "postalCode": 65120
-    },
-    "applicantType": "LEGAL_ENTITY",
-    "amount": 400000,
-    "numOfMonths": 28,
-    "created": "2022-09-26T11:07:10.656Z",
-    "status": "APPROVED",
-    "id": "967d6ffd72b43b18"
   },
   {
     "name": "Pavel",
