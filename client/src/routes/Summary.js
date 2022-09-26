@@ -4,6 +4,7 @@ import { ListGroup } from "react-bootstrap";
 import styles from "../css/Summary.module.css";
 
 function Summary() {
+  // fetch data
   const [applicantData, setApplicantData] = useState({});
   const params = useParams();
 

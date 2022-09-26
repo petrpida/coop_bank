@@ -8,6 +8,7 @@ import AdminContext from "../store/AdminDataProvider";
 export default function AdminLogin() {
   const navigate = useNavigate();
 
+  // login data
   const defaultData = {
     login: "",
     password: "",
@@ -17,6 +18,7 @@ export default function AdminLogin() {
   const { userData, setUserData } = useContext(AdminContext);
   const [validated, setValidated] = useState(false);
 
+  // format login inputs to fetch
   let user = Buffer.from(`${loginData.login}:${loginData.password}`).toString(
     "base64"
   );
@@ -29,6 +31,7 @@ export default function AdminLogin() {
     });
   };
 
+  // login submit
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.currentTarget;
