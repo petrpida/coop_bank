@@ -1,13 +1,19 @@
 .main {
-    position: relative;
+    /*position: relative;*/
   /* width: 100%; */
-  height: 50vh;
+  height: 70vh;
   background-image: url(../Img/mainPageImg.png);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   display: flex;
- 
+ margin-top: 20px;
+    box-shadow: 0 4.2rem 8.4rem rgba(0, 0, 0, 0.085);
+    transition: all 0.6s;
+}
+
+.main:hover {
+    transform: scale(0.99);
 }
 
  .main_text {
@@ -30,12 +36,26 @@ font-size: small;
 }
 
 .main_text button { 
-  padding: 8px 0;
-border: white 1px solid;
+  padding: 20px;
+border: none;
 color: white;
+    font-weight: bold;
 background-color: #00843D;
 }
 
 .main_text button:hover { 
-  background-color: #00843ec4;
+  background-color: rgba(2, 175, 51, 0.77);
+}
+
+.footer {
+    margin-top: 50px;
+    border-bottom: 2px solid #00843D;
+}
+
+/* mobil and small screens */
+@media (max-width: 41em) {
+    .main_text {
+        margin-left: 0;
+        margin-right: 10px;
+    }
 }
