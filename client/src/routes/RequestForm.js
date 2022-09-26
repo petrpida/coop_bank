@@ -125,10 +125,10 @@ export default function RequestForm() {
     });
     const data = await res.json();
     if (res.status >= 400) {
-      console.log(data);
       setAddNewRequestCall({ state: "error", error: data });
       setShowErrorMessage(data.errorMessage);
       handleShow();
+
     } else {
       setAddNewRequestCall({ state: "success", data });
       navigate(`/${data.id}`);
@@ -770,9 +770,9 @@ export default function RequestForm() {
       {addNewRequestCall.error && (
         <Modal centered show={show} onHide={handleClose}>
           <Modal.Header closeButton></Modal.Header>
-          <Modal.Body className={"text-center bg-danger text-light"}>
+          <Modal.Body className={"text-center bg-danger text-light fs-4"}>
             {showErrorMessage === "error - even descriptive number"
-              ? "Číslo popisné nenalezeno! Číslo popisné musí být liché číslo."
+              ? "Adresa nebyla nenalezena"
               : showErrorMessage}
           </Modal.Body>
           <Modal.Footer className={"justify-content-center"}>
