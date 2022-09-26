@@ -3,7 +3,6 @@ import Form from "react-bootstrap/Form";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Buffer } from "buffer";
-import AdminContext from "../store/AdminDataProvider";
 
 export default function AdminLogin() {
   const navigate = useNavigate();
@@ -15,7 +14,8 @@ export default function AdminLogin() {
   };
 
   const [loginData, setLoginData] = useState(defaultData);
-  const { userData, setUserData } = useContext(AdminContext);
+  const [userData, setUserData] = useState({});
+
   const [validated, setValidated] = useState(false);
 
   // format login inputs to fetch

@@ -2,7 +2,7 @@ import "./theme.sass";
 import "./App.css";
 import styles from "./css/app.module.css";
 import React from "react";
-import { Nav, Navbar, NavDropdown, Button } from "react-bootstrap";
+import {Nav, Navbar, Dropdown, DropdownButton} from "react-bootstrap";
 import { Outlet, useNavigate } from "react-router-dom";
 
 function App() {
@@ -28,26 +28,28 @@ function App() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav>
-            {currentPath === "/adminlogin" || currentPath === "/AdminApp" ? (
+            {currentPath === "/adminLogin" || currentPath === "/AdminApp" ? (
               <div className={"d-flex flex-column"}>
                 <h2 className={""}>Aplikace pro bankéře</h2>
               </div>
             ) : (
-              <NavDropdown title="Pujčky" id="basic-nav-dropdown">
-                <NavDropdown.Item
-                  onClick={() => {
-                    sessionStorage.setItem(
-                      "inputCalc",
-                      JSON.stringify({ amount: 350000, numOfMonths: 24 })
-                    );
-                    navigate("/calculator");
-                  }}
+                <DropdownButton
+                    align="end"
+                    title="Půjčky"
+                    id="dropdown-menu-align-end"
                 >
-                  Půjčka na cokoli
-                </NavDropdown.Item>
-                <NavDropdown.Item>Mikropůjčky</NavDropdown.Item>
-                <NavDropdown.Item> Hotovostní půjčka</NavDropdown.Item>
-              </NavDropdown>
+                    <Dropdown.Item
+                        onClick={() => {
+                            sessionStorage.setItem(
+                                "inputCalc",
+                                JSON.stringify({ amount: 350000, numOfMonths: 24 })
+                            );
+                            navigate("/calculator");
+                        }}
+                        eventKey="1">Půjčka na cokoli</Dropdown.Item>
+                    <Dropdown.Item eventKey="2">Mikropůjčky</Dropdown.Item>
+                    <Dropdown.Item eventKey="3">Hotovostní půjčka</Dropdown.Item>
+                </DropdownButton>
             )}
           </Nav>
         </Navbar.Collapse>

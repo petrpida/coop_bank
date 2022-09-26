@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {BrowserRouter, Routes, Route} from "react-router-dom";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import App from "./App";
@@ -10,29 +10,23 @@ import Calculator from "./routes/Calculator";
 import Summary from "./routes/Summary";
 import Home from "./routes/Home";
 import RequestForm from "./routes/RequestForm";
-import { FetchDataProvider } from "./store/FetchDataProvider";
-import { AdminDataProvider } from "./store/AdminDataProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <FetchDataProvider>
-      <AdminDataProvider>
+    <React.StrictMode>
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<App />}>
-              <Route path="" element={<Home />} />
-              <Route path="adminLogin" element={<AdminLogin />} />
-              <Route path="adminApp" element={<AdminApp />} />
-              <Route path="calculator" element={<Calculator />} />
-              <Route path="requestForm" element={<RequestForm />} />
-              <Route path="/:id" element={<Summary />} />
-            </Route>
-          </Routes>
+            <Routes>
+                <Route path="/" element={<App/>}>
+                    <Route path="" element={<Home/>}/>
+                    <Route path="adminLogin" element={<AdminLogin/>}/>
+                    <Route path="adminApp" element={<AdminApp/>}/>
+                    <Route path="calculator" element={<Calculator/>}/>
+                    <Route path="requestForm" element={<RequestForm/>}/>
+                    <Route path="/:id" element={<Summary/>}/>
+                </Route>
+            </Routes>
         </BrowserRouter>
-      </AdminDataProvider>
-    </FetchDataProvider>
-  </React.StrictMode>
+    </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

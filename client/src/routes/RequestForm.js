@@ -1,5 +1,5 @@
 import { Button, Form, InputGroup, Modal } from "react-bootstrap";
-import { useState, useContext, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function RequestForm() {
@@ -33,9 +33,6 @@ export default function RequestForm() {
     },
   };
   const [formData, setFormData] = useState(defaultFormData);
-
-
-
   const [showConfirmation, setShowConfirmation] = useState(false);
   const handleConfirmationClose = () => setShowConfirmation(false);
   const handleConfirmationShow = () => setShowConfirmation(true);
@@ -109,8 +106,6 @@ export default function RequestForm() {
       amount: parseInt(JSON.parse(sessionStorage.getItem("inputCalc")).amount),
       numOfMonths: parseInt(JSON.parse(sessionStorage.getItem("inputCalc")).numOfMonths),
     };
-
-    console.log(newData)
 
     if (!form.checkValidity()) {
       setValidated(true);

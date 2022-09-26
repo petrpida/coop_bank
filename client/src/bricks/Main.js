@@ -9,7 +9,7 @@ function Main() {
       <div className={styles.main}>
         <div className="w-50"></div>
         <div className={styles.main_text}>
-          <h3>Pujčka na cokoli</h3>
+          <h3>Půjčka na cokoli</h3>
           <p>
             od <span className={styles.percents}>6,5 %</span>
           </p>
@@ -23,7 +23,7 @@ function Main() {
               navigate("/calculator");
             }}
           >
-            Chci pujčku
+            Chci půjčku
           </button>{" "}
         </div>
       </div>

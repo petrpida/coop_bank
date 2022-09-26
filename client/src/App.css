@@ -3,6 +3,11 @@
   margin: 0 auto;
 }
 
+.dropdown-toggle {
+  padding: 10px 40px;
+  border-radius: 0 !important;
+}
+
 .modal-content {
   border-radius: 0 !important;
 }
