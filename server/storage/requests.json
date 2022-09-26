@@ -1054,5 +1054,29 @@
     "created": "2022-09-24T09:32:51.501Z",
     "status": "PENDING",
     "id": "99ddace352b3b6e2"
+  },
+  {
+    "name": "Petr",
+    "surname": "ŠTUDENÝ",
+    "birthNum": "7506120659",
+    "nationality": "cr",
+    "email": "petstu@email.cz",
+    "phone": "123456787",
+    "IC": "",
+    "position": "",
+    "companyName": "",
+    "address": {
+      "street": "nova",
+      "descNumber": 889,
+      "indicativeNumber": 0,
+      "city": "Brno",
+      "postalCode": 65120
+    },
+    "applicantType": "INDIVIDUAL",
+    "amount": 495000,
+    "numOfMonths": 24,
+    "created": "2022-09-26T09:36:26.514Z",
+    "status": "PENDING",
+    "id": "3ad9a73a33c17da3"
   }
 ]
