@@ -266,9 +266,7 @@ export default function AdminApp() {
               )}
               <li>{`Státní příslušnost: ${singleRequest.data.nationality}`}</li>
                 {singleRequest.data.phone && (
-              <li>{`Telefonní číslo: +420 ${new Intl.NumberFormat(
-                "cs-CZ"
-              ).format(singleRequest.data.phone)}`}</li>)}
+              <li>{`Telefonní číslo: ${singleRequest.data.phone}`}</li>)}
               <li>{`E-mailová adresa: ${singleRequest.data.email}`}</li>
               <li>Adresa:</li>
               <ul className={styles.address_ul}>
@@ -288,21 +286,25 @@ export default function AdminApp() {
             <div className={styles.modal_buttons}>
               {role === "SUPERVIZOR" && (
                 <div className={styles.approval_btn}>
-                  <Button
+                  {
+                    singleRequest.data.status === "PENDING" || singleRequest.data.status === "CANCELLED"
+                   && <Button
                     onClick={() => {
                       setShowConfirmModalA(true);
                     }}
                     className="rounded-0"
                   >
                     Potvrdit
-                  </Button>
-                  <Button
+                  </Button>}
+                  {
+                      singleRequest.data.status === "PENDING" || singleRequest.data.status === "APPROVED"
+                     && <Button
                     onClick={() => setShowConfirmModalC(true)}
                     variant="secondary"
                     className="rounded-0"
                   >
                     Zamitnout
-                  </Button>
+                  </Button>}
                 </div>
               )}
               {role === "ADMIN" && singleRequest.data.status === "PENDING" && (

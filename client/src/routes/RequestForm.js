@@ -7,7 +7,9 @@ import styles from "../css/RequestForm.module.css";
 export default function RequestForm() {
   const navigate = useNavigate();
 
-  const { inputCalc } = useContext(FetchDataContext);
+  //const { inputCalc } = useContext(FetchDataContext);
+  let inputCalc = sessionStorage.getItem("userData");
+  inputCalc = { data: JSON.parse(inputCalc) };
   const [addNewRequestCall, setAddNewRequestCall] = useState({
     state: "inactive",
   });
@@ -34,6 +36,8 @@ export default function RequestForm() {
     },
   };
   const [formData, setFormData] = useState(defaultFormData);
+
+
 
   const [showConfirmation, setShowConfirmation] = useState(false);
   const handleConfirmationClose = () => setShowConfirmation(false);
@@ -107,9 +111,11 @@ export default function RequestForm() {
     const newData = {
       ...formData,
       applicantType: typeSelected,
-      amount: inputCalc.amount,
-      numOfMonths: inputCalc.numOfMonths,
+      amount: parseInt(JSON.parse(sessionStorage.getItem("inputCalc")).amount),
+      numOfMonths: parseInt(JSON.parse(sessionStorage.getItem("inputCalc")).numOfMonths),
     };
+
+    console.log(newData)
 
     if (!form.checkValidity()) {
       setValidated(true);

@@ -5,78 +5,6 @@
     "birthNum": "750612/0659",
     "nationality": "ČR",
     "email": "petstu@email.cz",
-    "phone": "602123456",
-    "IC": "",
-    "position": "",
-    "companyName": "",
-    "address": {
-      "street": "Havanska",
-      "descNumber": 125,
-      "indicativeNumber": 154,
-      "city": "Kladno",
-      "postalCode": 27201
-    },
-    "applicantType": "INDIVIDUAL",
-    "amount": 450000,
-    "numOfMonths": 13,
-    "created": "2022-09-23T10:21:57.079Z",
-    "status": "APPROVED",
-    "id": "946ccb57c68cc5b8"
-  },
-  {
-    "name": "petr",
-    "surname": "studeny",
-    "birthNum": "",
-    "nationality": "",
-    "email": "petstu@email.cz",
-    "phone": "",
-    "IC": "",
-    "position": "",
-    "companyName": "",
-    "address": {
-      "street": "",
-      "descNumber": 9,
-      "indicativeNumber": 0,
-      "city": "",
-      "postalCode": 0
-    },
-    "applicantType": "INDIVIDUAL",
-    "amount": 540000,
-    "numOfMonths": 24,
-    "created": "2022-09-23T10:25:46.541Z",
-    "status": "APPROVED",
-    "id": "2efb87eb3df047fa"
-  },
-  {
-    "name": "petr",
-    "surname": "studeny",
-    "birthNum": "750612/0659",
-    "nationality": "ČR",
-    "email": "petstu@email.cz",
-    "phone": "123456789",
-    "IC": "",
-    "position": "",
-    "companyName": "",
-    "address": {
-      "street": "Havanska",
-      "descNumber": 25,
-      "indicativeNumber": 256,
-      "city": "Kladno",
-      "postalCode": 27204
-    },
-    "applicantType": "INDIVIDUAL",
-    "amount": 470000,
-    "numOfMonths": 28,
-    "created": "2022-09-23T10:30:00.521Z",
-    "status": "APPROVED",
-    "id": "3839025a3815810a"
-  },
-  {
-    "name": "petr",
-    "surname": "studeny",
-    "birthNum": "750612/0659",
-    "nationality": "ČR",
-    "email": "petstu@email.cz",
     "phone": "123456789",
     "IC": "",
     "position": "",
@@ -116,7 +44,7 @@
     "amount": 365000,
     "numOfMonths": 25,
     "created": "2022-09-23T10:32:15.780Z",
-    "status": "APPROVED",
+    "status": "CANCELLED",
     "id": "8517b1a2a6e5b264"
   },
   {
@@ -260,7 +188,7 @@
     "amount": 740000,
     "numOfMonths": 33,
     "created": "2022-09-23T20:07:39.396Z",
-    "status": "PENDING",
+    "status": "APPROVED",
     "id": "060aa5fd78e55122"
   },
   {
@@ -284,7 +212,7 @@
     "amount": 740000,
     "numOfMonths": 33,
     "created": "2022-09-23T20:27:07.839Z",
-    "status": "PENDING",
+    "status": "CANCELLED",
     "id": "cfa99d970b2d105e"
   },
   {
@@ -1028,7 +956,7 @@
     "amount": 495000,
     "numOfMonths": 24,
     "created": "2022-09-26T09:36:26.514Z",
-    "status": "PENDING",
+    "status": "CANCELLED",
     "id": "3ad9a73a33c17da3"
   },
   {
@@ -1076,7 +1004,7 @@
     "amount": 550000,
     "numOfMonths": 24,
     "created": "2022-09-26T09:56:31.972Z",
-    "status": "PENDING",
+    "status": "APPROVED",
     "id": "2c87a7c7434c11ce"
   },
   {
@@ -1100,7 +1028,7 @@
     "amount": 400000,
     "numOfMonths": 28,
     "created": "2022-09-26T11:07:10.656Z",
-    "status": "PENDING",
+    "status": "APPROVED",
     "id": "967d6ffd72b43b18"
   },
   {
@@ -1126,5 +1054,51 @@
     "created": "2022-09-26T12:51:43.234Z",
     "status": "CANCELLED",
     "id": "c31419efc376a827"
+  },
+  {
+    "name": "Adam",
+    "surname": "ONDRA",
+    "birthNum": "7506120659",
+    "nationality": "cze",
+    "email": "ahoj@email.com",
+    "phone": "123456789",
+    "IC": "",
+    "position": "",
+    "companyName": "",
+    "address": {
+      "street": "Pod lipami",
+      "descNumber": 381,
+      "indicativeNumber": 0,
+      "city": "kladno",
+      "postalCode": 62103
+    },
+    "applicantType": "INDIVIDUAL",
+    "created": "2022-09-26T17:53:18.602Z",
+    "status": "PENDING",
+    "id": "e0e3ad090a4747d4"
+  },
+  {
+    "name": "Adam",
+    "surname": "SMOLIK",
+    "birthNum": "7506120659",
+    "nationality": "cr",
+    "email": "petstu@email.cz",
+    "phone": "123456787",
+    "IC": "",
+    "position": "",
+    "companyName": "",
+    "address": {
+      "street": "nova",
+      "descNumber": 79,
+      "indicativeNumber": 0,
+      "city": "praha",
+      "postalCode": 65120
+    },
+    "applicantType": "INDIVIDUAL",
+    "amount": 465000,
+    "numOfMonths": 34,
+    "created": "2022-09-26T18:00:03.130Z",
+    "status": "PENDING",
+    "id": "53a994de87488a2c"
   }
 ]
