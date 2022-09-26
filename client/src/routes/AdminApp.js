@@ -1,16 +1,15 @@
-import React, { useState, useMemo, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import filterFactory, { selectFilter } from "react-bootstrap-table2-filter";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import { Modal, Button } from "react-bootstrap";
 import styles from "../css/AdminApp.module.css";
 import Icon from "@mdi/react";
-import { mdiLoading, mdiSwapVerticalBold } from "@mdi/js";
-import AdminContext from "../store/AdminDataProvider";
+import { mdiSwapVerticalBold } from "@mdi/js";
+
 import { useNavigate } from "react-router-dom";
 
 export default function AdminApp() {
-  // const { userData } = useContext(AdminContext);
   let userData = sessionStorage.getItem("userData");
   userData = { data: JSON.parse(userData) };
 
@@ -25,9 +24,10 @@ export default function AdminApp() {
   const [showConfirmModalD, setShowConfirmModalD] = useState(false);
 
   const [dataUpdate, setDataUpdate] = useState(false);
-
+  const [singleRequest, setSingleRequest] = useState({});
   const role = userData.data.roles[0];
 
+  // All clients
   useEffect(() => {
     fetch(`http://localhost:3000/request/list`, {
       method: "GET",
@@ -42,6 +42,70 @@ export default function AdminApp() {
     });
   }, [dataUpdate]);
 
+  // Single client
+  const editBtnFetch = (id) => {
+    fetch(`http://localhost:3000/request/${id}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    }).then(async (response) => {
+      const data = await response.json();
+      if (response.status >= 400) {
+        setSingleRequest({ state: "error", error: data });
+      } else {
+        setSingleRequest({ state: "success", data: data });
+        setShowModal(true);
+      }
+    });
+  };
+
+  // Update button for APPROVE
+  const approveBtn = () => {
+    fetch(`http://localhost:3000/request/${singleRequest.data.id}/approve`, {
+      method: "PUT",
+      headers: { Authorization: `Bearer ${userData.data.token}` },
+    }).then(async (response) => {
+      const data = await response.json();
+      if (response.status >= 400) {
+        setIsApproved({ state: "error", error: data });
+      } else {
+        setIsApproved({ state: "success", data: data });
+        setDataUpdate(!dataUpdate);
+      }
+    });
+  };
+
+  // Update button for CANCEL
+  const cancelBtn = () => {
+    fetch(`http://localhost:3000/request/${singleRequest.data.id}/cancel`, {
+      method: "PUT",
+      headers: { Authorization: `Bearer ${userData.data.token}` },
+    }).then(async (response) => {
+      const data = await response.json();
+      if (response.status >= 400) {
+        setIsCanceled({ state: "error", error: data });
+      } else {
+        setIsCanceled({ state: "success", data: data });
+        setDataUpdate(!dataUpdate);
+      }
+    });
+  };
+
+  // Delete request of single client data button
+  const deleteBtn = () => {
+    fetch(`http://localhost:3000/request/${singleRequest.data.id}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${userData.data.token}` },
+    }).then(async (response) => {
+      const data = await response.json();
+      if (response.status >= 400) {
+        setIsDeleted({ state: "error", error: data });
+      } else {
+        setIsDeleted({ state: "success", data: data });
+        setDataUpdate(!dataUpdate);
+      }
+    });
+  };
+
   const newData = { ...adminData };
   if (newData.state === "success") {
     newData.data.map((x, index) => {
@@ -52,12 +116,10 @@ export default function AdminApp() {
     });
   }
 
-  console.log(userData);
-
   //  Sorting buttons in table header
   const sortNames = (
     <span>
-      Řadit dle jména
+      Řadit dle příjmení / názvu firmy
       <Button className={styles.sort_btn + " outline-primary"}>
         <Icon size={1} path={mdiSwapVerticalBold} />
       </Button>
@@ -84,76 +146,9 @@ export default function AdminApp() {
     CANCELLED: "Zamítnuto",
   };
 
-  // Display company name if it exist, otherwise display persons name
-  // const nameFormatter = (company, row) => {
-  //   for (let i = 0; i < adminData.data.length; i++) {
-  //     return company ? row.companyName : `${row.surname} ${row.name}`;
-  //   }
-  // };
-
   //Numbers Formatter
   const numberFormatter = (number) => {
     return new Intl.NumberFormat("cs-CZ").format(number) + ` Kč`;
-  };
-
-  const [singleRequest, setSingleRequest] = useState({});
-  const editBtnFetch = (id) => {
-    fetch(`http://localhost:3000/request/${id}`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    }).then(async (response) => {
-      const data = await response.json();
-      if (response.status >= 400) {
-        setSingleRequest({ state: "error", error: data });
-      } else {
-        setSingleRequest({ state: "success", data: data });
-        setShowModal(true);
-      }
-    });
-  };
-
-  const approveBtn = () => {
-    fetch(`http://localhost:3000/request/${singleRequest.data.id}/approve`, {
-      method: "PUT",
-      headers: { Authorization: `Bearer ${userData.data.token}` },
-    }).then(async (response) => {
-      const data = await response.json();
-      if (response.status >= 400) {
-        setIsApproved({ state: "error", error: data });
-      } else {
-        setIsApproved({ state: "success", data: data });
-      }
-    });
-  };
-
-  const cancelBtn = () => {
-    fetch(`http://localhost:3000/request/${singleRequest.data.id}/cancel`, {
-      method: "PUT",
-      headers: { Authorization: `Bearer ${userData.data.token}` },
-    }).then(async (response) => {
-      const data = await response.json();
-      if (response.status >= 400) {
-        setIsCanceled({ state: "error", error: data });
-      } else {
-        console.log(isCanceled);
-        setIsCanceled({ state: "success", data: data });
-      }
-    });
-  };
-
-  const deleteBtn = () => {
-    fetch(`http://localhost:3000/request/${singleRequest.data.id}`, {
-      method: "DELETE",
-      headers: { Authorization: `Bearer ${userData.data.token}` },
-    }).then(async (response) => {
-      const data = await response.json();
-      if (response.status >= 400) {
-        setIsDeleted({ state: "error", error: data });
-      } else {
-        console.log(isCanceled);
-        setIsDeleted({ state: "success", data: data });
-      }
-    });
   };
 
   // Edit buttons for single row in table
@@ -175,12 +170,9 @@ export default function AdminApp() {
       dataField: "surname",
       sort: true,
       headerFormatter: (cell) => sortNames,
-      // formatter: nameFormatter,
     },
     {
-      // dataField:  ,
       dataField: "amount",
-      // text: "Amount",
       sort: true,
       headerFormatter: (cell) => sortNumbers,
       formatter: numberFormatter,
@@ -208,13 +200,14 @@ export default function AdminApp() {
     },
   ];
 
-
-  
-
   const ModalContent = () => {
     return (
       <>
-        <Modal animation={false} show={showModal} onHide={() => setShowModal(false)}>
+        <Modal
+          animation={false}
+          show={showModal}
+          onHide={() => setShowModal(false)}
+        >
           <Modal.Header closeButton>
             <Modal.Title>
               <div className={styles.modal_title}>
@@ -266,17 +259,25 @@ export default function AdminApp() {
                 ) + ` Kč`}
               </li>
               <li>{`Délka splácení: ${singleRequest.data.numOfMonths} měsíců`}</li>
-              <li>{`Rodné číslo: ${singleRequest.data.birthNum}`}</li>
+              {singleRequest.data.companyName ? (
+                <li>{`IČO: ${singleRequest.data.IC}`}</li>
+              ) : (
+                <li>{`Rodné číslo: ${singleRequest.data.birthNum}`}</li>
+              )}
               <li>{`Státní příslušnost: ${singleRequest.data.nationality}`}</li>
-
-              <li>{`Telefonní číslo: ${singleRequest.data.phone}`}</li>
+                {singleRequest.data.phone && (
+              <li>{`Telefonní číslo: +420 ${new Intl.NumberFormat(
+                "cs-CZ"
+              ).format(singleRequest.data.phone)}`}</li>)}
               <li>{`E-mailová adresa: ${singleRequest.data.email}`}</li>
               <li>Adresa:</li>
               <ul className={styles.address_ul}>
                 <li>{`Ulice: ${singleRequest.data.address.street}`}</li>
-                <li>
-                  {`Číslo popisné: ${singleRequest.data.address.descNumber}`}
-                </li>
+                {singleRequest.data.address.descNumber && (
+                  <li>
+                    {`Číslo popisné: ${singleRequest.data.address.descNumber}`}
+                  </li>
+                )}
                 <li>
                   {`Číslo orientační: ${singleRequest.data.address.indicativeNumber}`}
                 </li>
@@ -289,15 +290,12 @@ export default function AdminApp() {
                 <div className={styles.approval_btn}>
                   <Button
                     onClick={() => {
-                      // approveBtn();
-                      setShowConfirmModalA(true)
-                      setDataUpdate(!dataUpdate); 
+                      setShowConfirmModalA(true);
                     }}
                     className="rounded-0"
                   >
                     Potvrdit
                   </Button>
-
                   <Button
                     onClick={() => setShowConfirmModalC(true)}
                     variant="secondary"
@@ -311,20 +309,16 @@ export default function AdminApp() {
                 <div className={styles.approval_btn}>
                   <Button
                     onClick={() => {
-                      // approveBtn();
-                      setShowConfirmModalA(true)
-                    setDataUpdate(!dataUpdate);
+                      setShowConfirmModalA(true);
                     }}
                     className="rounded-0"
                   >
                     Potvrdit
                   </Button>
-    
 
                   <Button
                     onClick={() => {
-                      setShowConfirmModalC(true)
-                      setDataUpdate(!dataUpdate);
+                      setShowConfirmModalC(true);
                     }}
                     variant="secondary"
                     className="rounded-0"
@@ -337,7 +331,6 @@ export default function AdminApp() {
               {role === "SUPERVIZOR" && (
                 <Button
                   onClick={() => setShowConfirmModalD(true)}
-                  // className={styles.delete_btn}
                   variant="danger"
                   className="rounded-0"
                 >
@@ -353,20 +346,29 @@ export default function AdminApp() {
 
   const ConfirmModalA = () => {
     return (
-      <Modal animation={false} centered size="sm" show={showConfirmModalA} onHide={() => setShowConfirmModalA(false)}>
+      <Modal
+        animation={false}
+        centered
+        size="sm"
+        show={showConfirmModalA}
+        onHide={() => setShowConfirmModalA(false)}
+      >
         <Modal.Header closeButton>
-          <Modal.Title>Are you sure ??????</Modal.Title>
+          <Modal.Title>Opravdu chcete žádost schválit?</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div>
+          <div className="d-flex justify-content-around">
             <Button
-            onClick={() => {
-              approveBtn()
-              setShowConfirmModalA(false)
-            
-            }}
-            >Potvrdit</Button>
-            <Button>Zavřít</Button>
+              variant="danger"
+              onClick={() => {
+                approveBtn();
+                editBtnFetch(singleRequest.data.id);
+                setShowConfirmModalA(false);
+              }}
+            >
+              Potvrdit
+            </Button>
+            <Button onClick={() => setShowConfirmModalA(false)}>Zavřít</Button>
           </div>
         </Modal.Body>
       </Modal>
@@ -374,16 +376,29 @@ export default function AdminApp() {
   };
   const ConfirmModalC = () => {
     return (
-      <Modal animation={false} centered size="sm" show={showConfirmModalC} onHide={() => setShowConfirmModalC(false)}>
+      <Modal
+        animation={false}
+        centered
+        size="sm"
+        show={showConfirmModalC}
+        onHide={() => setShowConfirmModalC(false)}
+      >
         <Modal.Header closeButton>
-          <Modal.Title>Are you sure ??????</Modal.Title>
+          <Modal.Title>Opravdu chcete žádost zamítnout?</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div>
+          <div className="d-flex justify-content-around">
             <Button
-            onClick={() => cancelBtn()}
-            >Potvrdit</Button>
-            <Button>Zavřít</Button>
+              variant="danger"
+              onClick={() => {
+                cancelBtn();
+                setShowConfirmModalC(false);
+                editBtnFetch(singleRequest.data.id);
+              }}
+            >
+              Potvrdit
+            </Button>
+            <Button onClick={() => setShowConfirmModalC(false)}>Zavřít</Button>
           </div>
         </Modal.Body>
       </Modal>
@@ -391,23 +406,36 @@ export default function AdminApp() {
   };
   const ConfirmModalD = () => {
     return (
-      <Modal animation={false} centered size="sm" show={showConfirmModalD} onHide={() => setShowConfirmModalD(false)}>
+      <Modal
+        animation={false}
+        centered
+        size="sm"
+        // className="mb-3"
+        show={showConfirmModalD}
+        onHide={() => setShowConfirmModalD(false)}
+      >
         <Modal.Header closeButton>
-          <Modal.Title>Are you sure ??????</Modal.Title>
+          <Modal.Title>Opravdu chcete smazat žádost?</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div>
+          <div className="d-flex justify-content-around">
             <Button
-            onClick={() => deleteBtn() }
-            >Potvrdit</Button>
-            <Button
-            >Zavřít</Button>
+              className="rounded-0"
+              variant="danger"
+              onClick={() => {
+                deleteBtn();
+                setShowConfirmModalD(false);
+                setShowModal(false);
+              }}
+            >
+              Potvrdit
+            </Button>
+            <Button onClick={() => setShowConfirmModalD(false)}>Zavřít</Button>
           </div>
         </Modal.Body>
       </Modal>
     );
   };
-
 
   return (
     <>
@@ -424,7 +452,7 @@ export default function AdminApp() {
         />
       )}
       {showModal && <ModalContent />}
-      
+
       {showConfirmModalA && <ConfirmModalA />}
       {showConfirmModalC && <ConfirmModalC />}
       {showConfirmModalD && <ConfirmModalD />}
@@ -434,4 +462,3 @@ export default function AdminApp() {
 
 // SUPERVIZOR = admin
 // ADMIN = banker
-

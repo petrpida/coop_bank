@@ -1,4 +1,4 @@
-.App { 
+.App {
   width: 90%;
   margin: 0 auto;
 }
@@ -7,11 +7,19 @@
   border-radius: 0 !important;
 }
 
-.sr-only { 
+/* Admin Table ============ */
+.sr-only {
   display: none;
 }
-
-.filter-label { 
+.filter-label {
   margin-left: 1rem;
+  border-radius: 0 !important;
+}
+#select-filter-column-status,
+#select-filter-column-applicantType {
   border-radius: 0;
 }
+.pagination { 
+  border-radius: 0 !important;
+}
+/* =========================== */
