@@ -1,29 +1,5 @@
 [
   {
-    "applicantType": "INDIVIDUAL",
-    "name": "Lorem",
-    "surname": "Ipsum",
-    "birthNum": "801007/5953",
-    "nationality": "CZ",
-    "email": "dolor.sit@amet.co",
-    "phone": "+420555444333",
-    "IC": null,
-    "companyName": null,
-    "amount": 150000,
-    "numOfMonths": 12,
-    "position": null,
-    "address": {
-      "street": "Accumsan",
-      "descNumber": 12,
-      "indicativeNumber": 2,
-      "city": "Duis",
-      "postalCode": 11111
-    },
-    "status": "CANCELLED",
-    "id": "Pm8MtixTFX",
-    "created": "Wed Mar 25 2015 01:00:00 GMT+0100"
-  },
-  {
     "name": "petr",
     "surname": "studeny",
     "birthNum": "750612/0659",
@@ -44,7 +20,7 @@
     "amount": 450000,
     "numOfMonths": 13,
     "created": "2022-09-23T10:21:57.079Z",
-    "status": "CANCELLED",
+    "status": "APPROVED",
     "id": "946ccb57c68cc5b8"
   },
   {
@@ -116,7 +92,7 @@
     "amount": 470000,
     "numOfMonths": 28,
     "created": "2022-09-23T10:31:05.420Z",
-    "status": "PENDING",
+    "status": "APPROVED",
     "id": "5b01b950201415a4"
   },
   {
@@ -179,30 +155,6 @@
     "companyName": "",
     "address": {
       "street": "Havanska",
-      "descNumber": 1,
-      "indicativeNumber": 99,
-      "city": "Kladno",
-      "postalCode": 27204
-    },
-    "applicantType": "INDIVIDUAL",
-    "amount": 420000,
-    "numOfMonths": 25,
-    "created": "2022-09-23T10:39:14.154Z",
-    "status": "APPROVED",
-    "id": "a72394cb560f6f8a"
-  },
-  {
-    "name": "petr",
-    "surname": "studeny",
-    "birthNum": "750612/0659",
-    "nationality": "ČR",
-    "email": "petstu@email.cz",
-    "phone": "123456789",
-    "IC": "",
-    "position": "",
-    "companyName": "",
-    "address": {
-      "street": "Havanska",
       "descNumber": 9,
       "indicativeNumber": 99,
       "city": "Kladno",
@@ -212,7 +164,7 @@
     "amount": 500000,
     "numOfMonths": 29,
     "created": "2022-09-23T10:40:55.220Z",
-    "status": "PENDING",
+    "status": "APPROVED",
     "id": "f5ef1543975d4353"
   },
   {
@@ -236,7 +188,7 @@
     "amount": 465000,
     "numOfMonths": 31,
     "created": "2022-09-23T20:02:29.014Z",
-    "status": "PENDING",
+    "status": "APPROVED",
     "id": "40878265100992be"
   },
   {
@@ -260,7 +212,7 @@
     "amount": 465000,
     "numOfMonths": 31,
     "created": "2022-09-23T20:03:53.210Z",
-    "status": "PENDING",
+    "status": "CANCELLED",
     "id": "b66069631be3e2b9"
   },
   {
