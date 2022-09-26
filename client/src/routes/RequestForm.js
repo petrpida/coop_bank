@@ -4,6 +4,9 @@ import FetchDataContext from "../store/FetchDataProvider";
 import {useNavigate} from "react-router-dom";
 
 export default function RequestForm() {
+    // const datum = new Date(data.created)
+    // console.log(datum.toLocaleDateString('cz'))
+
     const navigate = useNavigate()
 
     const {inputCalc} = useContext(FetchDataContext)
@@ -114,7 +117,7 @@ export default function RequestForm() {
                     onClick={() => handleConfirmationShow()}
                     size="lg"
                     variant="light"
-                    className={"w-100 text-secondary fw-bold rounded-0"}>
+                    className={"w-100 text-danger fw-bold rounded-0"}>
                     Zpět
                 </Button>
                 <Button type="submit"
@@ -164,7 +167,8 @@ export default function RequestForm() {
                                     <Form.Group className="mb-2 w-100" controlId={`FormGroupName`}>
                                         <Form.Label className={"mb-0"}>Jméno</Form.Label>
                                         <Form.Control
-                                            onChange={(e) => storeInputData("name", e.target.value)}
+                                            onChange={(e) => storeInputData("name", e.target.value.charAt(0)
+                                                .toLocaleUpperCase("cz") + e.target.value.slice(1))}
                                             className={"rounded-0"}
                                             required
                                         />
@@ -176,7 +180,7 @@ export default function RequestForm() {
                                     <Form.Group className="mb-2 w-100" controlId={`FormGroupSurname`}>
                                         <Form.Label className={"mb-0"}>Příjmení</Form.Label>
                                         <Form.Control
-                                            onChange={(e) => storeInputData("surname", e.target.value)}
+                                            onChange={(e) => storeInputData("surname", e.target.value.toLocaleUpperCase("cz"))}
                                             className={"rounded-0"}
                                             required
                                         />
@@ -282,52 +286,26 @@ export default function RequestForm() {
                                     </Form.Group>
                                     <Form.Group className="mb-2 w-100" controlId={`FormGroupDescNumber`}>
                                         <Form.Label className={"mb-0"}>Číslo popisné</Form.Label>
-                                        {formData.address.indicativeNumber ?
-                                            <Form.Control
-                                                onChange={(e) => storeAddressData("descNumber", parseInt(e.target.value))}
-                                                className={"rounded-0"}
-                                                type="number"
-                                                min="1"
-                                            />
-                                            :
-                                            <><Form.Control
-                                                onChange={(e) => storeAddressData("descNumber", parseInt(e.target.value))}
-                                                className={"rounded-0"}
-                                                type="number"
-                                                min="1"
-                                                required
-                                            />
-                                                <Form.Control.Feedback className={"ps-1 text-light bg-danger"}
-                                                                       type="invalid">
-                                                    Číslo popisné nebo orientační je povinné
-                                                </Form.Control.Feedback></>
-                                        }
-
+                                        <Form.Control
+                                            onChange={(e) => storeAddressData("descNumber", parseInt(e.target.value))}
+                                            className={"rounded-0"}
+                                            type="number"
+                                            min="1"
+                                            required
+                                        />
+                                        <Form.Control.Feedback className={"ps-1 text-light bg-danger"}
+                                                               type="invalid">
+                                            Zadejte číslo popisné
+                                        </Form.Control.Feedback>
                                     </Form.Group>
                                     <Form.Group className="mb-2 w-100" controlId={`FormGroupIndicativeNumber`}>
                                         <Form.Label className={"mb-0"}>Číslo orientační</Form.Label>
-                                        {formData.address.descNumber ?
-                                            <Form.Control
-                                                onChange={(e) => storeAddressData("indicativeNumber", parseInt(e.target.value))}
-                                                className={"rounded-0"}
-                                                type="number"
-                                                min="1"
-                                            />
-                                            :
-                                            <>
-                                                <Form.Control
-                                                    onChange={(e) => storeAddressData("indicativeNumber", parseInt(e.target.value))}
-                                                    className={"rounded-0"}
-                                                    type="number"
-                                                    min="1"
-                                                    required
-                                                />
-                                                <Form.Control.Feedback className={"ps-1 text-light bg-danger"}
-                                                                       type="invalid">
-                                                    Číslo popisné nebo orientační je povinné
-                                                </Form.Control.Feedback>
-                                            </>
-                                        }
+                                        <Form.Control
+                                            onChange={(e) => storeAddressData("indicativeNumber", parseInt(e.target.value))}
+                                            className={"rounded-0"}
+                                            type="number"
+                                            min="1"
+                                        />
                                     </Form.Group>
                                 </div>
                                 <div className={"d-flex flex-column flex-lg-row gap-1"}>
@@ -408,52 +386,26 @@ export default function RequestForm() {
                                     </Form.Group>
                                     <Form.Group className="mb-2 w-100" controlId={`FormGroupDescNumber`}>
                                         <Form.Label className={"mb-0"}>Číslo popisné</Form.Label>
-                                        {formData.address.indicativeNumber ?
-                                            <Form.Control
-                                                onChange={(e) => storeAddressData("descNumber", parseInt(e.target.value))}
-                                                className={"rounded-0"}
-                                                type="number"
-                                                min="1"
-                                            />
-                                            :
-                                            <><Form.Control
-                                                onChange={(e) => storeAddressData("descNumber", parseInt(e.target.value))}
-                                                className={"rounded-0"}
-                                                type="number"
-                                                min="1"
-                                                required
-                                            />
-                                                <Form.Control.Feedback className={"ps-1 text-light bg-danger"}
-                                                                       type="invalid">
-                                                    Číslo popisné nebo orientační je povinné
-                                                </Form.Control.Feedback></>
-                                        }
-
+                                        <Form.Control
+                                            onChange={(e) => storeAddressData("descNumber", parseInt(e.target.value))}
+                                            className={"rounded-0"}
+                                            type="number"
+                                            min="1"
+                                            required
+                                        />
+                                        <Form.Control.Feedback className={"ps-1 text-light bg-danger"}
+                                                               type="invalid">
+                                            Zadejte číslo popisné
+                                        </Form.Control.Feedback>
                                     </Form.Group>
                                     <Form.Group className="mb-2 w-100" controlId={`FormGroupIndicativeNumber`}>
                                         <Form.Label className={"mb-0"}>Číslo orientační</Form.Label>
-                                        {formData.address.descNumber ?
-                                            <Form.Control
-                                                onChange={(e) => storeAddressData("indicativeNumber", parseInt(e.target.value))}
-                                                className={"rounded-0"}
-                                                type="number"
-                                                min="1"
-                                            />
-                                            :
-                                            <>
-                                                <Form.Control
-                                                    onChange={(e) => storeAddressData("indicativeNumber", parseInt(e.target.value))}
-                                                    className={"rounded-0"}
-                                                    type="number"
-                                                    min="1"
-                                                    required
-                                                />
-                                                <Form.Control.Feedback className={"ps-1 text-light bg-danger"}
-                                                                       type="invalid">
-                                                    Číslo popisné nebo orientační je povinné
-                                                </Form.Control.Feedback>
-                                            </>
-                                        }
+                                        <Form.Control
+                                            onChange={(e) => storeAddressData("indicativeNumber", parseInt(e.target.value))}
+                                            className={"rounded-0"}
+                                            type="number"
+                                            min="1"
+                                        />
                                     </Form.Group>
                                 </div>
                                 <div className={"d-flex flex-column flex-lg-row gap-1"}>
@@ -490,7 +442,8 @@ export default function RequestForm() {
                                     <Form.Group className="mb-2 w-100" controlId={`FormGroupName`}>
                                         <Form.Label className={"mb-0"}>Jméno</Form.Label>
                                         <Form.Control
-                                            onChange={(e) => storeInputData("name", e.target.value)}
+                                            onChange={(e) => storeInputData("name", e.target.value.charAt(0)
+                                                .toLocaleUpperCase("cz") + e.target.value.slice(1))}
                                             className={"rounded-0"}
                                             required
                                         />
@@ -502,7 +455,7 @@ export default function RequestForm() {
                                     <Form.Group className="mb-2 w-100" controlId={`FormGroupSurname`}>
                                         <Form.Label className={"mb-0"}>Příjmení</Form.Label>
                                         <Form.Control
-                                            onChange={(e) => storeInputData("surname", e.target.value)}
+                                            onChange={(e) => storeInputData("surname", e.target.value.toLocaleUpperCase("cz"))}
                                             className={"rounded-0"}
                                             required
                                         />
@@ -522,7 +475,7 @@ export default function RequestForm() {
 
                                             {companyPositions.map(position => {
                                                 return <option value={position}>{position}</option>
-                                                })
+                                            })
                                             }
                                         </Form.Select>
                                         <Form.Control.Feedback className={"ps-1 text-light bg-danger"}
@@ -583,36 +536,38 @@ export default function RequestForm() {
             </Form>
             {addNewRequestCall.error &&
                 <Modal centered show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                    </Modal.Header>
+                    <Modal.Body
+                        className={"text-center bg-danger text-light"}>{showErrorMessage === "error - even descriptive number" ?
+                        "Číslo popisné nenalezeno! Číslo popisné musí být liché číslo." : showErrorMessage}</Modal.Body>
+                    <Modal.Footer className={"justify-content-center"}>
+                        <Button variant="outline-dark" onClick={handleClose} className={"rounded-0"}>
+                            Opravit
+                        </Button>
+                    </Modal.Footer>
+                </Modal>}
+            <Modal centered show={showConfirmation} onHide={handleConfirmationClose}>
                 <Modal.Header closeButton>
                     <Modal.Title></Modal.Title>
                 </Modal.Header>
-                <Modal.Body className={"text-center bg-danger text-light"}>{showErrorMessage === "error - even descriptive number" ?
-                    "Číslo popisné nenalezeno! Číslo popisné musí být liché číslo." : showErrorMessage}</Modal.Body>
-                <Modal.Footer className={"justify-content-center"}>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Opravit
-                    </Button>
-                </Modal.Footer>
-            </Modal>}
-            {<Modal centered show={showConfirmation} onHide={handleConfirmationShow}>
-                <Modal.Header closeButton>
-                    <Modal.Title></Modal.Title>
-                </Modal.Header>
-                <Modal.Body className={"text-center bg-secondary text-light"}>
+                <Modal.Body className={"text-center bg-dark text-light"}>
                     <div>Při návratu budou Vaše dosud vyplněná data ztracena.</div>
                 </Modal.Body>
                 <Modal.Footer className={"justify-content-center"}>
-                    <Button variant="outline-primary" onClick={handleConfirmationClose}>
+                    <Button variant="outline-primary" className={"rounded-0"} onClick={handleConfirmationClose}>
                         Zůstat
                     </Button>
-                    <Button variant="outline-danger" onClick={() => {
+                    <Button variant="outline-danger" className={"rounded-0"} onClick={() => {
                         setTypeOfApplicant("default");
-                        handleConfirmationClose()
+                        setValidated(false);
+                        setTypeSelected("default")
+                        handleConfirmationClose();
                     }}>
                         Vrátit se
                     </Button>
                 </Modal.Footer>
-            </Modal>}
+            </Modal>
         </>
     )
 }

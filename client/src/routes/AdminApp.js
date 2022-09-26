@@ -90,6 +90,7 @@ export default function AdminApp() {
         setSingleRequest({ state: "error", error: data });
       } else {
         setSingleRequest({ state: "success", data: data });
+        setShowModal(true)
       }
     });
   };
@@ -145,7 +146,7 @@ export default function AdminApp() {
         className={styles.edit_btn}
         onClick={() => {
           editBtnFetch(row.id);
-          toggleTrueFalse();
+          //toggleTrueFalse();
         }}
       >
         Upravit
@@ -191,14 +192,13 @@ export default function AdminApp() {
   ];
 
   const toggleTrueFalse = () => {
-    setShowModal(handleShow);
+    setShowModal(true);
   };
 
   const ModalContent = () => {
     return (
       <>
-        {singleRequest.data ? (
-          <Modal show={show} onHide={handleClose} className="rounded-0">
+          <Modal show={showModal} onHide={() => setShowModal(false)} >
             <Modal.Header closeButton>
               <Modal.Title>
                 <div className={styles.modal_title}>
@@ -292,7 +292,7 @@ export default function AdminApp() {
               <Icon size={2} path={mdiLoading} spin={true} />
             </Modal.Body>
           </Modal>
-        )}
+
       </>
     );
   };
@@ -311,7 +311,7 @@ export default function AdminApp() {
           pagination={paginationFactory()}
         />
       )}
-      {show ? <ModalContent /> : null}
+      {showModal && <ModalContent />}
     </>
   );
 }
