@@ -116,7 +116,7 @@
     "amount": 470000,
     "numOfMonths": 28,
     "created": "2022-09-23T10:31:05.420Z",
-    "status": "PENDING",
+    "status": "APPROVED",
     "id": "5b01b950201415a4"
   },
   {
@@ -1078,5 +1078,101 @@
     "created": "2022-09-26T09:36:26.514Z",
     "status": "PENDING",
     "id": "3ad9a73a33c17da3"
+  },
+  {
+    "name": "Čeňěk",
+    "surname": "ŠTUDENÝ",
+    "birthNum": "",
+    "nationality": "cr",
+    "email": "petstu@email.cz",
+    "phone": "+420 605 561 101",
+    "IC": "13456788",
+    "position": "",
+    "companyName": "",
+    "address": {
+      "street": "nova",
+      "descNumber": 3,
+      "indicativeNumber": 0,
+      "city": "Brno",
+      "postalCode": 65120
+    },
+    "applicantType": "OSVC",
+    "amount": 395000,
+    "numOfMonths": 24,
+    "created": "2022-09-26T09:53:25.833Z",
+    "status": "PENDING",
+    "id": "345e66f44fc1ea29"
+  },
+  {
+    "name": "Čeňěk",
+    "surname": "ŠTUDENÝ",
+    "birthNum": "",
+    "nationality": "cr",
+    "email": "petstu@email.cz",
+    "phone": "+420 605 561 101",
+    "IC": "12345678",
+    "position": "ředitel/ka",
+    "companyName": "ŠUPSEM S.R.O.",
+    "address": {
+      "street": "Havanska",
+      "descNumber": 23,
+      "indicativeNumber": 0,
+      "city": "Brno",
+      "postalCode": 65120
+    },
+    "applicantType": "LEGAL_ENTITY",
+    "amount": 550000,
+    "numOfMonths": 24,
+    "created": "2022-09-26T09:56:31.972Z",
+    "status": "PENDING",
+    "id": "2c87a7c7434c11ce"
+  },
+  {
+    "name": "Čeňěk",
+    "surname": "STUDENY",
+    "birthNum": "",
+    "nationality": "cr",
+    "email": "petstu@email.cz",
+    "phone": "+420 123 456 785",
+    "IC": "12345678",
+    "position": "ředitel/ka",
+    "companyName": "ŠUPSEM S.R.O.",
+    "address": {
+      "street": "nova",
+      "descNumber": 3,
+      "indicativeNumber": 0,
+      "city": "Brno",
+      "postalCode": 65120
+    },
+    "applicantType": "LEGAL_ENTITY",
+    "amount": 400000,
+    "numOfMonths": 28,
+    "created": "2022-09-26T11:07:10.656Z",
+    "status": "PENDING",
+    "id": "967d6ffd72b43b18"
+  },
+  {
+    "name": "Pavel",
+    "surname": "SMOLIK",
+    "birthNum": "",
+    "nationality": "New Zealand",
+    "email": "petstu@email.cz",
+    "phone": "+420 123 456 777",
+    "IC": "12457836",
+    "position": "místostarosta",
+    "companyName": "UNICORN",
+    "address": {
+      "street": "Jankovcova",
+      "descNumber": 1,
+      "indicativeNumber": 0,
+      "city": "Praha",
+      "postalCode": 17000
+    },
+    "applicantType": "LEGAL_ENTITY",
+    "amount": 935000,
+    "numOfMonths": 41,
+    "created": "2022-09-26T12:51:43.234Z",
+    "status": "CANCELLED",
+    "id": "c31419efc376a827"
   }
 ]
