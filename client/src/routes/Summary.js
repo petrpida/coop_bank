@@ -20,8 +20,6 @@ function Summary() {
     );
   }, []);
 
-  console.log(applicantData);
-
   // format months
   function getYearsAndMonths(mths) {
     let yearsOut = Math.floor(mths / 12);
@@ -106,9 +104,11 @@ function Summary() {
               </ListGroup.Item>
               <ListGroup.Item>
                 Adresa: {applicantData.data.address.street}{" "}
-                {applicantData.data.address.descNumber}/
-                {applicantData.data.address.indicativeNumber},{" "}
-                {applicantData.data.address.postalCode}{" "}
+                {applicantData.data.address.descNumber}
+                {applicantData.data.address.indicativeNumber !== 0
+                  ? "/" + applicantData.data.address.indicativeNumber
+                  : ""}
+                , {applicantData.data.address.postalCode}{" "}
                 {applicantData.data.address.city}{" "}
               </ListGroup.Item>
               <ListGroup.Item>
@@ -143,7 +143,8 @@ function Summary() {
                   : ""}
               </ListGroup.Item>
               <ListGroup.Item>
-                Žádost vytvořena: {applicantData.data.created}
+                Žádost vytvořena:{" "}
+                {new Date(applicantData.data.created).toLocaleDateString("cz")}
               </ListGroup.Item>
               <ListGroup.Item>Vaše ID: {applicantData.data.id}</ListGroup.Item>
             </ListGroup>

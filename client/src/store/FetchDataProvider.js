@@ -67,6 +67,7 @@ export function FetchDataProvider(props) {
     enteredApplicantData,
     setEnteredApplicantData,
     applicantData,
+    setCalculatedData,
   };
 
   return (

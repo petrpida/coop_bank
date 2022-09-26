@@ -69,18 +69,22 @@ export default function AdminLogin() {
           Přihlašovací jméno
         </Form.Label>
         <Form.Control
+          isInvalid={userData.error}
           required
           className={"border-success rounded-0 "}
           value={loginData.login}
           onInput={(e) => setField("login", e.target.value)}
         />
         <Form.Control.Feedback type="invalid">
-          Uživatelské jméno nebo heslo není správné
+          {userData.error
+            ? "Uživatelské jméno nebo heslo není správné!"
+            : "Zadejte uživatelské jméno a heslo"}
         </Form.Control.Feedback>
       </Form.Group>
       <Form.Group className="mt-3 w-100" controlId="formBasicPassword">
         <Form.Label className={"d-block text-start fs-5"}>Heslo</Form.Label>
         <Form.Control
+          isInvalid={userData.error}
           required
           type="password"
           className={"border-success rounded-0"}
