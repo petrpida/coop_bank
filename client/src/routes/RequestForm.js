@@ -2,6 +2,7 @@ import { Button, Form, InputGroup, Modal } from "react-bootstrap";
 import { useState, useContext, useEffect } from "react";
 import FetchDataContext from "../store/FetchDataProvider";
 import { useNavigate } from "react-router-dom";
+import styles from "../css/RequestForm.module.css"
 
 export default function RequestForm() {
 
@@ -72,6 +73,10 @@ export default function RequestForm() {
         "zplnomocněný",
         "zplnomocněná",
     ];
+
+    const formatPhoneNumber = (phoneNumber) => {
+        return ("+420 " + new Intl.NumberFormat("cs-CZ").format(phoneNumber))
+    }
 
     // todo !!! DOESNT WORK !!!
     // useEffect(() => {
@@ -158,8 +163,8 @@ export default function RequestForm() {
             <>
                 <Form noValidate validated={validated}
                       onSubmit={(e) => handleSubmit(e)}
-                      className={" w-100 d-flex flex-column justify-content-between align-items-center" +
-                          " mt-2 mb-5 mx-auto bg-green text-light p-5"}>
+                      className={styles.requestForm + " d-flex flex-column justify-content-between align-items-center" +
+                          " mb-5 mx-auto bg-green text-light p-5"}>
                     {typeOfApplicant === "default" &&
                         <div className={" d-flex flex-column justify-content-center align-items-center"}>
                             <h3 className={"w-100"}>
@@ -267,7 +272,7 @@ export default function RequestForm() {
                                             <InputGroup hasValidation>
                                                 <InputGroup.Text className={"rounded-0"}>+420</InputGroup.Text>
                                                 <Form.Control
-                                                    onChange={(e) => storeInputData("phone", e.target.value.replaceAll(/\D/g, ""))}
+                                                    onChange={(e) => storeInputData("phone", formatPhoneNumber(e.target.value.replaceAll(/\D/g, "")))}
                                                     className={"rounded-0"}
                                                     required
                                                     pattern="^\D*[0-9]\D*[0-9]\D*[0-9]\D*[0-9]\D*[0-9]\D*[0-9]\D*[0-9]\D*[0-9]\D*[0-9]\D*$"
@@ -298,7 +303,8 @@ export default function RequestForm() {
                                         <Form.Group className="mb-2 w-100" controlId={`FormGroupStreet`}>
                                             <Form.Label className={"mb-0"}>Ulice</Form.Label>
                                             <Form.Control
-                                                onChange={(e) => storeAddressData("street", e.target.value)}
+                                                onChange={(e) => storeAddressData("street", e.target.value.charAt(0)
+                                                    .toLocaleUpperCase("cz") + e.target.value.slice(1))}
                                                 className={"rounded-0"}
                                                 required
                                             />
@@ -335,7 +341,8 @@ export default function RequestForm() {
                                         <Form.Group className="mb-2 w-100" controlId={`FormGroupCity`}>
                                             <Form.Label className={"mb-0"}>Město</Form.Label>
                                             <Form.Control
-                                                onChange={(e) => storeAddressData("city", e.target.value)}
+                                                onChange={(e) => storeAddressData("city", e.target.value.charAt(0)
+                                                    .toLocaleUpperCase("cz") + e.target.value.slice(1))}
                                                 className={"rounded-0"}
                                                 required
                                             />
@@ -369,7 +376,7 @@ export default function RequestForm() {
                                         <Form.Group className="mb-2 w-100" controlId={`FormGroupCompanyName`}>
                                             <Form.Label className={"mb-0"}>Název firmy</Form.Label>
                                             <Form.Control
-                                                onChange={(e) => storeInputData("companyName", e.target.value)}
+                                                onChange={(e) => storeInputData("companyName", e.target.value.toLocaleUpperCase("cz"))}
                                                 className={"rounded-0"}
                                                 required
                                             />
@@ -398,7 +405,8 @@ export default function RequestForm() {
                                         <Form.Group className="mb-2 w-100" controlId={`FormGroupDescStreet`}>
                                             <Form.Label className={"mb-0"}>Ulice</Form.Label>
                                             <Form.Control
-                                                onChange={(e) => storeAddressData("street", e.target.value)}
+                                                onChange={(e) => storeAddressData("street", e.target.value.charAt(0)
+                                                    .toLocaleUpperCase("cz") + e.target.value.slice(1))}
                                                 className={"rounded-0"}
                                                 required
                                             />
@@ -435,7 +443,8 @@ export default function RequestForm() {
                                         <Form.Group className="mb-2 w-100" controlId={`FormGroupCity`}>
                                             <Form.Label className={"mb-0"}>Město</Form.Label>
                                             <Form.Control
-                                                onChange={(e) => storeAddressData("city", e.target.value)}
+                                                onChange={(e) => storeAddressData("city", e.target.value.charAt(0)
+                                                    .toLocaleUpperCase("cz") + e.target.value.slice(1))}
                                                 className={"rounded-0"}
                                                 required
                                             />
@@ -528,7 +537,7 @@ export default function RequestForm() {
                                             <InputGroup hasValidation>
                                                 <InputGroup.Text className={"rounded-0"}>+420</InputGroup.Text>
                                                 <Form.Control
-                                                    onChange={(e) => storeInputData("phone", e.target.value.replaceAll(/\D/g, ""))}
+                                                    onChange={(e) => storeInputData("phone", formatPhoneNumber(e.target.value.replaceAll(/\D/g, "")))}
                                                     className={"rounded-0"}
                                                     required
                                                     pattern="^\D*[0-9]\D*[0-9]\D*[0-9]\D*[0-9]\D*[0-9]\D*[0-9]\D*[0-9]\D*[0-9]\D*[0-9]\D*$"

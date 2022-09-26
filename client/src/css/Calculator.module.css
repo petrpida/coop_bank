@@ -38,7 +38,8 @@
 }
 
 .card {
-    box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
+    box-shadow: 10px 10px 20px -7px rgba(0,0,0,0.8);
+
 }
 
 .title {

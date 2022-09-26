@@ -3,10 +3,14 @@
   margin: 0 auto;
 }
 
+.modal-content {
+  border-radius: 0 !important;
+}
 
 .sr-only { 
   display: none;
 }
+
 .filter-label { 
   margin-left: 1rem;
   border-radius: 0;

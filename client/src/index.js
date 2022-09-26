@@ -23,8 +23,6 @@ root.render(
             <Route path="/" element={<App />}>
               <Route path="" element={<Home />} />
               <Route path="adminLogin" element={<AdminLogin />} />
-              <Route path="/:id" element={<Summary />} />
-
               <Route path="adminApp" element={<AdminApp />} />
               <Route path="calculator" element={<Calculator />} />
               <Route path="requestForm" element={<RequestForm />} />
