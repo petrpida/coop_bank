@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 export default function RequestForm() {
   const navigate = useNavigate();
 
-  let inputCalc = sessionStorage.getItem("userData");
-  inputCalc = { data: JSON.parse(inputCalc) };
+  // let inputCalc = sessionStorage.getItem("userData");
+  // inputCalc = { data: JSON.parse(inputCalc) };
   const [addNewRequestCall, setAddNewRequestCall] = useState({
     state: "inactive",
   });

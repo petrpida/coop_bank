@@ -238,5 +238,29 @@
     "created": "2022-09-26T21:15:56.938Z",
     "status": "PENDING",
     "id": "bfcbc9d68060bde6"
+  },
+  {
+    "name": "Adam",
+    "surname": "SMOLIK",
+    "birthNum": "",
+    "nationality": "ČR",
+    "email": "ahoj@email.com",
+    "phone": "+420 123 456 787",
+    "IC": "74858699",
+    "position": "ředitel/ka",
+    "companyName": "UNICORN",
+    "address": {
+      "street": "Jankovcova",
+      "descNumber": 7,
+      "indicativeNumber": 0,
+      "city": "Praha",
+      "postalCode": 17000
+    },
+    "applicantType": "LEGAL_ENTITY",
+    "amount": 350000,
+    "numOfMonths": 24,
+    "created": "2022-09-26T21:40:44.569Z",
+    "status": "PENDING",
+    "id": "e2aa09a88995397d"
   }
 ]
