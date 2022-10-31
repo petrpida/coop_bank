@@ -20,7 +20,7 @@
     "amount": 235000,
     "numOfMonths": 20,
     "created": "2022-09-26T19:22:32.211Z",
-    "status": "PENDING",
+    "status": "APPROVED",
     "id": "77411dddb3535955"
   },
   {
@@ -262,5 +262,53 @@
     "created": "2022-09-26T21:40:44.569Z",
     "status": "PENDING",
     "id": "e2aa09a88995397d"
+  },
+  {
+    "name": "Jan",
+    "surname": "VESELÝ",
+    "birthNum": "",
+    "nationality": "ČR",
+    "email": "ahoj@email.com",
+    "phone": "+420 702 258 125",
+    "IC": "78965412",
+    "position": "",
+    "companyName": "",
+    "address": {
+      "street": "Pod lipami",
+      "descNumber": 3,
+      "indicativeNumber": 14,
+      "city": "Praha",
+      "postalCode": 62100
+    },
+    "applicantType": "OSVC",
+    "amount": 500000,
+    "numOfMonths": 36,
+    "created": "2022-09-27T06:53:14.061Z",
+    "status": "PENDING",
+    "id": "44013da6b0986ceb"
+  },
+  {
+    "name": "Petr",
+    "surname": "SMOLIK",
+    "birthNum": "",
+    "nationality": "cze",
+    "email": "tomas@rohlik.cz",
+    "phone": "+420 605 152 123",
+    "IC": "12345677",
+    "position": "ředitel/ka",
+    "companyName": "MONFIS GROUP",
+    "address": {
+      "street": "Jankovcova",
+      "descNumber": 7,
+      "indicativeNumber": 0,
+      "city": "Kladno",
+      "postalCode": 65120
+    },
+    "applicantType": "LEGAL_ENTITY",
+    "amount": 500000,
+    "numOfMonths": 36,
+    "created": "2022-09-27T06:54:47.350Z",
+    "status": "PENDING",
+    "id": "acbe78bb25666db2"
   }
 ]
